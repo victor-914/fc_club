@@ -1,0 +1,170 @@
+import React from "react";
+import ProductCarousel from "../productsCard/ProductCard";
+import { Box, Typography, IconButton, useMediaQuery } from "@mui/material";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import One from "../../assets/ranger_giphy.gif";
+// import imagetwo from "../../assets/ranger.gif";
+import imagefour from "../../assets/football_wallpaper.webp";
+// import imagefive from "../../assets/rangerGif.webp";
+import imagesix from "../../assets/giphy_rangers.gif";
+import imageseven from "../../assets/rangers.gif";
+import styled from "styled-components";
+import { Color } from "../../utils/color";
+function HeroProductCarousel() {
+  const heroTextureImports = [
+    One,
+    // imagetwo,
+    imagefour,
+    // imagefive,
+    imagesix,
+    imageseven,
+  ];
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  return (
+    <StyledHeroProductCarousel className="carouselContainer">
+      <div className="carouselContainer">
+        <header className="heroProductHeader">
+          <div className="trending">Trending Now</div>
+          <sub className="viewShop">Enter shop</sub>
+        </header>
+        <Carousel
+          infiniteLoop={true}
+          showThumbs={false}
+          showIndicators={false}
+          showStatus={false}
+          swipeable={false}
+          autoPlay={true}
+          renderArrowPrev={(onClickHandler, hasPrev, label) => (
+            <button onClick={onClickHandler} className="navButton_left">
+              <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+            </button>
+          )}
+          renderArrowNext={(onClickHandler, hasNext, label) => (
+            <button onClick={onClickHandler} className="navButton_right">
+              <NavigateNextIcon sx={{ fontSize: 40 }} />
+            </button>
+          )}
+        >
+          {heroTextureImports.map((texture, index) => (
+            <Box
+              sx={{
+                display: "flex",
+                backgroundColor: "transparent",
+                height: "50vh",
+                width: "80%",
+                padding: "10px",
+                margin: "auto",
+                justifyContent: "space-around",
+              }}
+              key={`carousel-image-${index}`}
+            >
+              <ProductCarousel />
+              <ProductCarousel />
+              <ProductCarousel />
+              <ProductCarousel />
+            </Box>
+          ))}
+        </Carousel>
+      </div>
+    </StyledHeroProductCarousel>
+  );
+}
+
+export default HeroProductCarousel;
+
+const StyledHeroProductCarousel = styled.section`
+  width: 100%;
+  height: 80vh;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .carouselContainer {
+    /* background-color: blue; */
+    background-image: url("/news_wallpaper1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    padding: 40px 0px 40px 0px;
+    width: 100%;
+  }
+
+  .heroProductHeader {
+    background-color: ${Color.primaryColor};
+    width: 75%;
+    margin: auto;
+    display: flex;
+    margin-bottom: 30px;
+    padding: 8px;
+    color: #fff;
+    font-weight: 700;
+    /* border-radius: 5px; */
+    /* margin: auto; */
+  }
+
+  .viewShop {
+    /* color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    /* margin: 5px; 
+    width: 30%;
+    height: 100%;
+    background-color: green; */
+  }
+
+  .trending {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .navButton_left {
+    position: absolute;
+    top: 41%;
+    right: 6%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    z-index: 10;
+    border-radius: 8px 0px 0px 8px;
+    transition: background-color 0.4s;
+  }
+
+  .navButton_left:hover {
+    background-color: ${Color.primaryColor} !important;
+    transition: background-color 0.4s;
+  }
+
+  .navButton_right {
+    position: absolute;
+    top: 41%;
+    right: 2%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 30px; */
+    width: 80px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    z-index: 10;
+    border-radius: 0px 5px 5px 0px;
+    transition: background-color 0.4s;
+  }
+
+  .navButton_right:hover {
+    background-color: ${Color.primaryColor} !important;
+    transition: background-color 0.4s;
+  }
+`;
