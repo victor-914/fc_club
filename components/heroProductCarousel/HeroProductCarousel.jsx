@@ -6,9 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import One from "../../assets/ranger_giphy.gif";
-// import imagetwo from "../../assets/ranger.gif";
 import imagefour from "../../assets/football_wallpaper.webp";
-// import imagefive from "../../assets/rangerGif.webp";
 import imagesix from "../../assets/giphy_rangers.gif";
 import imageseven from "../../assets/rangers.gif";
 import styled from "styled-components";
@@ -16,9 +14,7 @@ import { Color } from "../../utils/color";
 function HeroProductCarousel() {
   const heroTextureImports = [
     One,
-    // imagetwo,
     imagefour,
-    // imagefive,
     imagesix,
     imageseven,
   ];
@@ -84,6 +80,7 @@ const StyledHeroProductCarousel = styled.section`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 
   .carouselContainer {
     /* background-color: blue; */
@@ -101,6 +98,7 @@ const StyledHeroProductCarousel = styled.section`
     width: 75%;
     margin: auto;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 30px;
     padding: 8px;
     color: #fff;
@@ -110,18 +108,33 @@ const StyledHeroProductCarousel = styled.section`
   }
 
   .viewShop {
-    /* color: #fff;
+    color: #fff;
     font-size: 14px;
     font-weight: 700;
-    /* margin: 5px; 
-    width: 30%;
-    height: 100%;
-    background-color: green; */
+     margin: 5px; 
+    width: 20%;
+    height: 40px;
+    padding-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: text-decoration .04s;
+
+  }
+
+  .viewShop:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    transition: text-decoration .04s;
   }
 
   .trending {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     letter-spacing: 1.5px;
   }

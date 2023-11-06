@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Color } from "../../utils/color";
-export const StyledNewsGrid = styled.div`
+export const StyledHeroVideo = styled.section`
   width: 100%;
   height: 100vh;
   background-color: #f1f2f3;
@@ -11,6 +11,7 @@ export const StyledNewsGrid = styled.div`
     font-size: 20px;
     width: 80%;
     height: 55px;
+    text-transform: uppercase;
     margin: auto;
     background-color: ${Color.primaryColor};
     margin-bottom: 40px;
@@ -40,6 +41,17 @@ export const StyledNewsGrid = styled.div`
     display: flex;
   }
 
+  .grid_img_cover_one {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    border-radius: 8px;
+    box-shadow: inset 0px -100px 50px rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   .imgContainer {
     position: relative;
     width: 50%;
@@ -51,7 +63,6 @@ export const StyledNewsGrid = styled.div`
     width: 50%;
     height: 100%;
     cursor: pointer;
-    /* background-color: red; */
   }
 
   .grid-box-one-aside-header {
@@ -120,7 +131,7 @@ export const StyledNewsGrid = styled.div`
     cursor: pointer;
   }
 
-  .grid-box-one:hover #img {
+  .grid-box-one:hover #grid_two_img {
     /* width: 100%; */
     border-radius: 8px;
     transition: transform 0.7s;
@@ -167,12 +178,13 @@ export const StyledNewsGrid = styled.div`
     width: 100%;
     bottom: 0px;
     height: auto;
-    padding: 10px;
+    /* padding: 10px; */
   }
 
   .youTubeIcon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
+    margin: 0;
   }
 
   .grid_two_header {
@@ -180,8 +192,11 @@ export const StyledNewsGrid = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     color: #fff;
-    line-height: 2.5;
-    text-decoration: underline;
+    width: 99%;
+    margin: auto;
+    line-height: 1.3;
+    padding-left: 13px;
+    /* text-decoration: underline; */
   }
 
   .timeCont_gridtwo {
@@ -201,23 +216,25 @@ export const StyledNewsGrid = styled.div`
     grid-column: 1/3;
     height: 45vh;
     width: 381px;
+    position: relative;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.7s;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+
   }
 
   .grid-box-three:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.7s;
   }
 
   .grid_three_imgCont {
     width: 100%;
     position: relative;
-    height: 40%;
+    height: 100%;
   }
 
   .grid_three_img {
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px;
   }
 
   .grid_img_cover_three {
@@ -225,38 +242,59 @@ export const StyledNewsGrid = styled.div`
     height: 100%;
     position: absolute;
     z-index: 1;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0px -100px 50px rgba(0, 0, 0, 0.7);
+  }
+
+  .mediaCont_three {
+    z-index: 7;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    height: auto;
+    /* padding: 10px; */
+  }
+
+  .youTubeIcon_three {
+    width: 50px;
+    height: 50px;
+    margin: 0;
   }
 
   .grid_three_header {
-    font-size: 14px;
-    padding: 5px;
-    font-weight: 600;
-    text-decoration: underline;
-  }
-
-  .grid_three_content {
-    font-size: 16px;
-    padding: 8px;
-    height: 37%;
-    /* font-weight: 600; */
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    width: 100%;
+    margin: auto;
+    line-height: 1.3;
+    padding-left: 13px;
+    /* text-decoration: underline; */
   }
 
   .grid-box-one-aside-footer {
+    /* position: absolute; */
+    /* bottom: 5px; */
+    z-index: 1;
+    color: #fff;
   }
 
   .grid-box-four {
     grid-column: 3/5;
     width: 381px;
+    position: relative;
   }
 
   .grid-box-five {
     grid-column: 5/7;
+    position: relative;
   }
 
   .grid-box-six {
     grid-column: 7/9;
+    position: relative;
   }
 
   .grid-box-four,

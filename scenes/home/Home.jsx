@@ -7,6 +7,8 @@ import HomeCatergories from "../../components/homeCatergories/HomeCatergories";
 import CartMenu from "../global/CartMenu";
 import NewsComponents from "../../components/news/NewsComponents";
 import HeroProductCarousel from "../../components/heroProductCarousel/HeroProductCarousel";
+import HeroVideos from "../../components/heroVideo/HeroVideos";
+
 function Home() {
   return (
     <div className="home">
@@ -14,7 +16,7 @@ function Home() {
       <HomeCatergories />
       <NewsComponents />
       <HeroProductCarousel />
-
+      <HeroVideos/>
       {/* <HomePageBanner /> */}
       <ShoppingList />
       <Subscribe />
