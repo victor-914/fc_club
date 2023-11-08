@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { Color } from "../../utils/color";
 export const StyledNewsGrid = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   background-color: #f1f2f3;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+  padding: 40px 0px 100px 40px;
 
   .newsHeader {
     font-weight: 600;

@@ -8,6 +8,8 @@ import CartMenu from "../global/CartMenu";
 import NewsComponents from "../../components/news/NewsComponents";
 import HeroProductCarousel from "../../components/heroProductCarousel/HeroProductCarousel";
 import HeroVideos from "../../components/heroVideo/HeroVideos";
+import HeroHistory from "../../components/heroHIstory/HeroHistory";
+import Partners from "../../components/partners/Partners";
 
 function Home() {
   return (
@@ -18,7 +20,8 @@ function Home() {
       <HeroProductCarousel />
       <HeroVideos/>
       <SocialMedia />
-      <Subscribe />
+      <HeroHistory/>
+      <Partners/>
     </div>
   );
 }

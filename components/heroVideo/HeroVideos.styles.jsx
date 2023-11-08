@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { Color } from "../../utils/color";
 export const StyledHeroVideo = styled.section`
   width: 100%;
-  height: 100vh;
-  background-color: #f1f2f3;
-  margin-bottom: 100px;
+  height: auto;
+  /* background-color: #f1f2f3; */
+  /* margin-bottom: 100px; */
+  /* background-color: red; */
+  padding-bottom: 200px;
 
   .newsHeader {
     font-weight: 600;
