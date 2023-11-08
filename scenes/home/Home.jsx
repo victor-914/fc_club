@@ -17,10 +17,8 @@ function Home() {
       <NewsComponents />
       <HeroProductCarousel />
       <HeroVideos/>
-      {/* <HomePageBanner /> */}
-      <ShoppingList />
-      <Subscribe />
       <SocialMedia />
+      <Subscribe />
     </div>
   );
 }

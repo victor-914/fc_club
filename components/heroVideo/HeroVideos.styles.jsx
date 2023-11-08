@@ -98,7 +98,7 @@ export const StyledHeroVideo = styled.section`
 
   .timeCont {
     display: flex;
-    width: 30%;
+    width: 50%;
     justify-content: space-around;
     padding: 8px;
   }
@@ -110,7 +110,7 @@ export const StyledHeroVideo = styled.section`
   }
 
   .shareButton_gridone {
-    color: #000;
+    color: #fff;
     padding: 8px;
     font-size: 20px;
   }
@@ -243,7 +243,7 @@ export const StyledHeroVideo = styled.section`
     position: absolute;
     z-index: 1;
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: inset 0px -100px 50px rgba(0, 0, 0, 0.7);
   }
 
@@ -301,7 +301,7 @@ export const StyledHeroVideo = styled.section`
   .grid-box-six,
   .grid-box-five {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.7s;
+    transition: transform 0.7s;
     cursor: pointer;
   }
 
@@ -310,24 +310,24 @@ export const StyledHeroVideo = styled.section`
   .grid-box-six:hover,
   .grid-box-five:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: box-shadow 0.7s;
+    transition: all 0.7s;
   }
 
   .grid-box-three:hover .grid_three_img {
     transition: transform 0.7s;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 
   .grid-box-four:hover .grid_three_img {
     transition: transform 0.7s;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
   .grid-box-six:hover .grid_three_img {
     transition: transform 0.7s;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
   .grid-box-five:hover .grid_three_img {
     transition: transform 0.7s;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 `;
