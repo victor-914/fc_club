@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
 import Image from "next/image";
-import logo from "../../assets/rangers.png";
+import logo from "../../assets/footer_logo-removebg-preview.png";
+import afri from "../../assets/afriinvest.png";
+import enugu from "../../assets/enugu_state-removebg-preview.png";
 function Partners() {
   return (
     <StyledPartner>
@@ -10,12 +12,16 @@ function Partners() {
         <div className="partner">
           <header className="partnerHeader">Principal Club Partners</header>
           <div className="logoContainer">
-            <p>Afrinvest</p>
-            <p>Enugu State</p>
+            <div className="fc_logo">
+              <Image src={afri} layout="fill" />
+            </div>
+            <div className="fc_logo">
+              <Image src={enugu} layout="fill" />
+            </div>
           </div>
 
           <div className="fc_logo">
-            <Image src={logo} layout="fixed" width={"150px"} height={"150px"} />
+            <Image src={logo} layout="fill" />
           </div>
         </div>
       </main>
@@ -49,25 +55,20 @@ const StyledPartner = styled.div`
   }
 
   .logoContainer {
-    width: 50%;
+    width: 80%;
     margin: auto;
-    padding: 40px;
-
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .logoContainer p {
-    font-size: calc(${BaseFontSize.bfs} + 2vw);
-    text-transform: uppercase;
-    color: #fff;
-    letter-spacing: -2px;
-  }
-
-  .fc_logo{
-    width: 100%;
+    padding:20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  
+
+  .fc_logo {
+    width: 200px;
+    height: 150px;
+    position: relative;
+    margin: auto;
   }
 `;

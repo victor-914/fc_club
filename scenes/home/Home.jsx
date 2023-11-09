@@ -10,6 +10,7 @@ import HeroProductCarousel from "../../components/heroProductCarousel/HeroProduc
 import HeroVideos from "../../components/heroVideo/HeroVideos";
 import HeroHistory from "../../components/heroHIstory/HeroHistory";
 import Partners from "../../components/partners/Partners";
+import LatestFixture from "../../components/latestFixture/LatestFixture";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <MainCarousel />
       <HomeCatergories />
       <NewsComponents />
+      <LatestFixture/>
       <HeroProductCarousel />
       <HeroVideos/>
       <SocialMedia />
