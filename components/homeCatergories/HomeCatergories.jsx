@@ -9,7 +9,7 @@ import styled from "styled-components";
 const HomeCatergories = () => {
   const cardData = [
     // { title: "Matches", img: imgOne, page: "arrivals" },
-    { title: "The Club", img: imgTwo, page:"women" },
+    { title: "The Club", img: imgTwo, page: "women" },
     // { title: "Schedule", img: imgThree, page: "men" },
     { title: "News", img: imgFour, page: "girls" },
     { title: "Shop", img: imgFive, page: "boys" },
@@ -20,7 +20,12 @@ const HomeCatergories = () => {
     <StyledCat>
       <main className="cardContainer">
         {cardData.map((card, index) => (
-          <Card key={card.page} title={card.title} imgSrc={card.img} page={card.page} />
+          <Card
+            key={card.page}
+            title={card.title}
+            imgSrc={card.img}
+            page={card.page}
+          />
         ))}
       </main>
     </StyledCat>
@@ -36,8 +41,7 @@ const StyledCat = styled.section`
   transform: translateY(-200px);
   position: relative;
   background-color: #fff;
-  /* padding-top: 30px; */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.132), 0 1px 3px rgba(0, 0, 0, 0.087);
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.132), 0 1px 3px rgba(0, 0, 0, 0.087); */
   .cardContainer {
     width: 100%;
     height: 100%;
@@ -47,20 +51,37 @@ const StyledCat = styled.section`
     justify-content: space-around;
     align-items: center;
     gap: 20px;
-
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
     width: 94%;
+    height: auto;
 
     .cardContainer {
-
+      flex-direction: column;
+      height: auto;
+      gap: 10px;
+      padding-bottom: 10px;
     }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
+    width: 90%;
+    .cardContainer {
+      flex-direction: column;
+      height: auto;
+      gap: 10px;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
+    width: 90%;
+    .cardContainer {
+      flex-direction: column;
+      height: auto;
+      gap: 10px;
+    }
   }
+
+ 
 `;

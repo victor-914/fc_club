@@ -6,6 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
+    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     domains: [
       "res.cloudinary.com",
       "https://picsum.photos",

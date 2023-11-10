@@ -6,19 +6,19 @@ import kanoPillar from "../../assets/kanoPillar.png";
 import rangers from "../../assets/main_logo.png";
 import CountdownClock from "../countdown/CountDown";
 
-function LatestFixture() {
+function LatestMatch() {
   const targetDate = "2023-12-31T23:59:59";
   return (
     <StyledFixture>
       <div className="cover"></div>
       <section className="fixtureSection">
-        <header className="fixtureHeader">Latest Fixture</header>
-        <section className="time">
+        <header className="fixtureHeader">Latest Match</header>
+        {/* <section className="time">
           <main className="countdownContainer">
             <CountdownClock targetDate={targetDate} />
           </main>
           <div className="venue">Awka</div>
-        </section>
+        </section> */}
         <main className="fixtureContainer">
           <div className="home fixture">
             <div className="name homeName">Kano Pillar</div>
@@ -26,10 +26,12 @@ function LatestFixture() {
               <div className=" logo awayLogo">
                 <Image src={kanoPillar} className="img" layout="fill" />
               </div>
+              <div className="nums">1</div>
             </div>
           </div>
-          <aside className="vs">VS</aside>
+          <aside className="vs">-</aside>
           <div className="away fixture">
+          <div className="nums">4</div>
             <div className="logoCont">
               <div className=" logo awayLogo">
                 <Image src={rangers} className="img" layout="fill" />
@@ -40,14 +42,14 @@ function LatestFixture() {
         </main>
 
         <aside className="ticket">
-          <button className="learnMore">Buy Ticket</button>
+          <button className="learnMore">Match Highlights</button>
         </aside>
       </section>
     </StyledFixture>
   );
 }
 
-export default LatestFixture;
+export default LatestMatch;
 
 const StyledFixture = styled.section`
   width: 100%;
@@ -73,7 +75,7 @@ const StyledFixture = styled.section`
   }
 
   .cover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -103,7 +105,6 @@ const StyledFixture = styled.section`
     margin: auto;
     height: 70%;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
@@ -143,8 +144,7 @@ const StyledFixture = styled.section`
     width: 70%;
     height: 100%;
     color: #fff;
-    /* font-size: 30px; */
-    font-size: calc(${BaseFontSize.bfs} + 1vw);
+    font-size: 30px;
     /* text-align: end; */
     display: flex;
     align-items: center;
@@ -235,130 +235,10 @@ const StyledFixture = styled.section`
     padding: 20px;
   }
 
-  @media (min-width: 320px) and (max-width: 480px) {
-    .time {
-      /* background-color: green; */
-    }
-
-    .fixtureSection {
-      /* background-color: red; */
-    }
-
-    .fixtureContainer {
-      /* background-color: purple; */
-      height: auto;
-      flex-direction: column;
-    }
-
-    .fixture {
-      /* background-color: green; */
-      flex-direction: column;
-      width: 100%;
-      height: 150px;
-    }
-
-    .name {
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    /* display: none; */
-    background-color: red;
-
-    .time {
-      /* background-color: green; */
-    }
-
-    .fixtureSection {
-      /* background-color: red; */
-    }
-
-    .fixtureContainer {
-      /* background-color: purple; */
-      height: auto;
-      flex-direction: column;
-    }
-
-    .fixture {
-      /* background-color: green; */
-      flex-direction: column;
-      width: 100%;
-      height: 200px;
-    }
-
-    .name {
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    background-color: red;
-
-    .fixtureSection {
-      /* background-color: red; */
-    }
-
-    .fixtureContainer {
-      /* background-color: purple; */
-      height: auto;
-      flex-direction: column;
-    }
-
-    .fixture {
-      flex-direction: column;
-      height: 300px;
-      width: 60%;
-    }
-
-    .name {
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-      font-size: calc(${BaseFontSize.bfs} + 1.5vw);
-    }
-  }
-
-  @media (min-width: 1025px) and (max-width: 1200px) {
-    /* display: none; */
-    /* background-color: red; */
-
-    .fixtureSection {
-      /* background-color: red; */
-    }
-
-    .fixtureContainer {
-      /* background-color: purple; */
-    }
-
-    .fixture {
-      flex-direction: column;
-      height: 300px;
-      width: 60%;
-    }
-
-    .name {
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-    }
-  }
-
-  @media (min-width: 1201px) {
-    .fixture {
-      flex-direction: column;
-      height: 300px;
-      width: 60%;
-    }
-
-    .name {
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-    }
+  .nums{
+    font-size: calc(${BaseFontSize.bfs} + 1.5vw);
+    color: #fff;
+    font-weight: 800;
+    font-family: "lato";
   }
 `;

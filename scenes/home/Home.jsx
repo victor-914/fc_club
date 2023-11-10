@@ -11,19 +11,21 @@ import HeroVideos from "../../components/heroVideo/HeroVideos";
 import HeroHistory from "../../components/heroHIstory/HeroHistory";
 import Partners from "../../components/partners/Partners";
 import LatestFixture from "../../components/latestFixture/LatestFixture";
+import LatestMatch from "../../components/latestMatch/LatestMatch";
 
 function Home() {
   return (
     <div className="home">
       <MainCarousel />
       <HomeCatergories />
-      <NewsComponents />
-      <LatestFixture/>
-      <HeroProductCarousel />
-      <HeroVideos/>
-      <SocialMedia />
-      <HeroHistory/>
-      <Partners/>
+      <LatestFixture />
+      <NewsComponents /> 
+      {/* <LatestMatch /> */}
+      {/* <HeroProductCarousel /> */}
+      {/* <HeroVideos /> */}
+      {/* <SocialMedia /> */}
+      {/* <HeroHistory /> */}
+      {/* <Partners />  */}
     </div>
   );
 }

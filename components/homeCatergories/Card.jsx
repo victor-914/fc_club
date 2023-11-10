@@ -16,7 +16,7 @@ const Card = ({ title, imgSrc, page }) => {
     >
       <div className="title">{title}</div>
       <main className="imageHolder">
-        <Image src={imgSrc} layout="fill" />
+        <Image src={imgSrc} layout="fill" className="image" />
       </main>
       <div className="buttonContainer">
         <button className="viewButton">SEE MORE</button>
@@ -29,9 +29,13 @@ export default Card;
 
 const StyledCard = styled.section`
   width: 30%;
-  height: 450px;
+  height: 400px;
   cursor: pointer;
   padding: 20px;
+
+  .image {
+    object-fit: contain;
+  }
 
   :hover {
     background-color: #f7f0f0;
@@ -81,7 +85,14 @@ const StyledCard = styled.section`
 
   @media (min-width: 320px) and (max-width: 480px) {
     width: 90%;
-
+    /* height: 300px; */
+    .title {
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+    .image {
+      object-fit: cover;
+    }
     .imageHolder {
       width: 90%;
       height: 80%;
@@ -89,8 +100,18 @@ const StyledCard = styled.section`
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
+    width: 90%;
+    /* height: 300px; */
+    /* background-color: green; */
+
+    .imageHolder {
+      width: 90%;
+      height: 80;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
+
+    width: 55%;
   }
 `;

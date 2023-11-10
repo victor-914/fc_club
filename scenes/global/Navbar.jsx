@@ -58,6 +58,17 @@ const StyledSecNavBar = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     display: none;
   }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: none;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: none;
+  }
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    display: none;
+  } 
 `;
 const secNavbar = [
   {
@@ -95,7 +106,6 @@ const secNavbar = [
     content: "Contact",
     link: "accessories",
   },
-  
 ];
 function Navbar() {
   const dispatch = useDispatch();
@@ -157,7 +167,7 @@ function Navbar() {
             columnGap="20px"
             zIndex="2"
           >
-            <Badge
+            {/* <Badge
               badgeContent={wishList.length}
               color="secondary"
               invisible={wishList.length === 0}
@@ -177,14 +187,14 @@ function Navbar() {
               >
                 <AiOutlineHeart />
               </IconButton>
-            </Badge>
+            </Badge> */}
 
-            <IconButton
+            {/* <IconButton
               sx={{ color: "black" }}
               onClick={() => router.push("/profile")}
             >
               <PersonOutline />
-            </IconButton>
+            </IconButton> */}
             <Badge
               badgeContent={cart.length}
               color="secondary"
