@@ -28,7 +28,7 @@ function NewsComponents() {
               weekend play host to one of the most...
             </main>
 
-            <footer className="grid-box-one-aside-footer">
+            <footer className="grid_three_footer">
               <div className="timeCont">
                 <div className="time">5min</div>|
                 <div className="catergory">news</div>
@@ -74,7 +74,7 @@ function NewsComponents() {
             Rangers International F.C under coach Fidelis Ilechukwu continued
             its good start in the 2023/2024 NPFL...I
           </div>
-          <footer className="grid-box-one-aside-footer">
+          <footer className="grid_three_footer">
             <div className="timeCont">
               <div className="time">5min</div>|
               <div className="catergory">news</div>
@@ -86,7 +86,7 @@ function NewsComponents() {
           </footer>
         </div>
         <div className="grid-box-four content">
-          <main className="grid_three_imgCont">
+        <main className="grid_three_imgCont">
             <div className="grid_img_cover_three"></div>
             <Image className="grid_three_img" layout="fill" src={newsImg1} />
           </main>
@@ -97,7 +97,7 @@ function NewsComponents() {
             Rangers International F.C under coach Fidelis Ilechukwu continued
             its good start in the 2023/2024 NPFL...I
           </div>
-          <footer className="grid-box-one-aside-footer">
+          <footer className="grid_three_footer">
             <div className="timeCont">
               <div className="time">5min</div>|
               <div className="catergory">news</div>
@@ -120,7 +120,7 @@ function NewsComponents() {
             Rangers International F.C under coach Fidelis Ilechukwu continued
             its good start in the 2023/2024 NPFL...I
           </div>
-          <footer className="grid-box-one-aside-footer">
+          <footer className="grid_three_footer">
             <div className="timeCont">
               <div className="time">5min</div>|
               <div className="catergory">news</div>
@@ -129,7 +129,7 @@ function NewsComponents() {
             <div className="shareButton_gridone">
               <AiOutlineShareAlt />
             </div>
-          </footer>
+        </footer>
         </div>
         <div className="grid-box-six content">
           <main className="grid_three_imgCont">
@@ -143,7 +143,7 @@ function NewsComponents() {
             Rangers International F.C under coach Fidelis Ilechukwu continued
             its good start in the 2023/2024 NPFL...I
           </div>
-          <footer className="grid-box-one-aside-footer">
+          <footer className="grid_three_footer">
             <div className="timeCont">
               <div className="time">5min</div>|
               <div className="catergory">news</div>
