@@ -6,21 +6,21 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import One from "../../assets/ranger_giphy.gif";
 // import imagetwo from "../../assets/ranger.gif";
-import imagefour from "../../assets/football_wallpaper.webp";
+// import imagefour from "../../assets/football_wallpaper.webp";
 // import imagefive from "../../assets/rangerGif.webp";
 import imagesix from "../../assets/giphy_rangers.gif";
 import imageseven from "../../assets/rangers.gif";
-
-
+import Image from "next/image";
+import styled from "styled-components";
 
 const MainCarousel = () => {
   const heroTextureImports = [
     One,
-    // imagetwo, 
-    imagefour,
+    // imagetwo,
+    // imagefour,
     // imagefive,
-     imagesix, 
-    imageseven
+    imagesix,
+    imageseven,
   ];
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
@@ -63,9 +63,12 @@ const MainCarousel = () => {
       )}
     >
       {heroTextureImports.map((texture, index) => (
-        <Box key={`carousel-image-${index}`}>
-          <img
+        <StyledCarousel key={`carousel-image-${index}`}>
+          <Image
             src={texture.src}
+            //  height={"700px"}
+            //  width={}
+            layout="fill"
             alt={`carousel-${index}`}
             style={{
               width: "100%",
@@ -90,12 +93,18 @@ const MainCarousel = () => {
             margin={isNonMobile ? undefined : "0 auto"}
             maxWidth={isNonMobile ? undefined : "240px"}
           > */}
-          
+
           {/* </Box> */}
-        </Box>
+        </StyledCarousel>
       ))}
     </Carousel>
   );
 };
 
 export default MainCarousel;
+
+const StyledCarousel = styled.section`
+  width: 100%;
+  height: 80vh;
+  position: relative;
+`;

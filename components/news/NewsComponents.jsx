@@ -51,15 +51,16 @@ function NewsComponents() {
               RANGERS CHASE VITAL POINTS TO ILORIN
             </header>
 
-            <aside className="grid_two_aside">
-              <div className="timeCont_gridtwo">
-                <div className="time">5min</div>|
-                <div className="catergory">Highlights</div>
-              </div>
-              <div className="shareButton">
-                <AiOutlineShareAlt />
-              </div>
-            </aside>
+            <footer id="two_footer"  className="grid_three_footer">
+            <div className="timeCont">
+              <div className="time">5min</div>|
+              <div className="catergory">news</div>
+            </div>
+
+            <div id="two_footer"  className="shareButton_gridone">
+              <AiOutlineShareAlt />
+            </div>
+          </footer>
           </main>
         </div>
         <div className="grid-box-three content">
