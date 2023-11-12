@@ -68,7 +68,7 @@ const StyledSecNavBar = styled.section`
   }
   @media (min-width: 1025px) and (max-width: 1200px) {
     display: none;
-  } 
+  }
 `;
 const secNavbar = [
   {
@@ -122,7 +122,6 @@ function Navbar() {
               onClick={() => {
                 router.push({
                   pathname: "/products",
-                  query: { catergory: `${item.link}` },
                 });
               }}
             >

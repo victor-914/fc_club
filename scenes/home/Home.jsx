@@ -20,12 +20,12 @@ function Home() {
       <HomeCatergories />
       <LatestFixture />
       <NewsComponents /> 
-      {/* <LatestMatch />
+      <LatestMatch />
       <HeroProductCarousel />
       <HeroVideos />
       <SocialMedia />
       <HeroHistory />
-      <Partners />  */}
+      <Partners /> 
     </div>
   );
 }

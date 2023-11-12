@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import ing from "../../assets/products-page-heading.jpg";
+// import ing from "../../assets/products-page-heading.jpg";
 import Image from "next/image";
-const img = ing;
-function CatergoriesHeader({image, text}) {
+import { BaseFontSize } from "../../utils/color";
+// const img = ing;
+function CatergoriesHeader({ image, text }) {
   return (
     <StyledCatergories>
+      <div className="cover"></div>
       <main className="imgCont">
         <Image src={image} layout="fill" />
         <div className="headerText">{text}</div>
@@ -18,35 +20,43 @@ export default CatergoriesHeader;
 
 const StyledCatergories = styled.section`
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   position: relative;
 
+  .cover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    box-shadow: inset 5em -10em 100px 40px rgba(0, 0, 0, 0.3);
+  }
 
   .imgCont {
     width: 100%;
     height: 100%;
   }
 
-  
-
   .headerText {
     width: 100%;
     height: 50%;
-    z-index: 3;
+    margin: auto;
     position: absolute;
-    bottom: 10%;
+    bottom: 0%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     text-align: center;
-    font-size: 40px;
+    z-index: 1;
+    font-size: calc(${BaseFontSize.bfs} + 3vw);
     font-weight: 800;
     color: #fff;
     letter-spacing: 1px;
-    text-shadow: 5px 2px #000;
+    text-shadow: 1px 1px #000;
+    /* background-color: RED; */
   }
 
-  .latestProduct{
+  .latestProduct {
     width: 80%;
     display: flex;
     justify-content: center;
