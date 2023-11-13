@@ -72,7 +72,7 @@ const StyledSecNavBar = styled.section`
 `;
 const secNavbar = [
   {
-    _id: "hjdhd",
+    _id: "hjxssdhd",
     content: "Matches",
     link: "#",
   },
@@ -82,18 +82,18 @@ const secNavbar = [
     link: "men",
   },
   {
-    _id: "hjdhwwddd",
+    _id: "hjdhwwdsadd",
     content: "News",
     link: "boys",
   },
+  // {
+  //   _id: "hjdhdssdd",
+  //   content: "Players",
+  //   link: "girls",
+  // },
   {
-    _id: "hjdhdssdd",
-    content: "Players",
-    link: "girls",
-  },
-  {
-    _id: "hjdddhddd",
-    content: "Media",
+    _id: "hjdddssaaddhddd",
+    content: "Highlights",
     link: "accessories",
   },
   {
@@ -101,11 +101,11 @@ const secNavbar = [
     content: "Shop",
     link: "accessories",
   },
-  {
-    _id: "hjdddhddd",
-    content: "Contact",
-    link: "accessories",
-  },
+  // {
+  //   _id: "hjdddhddd",
+  //   content: "Contact",
+  //   link: "accessories",
+  // },
 ];
 function Navbar() {
   const dispatch = useDispatch();

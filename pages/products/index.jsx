@@ -78,7 +78,9 @@ function ProductListing({ productResult }) {
         <StyledProductListing>
           <main className="container">
             <header className="headerCont">
-              <span>Showing all Football Shirts and Kit </span>
+              <span className="headerText">
+                Showing all Football Shirts and Kit{" "}
+              </span>
               <div className="searchBar">
                 <div className="inputContainer">
                   <input
@@ -91,7 +93,7 @@ function ProductListing({ productResult }) {
                 <button className="searchButton">search</button>
               </div>
             </header>
-            <div className="filterCont">
+            {/* <div className="filterCont">
               <main className="filter_bySize">
                 <header>SIZES</header>
                 <div class="checkbox-list">
@@ -107,7 +109,7 @@ function ProductListing({ productResult }) {
                   ))}
                 </div>
               </main>
-            </div>
+            </div> */}
             <div className="productCont">
               <Product />
               <Product />
@@ -158,7 +160,7 @@ export const StyledProductListing = styled.section`
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
       "header header header header header header"
-      "filter filter product product product product";
+      "product product product product product product";
   }
 
   .headerCont {
@@ -293,11 +295,13 @@ export const StyledProductListing = styled.section`
   .productCont {
     padding: 10px;
     grid-area: product;
-    height: 100vh;
+    height: auto;
     /* border: 2px solid green; */
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding-bottom: 100px;
+    gap: 40px;
     /* background-color: purple; */
   }
 
@@ -325,7 +329,22 @@ export const StyledProductListing = styled.section`
     font-size: 30px;
   } */
 
-  @media (min-width: 360px) and (max-width: "481px") {
+  @media (min-width: 320px) and (max-width: 481px) {
+    .headerText {
+      display: none;
+    }
+
+    .searchBar {
+      width: 100%;
+    }
+
+    .inputContainer {
+      width: 80%;
+    }
+
+    .searchButton {
+      width: 20%;
+    }
   }
 `;
 
