@@ -15,25 +15,25 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const responseData = await api.post("/auth/local/register", {
-        email: userData.email,
-        password: userData.password,
-        username: userData.username,
-      });
-      responseData?.status === 200 &&
-        toast(`Registration successful`, {
-          autoClose: 100,
-          hideProgressBar: true,
-        });
-      router.back();
-    } catch (error) {
-      error?.response?.data?.error?.message &&
-        toast(`${error?.response?.data?.error?.message}`, {
-          autoClose: 200,
-          hideProgressBar: true,
-        });
-    }
+    // try {
+    //   const responseData = await api.post("/auth/local/register", {
+    //     email: userData.email,
+    //     password: userData.password,
+    //     username: userData.username,
+    //   });
+    //   responseData?.status === 200 &&
+    //     toast(`Registration successful`, {
+    //       autoClose: 100,
+    //       hideProgressBar: true,
+    //     });
+    //   router.back();
+    // } catch (error) {
+    //   error?.response?.data?.error?.message &&
+    //     toast(`${error?.response?.data?.error?.message}`, {
+    //       autoClose: 200,
+    //       hideProgressBar: true,
+    //     });
+    // }
   };
 
   const handleChange = (e) => {
@@ -81,7 +81,7 @@ function SignUp() {
           </h1>
         </div>
 
-        <div>{errorMessage}</div>
+        {/* <div>{errorMessage}</div> */}
 
         <form onSubmit={handleSubmit}>
           <div className="mt-4">

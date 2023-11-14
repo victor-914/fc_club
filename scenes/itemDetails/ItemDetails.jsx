@@ -14,12 +14,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Product from "../../components/shopProduct/ShopProduct";
-import { Color } from "../../utils/color";
+import { BaseFontSize, Color } from "../../utils/color";
 import Kit from "../../assets/Rangers Kit1.png";
 import Kit2 from "../../assets/Rangers Kit1.png";
 const ItemDetails = ({ data }) => {
-
-  
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const [value, setValue] = useState("description");
@@ -95,60 +93,31 @@ const ItemDetails = ({ data }) => {
       </div>
 
       <div className="detailsCont">
-        {/* <div className="product_title"></div>
-        <div className="product_info"></div>
-        <div className="product_"></div> */}
-        <Accordion
-          expanded={expanded === "panel1"}
-          onChange={handleChange("panel1")}
-        >
-          <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>Collapsible Group Item #1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
-        >
-          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-            <Typography>Collapsible Group Item #2</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
-          <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-            <Typography>Collapsible Group Item #3</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        <div className="product_title">
+          <main className="title">Arsenal Eco Gunnersaurus Bag Buddy</main>
+          <div className="price_details">&#8358;40,000</div>
+          <div className="buttonCont">
+            <button>ADD TO WISHLIST</button>
+            <button>ADD TO CART</button>
+          </div>
+        </div>
+        <div className="product_info">
+          <header className="product_info_header">Product info</header>
+          <main className="info">
+            Our much loved Gunnersaurus is now an adorable, eco-friendly
+            miniature. Made from recycled plastic bottles, it's the accessory
+            your keys or kids' school bag cannot (and should not!) live without.
+            Embroidered Club crest Metal ring and hook Made from recycled
+            plastic bottles Product code: N05538 Material: Recycled plastic
+          </main>
+        </div>
+        <div className="product_info">
+          <header className="product_info_header">SHIPPING TIMES & COSTS</header>
+          <div className="info">
+            Delivery costs will be calculated at checkout. For more information
+            on shipping options and times, please see our delivery page here.
+          </div>
+        </div>
       </div>
 
       <div className="related">
@@ -174,6 +143,7 @@ const StyledItemsPage = styled.section`
   height: 100vh;
   margin: auto;
   display: grid;
+  grid-gap: 5px;
   grid-template-columns: repeat(10, 10%);
   grid-template-areas:
     "images images images images images images detail detail detail detail"
@@ -198,9 +168,62 @@ const StyledItemsPage = styled.section`
 
   .detailsCont {
     grid-area: detail;
-    width: 100%;
-    height: 50vh;
+    width: auto;
+    padding: 10px;
+    height: fit-content;
     /* background-color: purple; */
+  }
+
+  .product_title {
+  }
+
+  .title {
+    font-size: calc(${BaseFontSize.bfs} + 0.5vw);
+  }
+
+  .price_details {
+    font-weight: 700;
+    font-size: calc(${BaseFontSize.bfs} + 0.5vw);
+    padding: 5px 0px 5px 0px;
+  }
+
+  .buttonCont {
+    width: 100%;
+    display: flex;
+    /* background-color: green; */
+    padding: 20px 0px 20px 0px;
+  }
+
+  .buttonCont button {
+    padding: 10px;
+    background-color: ${Color.primaryColor};
+    font-weight: 700;
+    font-size: calc(${BaseFontSize.bfs});
+    margin: 0px 10px 0px 0px;
+    color: #fff;
+  }
+
+  button:last-child {
+    background-color: #f3f3f3;
+    color: #000;
+  }
+
+  .product_info {
+    /* background-color: orange; */
+    height: max-content;
+  }
+
+  .product_info .product_info_header {
+    font-weight: 700;
+    font-size: calc(${BaseFontSize.bfs} + 0.5vw);
+    padding: 5px 0px 5px 0px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+
+  .info {
+    padding: 10px;
+    font-size: calc(${BaseFontSize.bfs} + 0.1vw);
   }
 
   .related {

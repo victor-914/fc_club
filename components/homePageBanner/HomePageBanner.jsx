@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import heroBanner from "../../assets/banner-01.jpg"
-import asideBanner from "../../assets/banner-02.jpg"
-import asideBanner2 from "../../assets/banner-03.jpg"
+// import heroBanner from "../../assets/banner-01.jpg"
+// import asideBanner from "../../assets/banner-02.jpg"
+// import asideBanner2 from "../../assets/banner-03.jpg"
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -10,7 +10,7 @@ function HomePageBanner() {
   const router = useRouter()
   return (
     <StyledBanner>
-      <main className="heroBanner">
+      {/* <main className="heroBanner">
         <div className="banner-content">
             <h4 className="entry-subtitle">NEW SEASON</h4>
             <h2 className="entry-title size-42 bold">
@@ -68,7 +68,7 @@ function HomePageBanner() {
         </main>
           
           </div>
-      </aside>
+      </aside> */}
     </StyledBanner>
   );
 }

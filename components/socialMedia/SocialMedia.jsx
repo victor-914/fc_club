@@ -1,11 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import social1 from "../../assets/slider-01.jpg";
-import social2 from "../../assets/banner-02.jpg";
-import { AiFillInstagram } from "react-icons/ai";
 import styled from "styled-components";
 import { InstagramEmbed } from "react-social-media-embed";
-import { FacebookEmbed } from "react-social-media-embed";
 import { LinkedInEmbed } from "react-social-media-embed";
 import { TwitterEmbed } from "react-social-media-embed";
 function SocialMedia() {
@@ -139,7 +134,7 @@ const StyledSocialMedia = styled.section`
     width: 60%;
   }
 
-  .sub_socialsHeader{
+  .sub_socialsHeader {
     font-size: 20px;
     padding: 8px;
   }

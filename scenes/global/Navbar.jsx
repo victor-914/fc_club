@@ -74,32 +74,27 @@ const secNavbar = [
   {
     _id: "hjxssdhd",
     content: "Matches",
-    link: "#",
+    link: "_matches",
   },
   {
     _id: "hjdhddd",
     content: "The Club",
-    link: "men",
+    link: "_club",
   },
   {
     _id: "hjdhwwdsadd",
     content: "News",
-    link: "boys",
+    link: "_news",
   },
-  // {
-  //   _id: "hjdhdssdd",
-  //   content: "Players",
-  //   link: "girls",
-  // },
   {
     _id: "hjdddssaaddhddd",
     content: "Highlights",
-    link: "accessories",
+    link: "_highlights",
   },
   {
     _id: "hjdddhddd",
     content: "Shop",
-    link: "accessories",
+    link: "products",
   },
   // {
   //   _id: "hjdddhddd",
@@ -121,7 +116,7 @@ function Navbar() {
               key={item._id}
               onClick={() => {
                 router.push({
-                  pathname: "/products",
+                  pathname: item.link,
                 });
               }}
             >

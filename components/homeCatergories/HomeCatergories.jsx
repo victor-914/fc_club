@@ -1,14 +1,10 @@
 import Card from "./Card";
-import imgOne from "../../assets/close-up-kitted-bag-still-life.jpg";
 import imgTwo from "../../assets/theclub.jpg";
-import imgThree from "../../assets/front-view-handsome-man-grey-jacket-posing.jpg";
 import imgFour from "../../assets/Welcome-to-Ranger-Elmer.jpg";
 import imgFive from "../../assets/product_handglove.webp";
-import imgSix from "../../assets/top-view-open-woman-bag.jpg";
 import styled from "styled-components";
 const HomeCatergories = () => {
   const cardData = [
-    // { title: "Matches", img: imgOne, page: "arrivals" },
     { title: "The Club", img: imgTwo, page: "women" },
     // { title: "Schedule", img: imgThree, page: "men" },
     { title: "News", img: imgFour, page: "girls" },
