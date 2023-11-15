@@ -17,6 +17,34 @@ import { setIsmMenuOpen } from "../../state/mobilemenu";
 import { AiOutlineHeart } from "react-icons/ai";
 import { setIsWishListOpen } from "../../state/wishlist";
 import { Color } from "../../utils/color";
+
+const StyledMenuLi = styled.li`
+  font-size: 17px;
+  font-weight: 600;
+  list-style: none;
+  /* color: #fff; */
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  /* padding: 10px; */
+  width: 15%;
+  text-align: center;
+  border: 10px solid transparent;
+  background-color: ${(props) =>
+    props.path === props.link ? "#fff" : "transparent"};
+  color: ${(props) => (props.path === props.link ? "#000" : "#fff")};
+  border: ${(props) =>
+    props.path === props.link
+      ? `10px solid ${Color.primaryColor}`
+      : "10px solid transparent"};
+
+  :hover {
+    background-color: #fff;
+    border: 10px solid ${Color.primaryColor};
+    color: #000;
+    cursor: pointer;
+  }
+`;
+
 const StyledSecNavBar = styled.section`
   width: 100%;
   margin: auto;
@@ -33,26 +61,6 @@ const StyledSecNavBar = styled.section`
     width: 70%;
     margin: auto;
     height: 100%;
-  }
-
-  li {
-    font-size: 17px;
-    font-weight: 600;
-    list-style: none;
-    color: #fff;
-    letter-spacing: 1.3px;
-    text-transform: uppercase;
-    /* padding: 10px; */
-    width: 15%;
-    text-align: center;
-    border: 10px solid transparent;
-  }
-
-  li:hover {
-    background-color: #fff;
-    border: 10px solid ${Color.primaryColor};
-    color: #000;
-    cursor: pointer;
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -74,27 +82,27 @@ const secNavbar = [
   {
     _id: "hjxssdhd",
     content: "Matches",
-    link: "_matches",
+    link: "/_matches",
   },
   {
     _id: "hjdhddd",
     content: "The Club",
-    link: "_club",
+    link: "/_club",
   },
   {
     _id: "hjdhwwdsadd",
     content: "News",
-    link: "_news",
+    link: "/_news",
   },
   {
     _id: "hjdddssaaddhddd",
     content: "Highlights",
-    link: "_highlights",
+    link: "/_highlights",
   },
   {
     _id: "hjdddhddd",
     content: "Shop",
-    link: "products",
+    link: "/products",
   },
   // {
   //   _id: "hjdddhddd",
@@ -107,12 +115,22 @@ function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
   const wishList = useSelector((state) => state.wishList.wishList);
   const router = useRouter();
+
+  console.log(router.pathname, "hhdh");
   return (
     <>
       <StyledSecNavBar className="">
         <main className="secBar">
           {secNavbar.map((item) => (
-            <li
+            <StyledMenuLi
+              path={router.pathname}
+              link={item.link}
+              // style={{
+              //   color:
+              //     router.pathname === `${item.page}` ? "#000" : "#fff",
+              //     // backgroundColor:  router.pathname === `${item.page}` ? "#000" : "transparent",
+              //     // border:router.pathname === `${item.page}` ? `10px solid green` : `10px solid ${Color.primaryColor}`
+              // }}
               key={item._id}
               onClick={() => {
                 router.push({
@@ -121,7 +139,7 @@ function Navbar() {
               }}
             >
               {item.content}
-            </li>
+            </StyledMenuLi>
           ))}
         </main>
       </StyledSecNavBar>

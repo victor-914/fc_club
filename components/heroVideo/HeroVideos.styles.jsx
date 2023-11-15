@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import { Color } from "../../utils/color";
 export const StyledHeroVideo = styled.section`
-  width: 100%;
-  height: auto;
+  width: 90%;
+  /* height: auto; */
+  margin: auto;
   /* background-color: #f1f2f3; */
   /* margin-bottom: 100px; */
   /* background-color: red; */
-  padding-bottom: 200px;
+  padding-top: 100px;
 
   .newsHeader {
     font-weight: 600;
     font-size: 20px;
-    width: 80%;
+    width: 100%;
     height: 55px;
     text-transform: uppercase;
     margin: auto;
@@ -23,9 +24,10 @@ export const StyledHeroVideo = styled.section`
   }
 
   .gridContainer {
-    width: 80%;
-    display: grid;
+    width: 100%;
     margin: auto;
+
+    display: grid;
     grid-template-columns: repeat(8, 1fr);
     column-gap: 30px;
     row-gap: 30px;

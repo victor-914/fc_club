@@ -24,8 +24,8 @@ function Home() {
       <HeroProductCarousel />
       <HeroVideos />
       <SocialMedia />
-      <HeroHistory />
-      <Partners /> 
+      {/* <HeroHistory />
+      <Partners />  */}
     </div>
   );
 }

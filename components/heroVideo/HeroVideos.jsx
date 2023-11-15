@@ -10,10 +10,10 @@ import { StyledHeroVideo } from "./HeroVideos.styles";
 import undf from "../../assets/undefeated.jpg";
 import rngtl from "../../assets/Rangers.jpg"
 import heading from "../../assets/heading.webp"
-function HeroVideos() {
+function HeroVideos({title}) {
   return (
     <StyledHeroVideo>
-      <header className="newsHeader">Latest Videos</header>
+      <header className="newsHeader">{title}</header>
       <main className="gridContainer">
         <div className="grid-box-one content">
           <aside className="grid-box-one-aside">
