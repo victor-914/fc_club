@@ -23,9 +23,9 @@ function Home() {
       <LatestMatch />
       <HeroProductCarousel />
       {/* <HeroVideos /> */}
-      {/* <SocialMedia /> */}
-      {/* <HeroHistory />
-      <Partners />  */}
+      <SocialMedia />
+       <HeroHistory />
+      <Partners />  
     </div>
   );
 }

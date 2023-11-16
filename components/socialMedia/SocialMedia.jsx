@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { InstagramEmbed } from "react-social-media-embed";
 import { LinkedInEmbed } from "react-social-media-embed";
 import { TwitterEmbed } from "react-social-media-embed";
+import { BaseFontSize } from "../../utils/color";
 function SocialMedia() {
   const images = [
     // {
@@ -25,7 +26,9 @@ function SocialMedia() {
   return (
     <StyledSocialMedia>
       {/* <header>Shop our Socials</header> */}
-      <header>TAG & FOLLOW #RANGERSINTL ENUGU ON INSTAGRAM</header>
+      <header className="sub_socialsHeader">
+        TAG & FOLLOW #RANGERSINTL ON INSTAGRAM
+      </header>
 
       <section>
         <main className="socialContainer">
@@ -43,7 +46,7 @@ function SocialMedia() {
         <main className="subSocialContainer">
           <div className="sub_socials" id="linkedIn">
             <header className="sub_socialsHeader">
-              TAG & FOLLOW #RANGERSINTL ENUGU ON LINKEDIN
+              TAG & FOLLOW #RANGERSINTL ON LINKEDIN
             </header>
             <LinkedInEmbed
               placeholderDisabled
@@ -53,13 +56,14 @@ function SocialMedia() {
           </div>
           <div className="sub_socials">
             <header className="sub_socialsHeader">
-              TAG & FOLLOW #RANGERSINTL ENUGU ON TWITTER
+              TAG & FOLLOW #RANGERSINTL ON TWITTER
             </header>
             <TwitterEmbed
               placeholderDisabled
-              url="https://twitter.com/PixelAndBracket/sta/1356633038717923333"
+              url="https://x.com/Rangers_Intl/status/1724802394054435270?s=20"
               // width={325}
               width={"100%"}
+              height={"auto"}
             />
           </div>
         </main>
@@ -132,10 +136,11 @@ const StyledSocialMedia = styled.section`
 
   #linkedIn {
     width: 60%;
-  }
+    height: 100%;
+  } 
 
   .sub_socialsHeader {
-    font-size: 20px;
+    font-size: calc(${BaseFontSize.bfs} + 1vw);
     padding: 8px;
   }
 
@@ -155,13 +160,27 @@ const StyledSocialMedia = styled.section`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
+    width: 100%;
+    background-color: red;
+    width: 100%;
+    padding: 0px;
+    margin: auto;
+    height: auto;
+    background-color: #fff;
+    /* margin-bottom: 1.00px; */
+
     header {
       font-size: 20px;
     }
 
+    #linkedIn {
+    width: 100%;
+  }
+
     .socialContainer {
       flex-direction: column;
       height: auto;
+      width: 95%;
     }
 
     .socials {
@@ -172,11 +191,24 @@ const StyledSocialMedia = styled.section`
       margin-bottom: 10px;
       height: 50%;
     }
+
+    .subSocialContainer {
+      width: 95%;
+      flex-direction: column;
+    }
+
+    .sub_socials {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;

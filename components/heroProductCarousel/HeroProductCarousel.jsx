@@ -22,7 +22,6 @@ function HeroProductCarousel() {
       <div className="carouselContainer">
         <header className="heroProductHeader">
           <div className="trending">Trending Now</div>
-          <sub className="viewShop">Enter shop</sub>
         </header>
         <Carousel
           infiniteLoop={true}
@@ -61,6 +60,8 @@ function HeroProductCarousel() {
               <Product /> <Product /> <Product />
             </Box>
           ))}
+
+          <button className="viewShop">Enter shop</button>
         </Carousel>
       </div>
     </StyledHeroProductCarousel>

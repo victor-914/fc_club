@@ -29,7 +29,6 @@ export default HeroHistory;
 const StyledHeroHistory = styled.section`
   width: 100%;
 
-
   .heroHistory {
     width: 100%;
     background-image: url("/theclub.jpg");
@@ -54,7 +53,6 @@ const StyledHeroHistory = styled.section`
     position: relative;
     margin: auto;
     padding: 40px 0px 30px 0px;
-
   }
 
   .textContainer {
@@ -88,13 +86,35 @@ const StyledHeroHistory = styled.section`
     font-weight: 700;
     text-transform: uppercase;
     border-radius: 1px;
-    transition: all   0.2s;
+    transition: all 0.2s;
     font-size: calc(${BaseFontSize.bfs} + 0.2vw);
   }
 
-  .learnMore:hover{
+  .learnMore:hover {
     background-color: #fff;
     color: #000;
-    transition: all  0.2s;
+    transition: all 0.2s;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    /* background-color: red; */
+
+    .layoutContainer {
+      /* background-color: green; */
+    }
+
+    .textContainer{
+      /* background-color: papayawhip; */
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;
