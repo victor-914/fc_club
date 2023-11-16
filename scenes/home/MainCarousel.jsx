@@ -107,4 +107,15 @@ const StyledCarousel = styled.section`
   width: 100%;
   height: 80vh;
   position: relative;
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    height: 60vh;
+  }
+
+@media (min-width: 481px) and (max-width: 768px) {}
+
+@media (min-width: 769px) and (max-width: 1024px) {}
+
+@media (min-width: 1025px) and (max-width: 1200px) {}
+
 `;

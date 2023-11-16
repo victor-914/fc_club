@@ -61,7 +61,7 @@ function HeroProductCarousel() {
             </Box>
           ))}
 
-          <button className="viewShop">Enter shop</button>
+          {/* <button className="viewShop">Enter shop</button> */}
         </Carousel>
       </div>
     </StyledHeroProductCarousel>
@@ -182,6 +182,39 @@ const StyledHeroProductCarousel = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     .heroProductHeader {
       width: 100%;
+    }
+
+    .navButton_right {
+      /* position: absolute; */
+      top: 41%;
+      right: 2%;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* padding: 30px; */
+      width: 80px;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      z-index: 10;
+      border-radius: 0px 5px 5px 0px;
+      transition: background-color 0.4s;
+    }
+
+    .navButton_left {
+      position: absolute;
+      top: 41%;
+      left: 6%;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.6) !important;
+      z-index: 10;
+      border-radius: 8px 0px 0px 8px;
+      transition: background-color 0.4s;
     }
   }
 
