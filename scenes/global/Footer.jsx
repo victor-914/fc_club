@@ -11,22 +11,14 @@ function Footer() {
   } = useTheme();
   return (
     <StyledFootertext>
-      <Box
-        width="80%"
-        display="flex"
-        justifyContent="space-between"
-        color="#fff"
-        margin="auto"
-        padding="20px"
-        fontSize={`${BaseFontSize.bfs} + 5vw`}
-      >
+      <main>
         <section className="footerCont">
           <div>Privacy Policy</div>
           <div>Help & Support</div>
           <div>Jobs & Careers</div>
           <div>Team of Use</div>
         </section>
-      </Box>
+      </main>
     </StyledFootertext>
   );
 }
@@ -40,6 +32,15 @@ const StyledFootertext = styled.div`
   border-top: 2px solid #fff;
   background-color: #000;
 
+  main {
+    width: 80%;
+    justify-content: space-between;
+    color: #fff;
+    margin: auto;
+    padding: 20px;
+    font-size: ${BaseFontSize.bfs} + 5vw;
+  }
+
   .footerCont {
     width: 70%;
     display: flex;
@@ -52,5 +53,32 @@ const StyledFootertext = styled.div`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
+    
+
+    main {
+    width: 100%;
+    justify-content: space-between;
+    color: #fff;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .footerCont{
+    width: 100%;
+  }
+
+  .footerCont div {
+    font-size: calc(${BaseFontSize.bfs} - 1vw);
+  }
+  }
+
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;
