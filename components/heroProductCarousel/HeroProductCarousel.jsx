@@ -11,13 +11,10 @@ import imagesix from "../../assets/giphy_rangers.gif";
 import imageseven from "../../assets/rangers.gif";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
+import Product from "../shopProduct/ShopProduct";
+
 function HeroProductCarousel() {
-  const heroTextureImports = [
-    One,
-    imagefour,
-    imagesix,
-    imageseven,
-  ];
+  const heroTextureImports = [One, imagefour, imagesix, imageseven];
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   return (
@@ -50,18 +47,18 @@ function HeroProductCarousel() {
               sx={{
                 display: "flex",
                 backgroundColor: "transparent",
-                height: "50vh",
-                width: "80%",
+                flexWrap: "wrap",
+                height: "auto",
+                width: "100%",
                 padding: "10px",
                 margin: "auto",
+                gap: "30px",
                 justifyContent: "space-around",
               }}
               key={`carousel-image-${index}`}
             >
-              <ProductCarousel />
-              <ProductCarousel />
-              <ProductCarousel />
-              <ProductCarousel />
+              <Product />
+              <Product /> <Product /> <Product />
             </Box>
           ))}
         </Carousel>
@@ -74,13 +71,14 @@ export default HeroProductCarousel;
 
 const StyledHeroProductCarousel = styled.section`
   width: 100%;
-  height: 80vh;
+  height: auto;
   /* background-color: green; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+  padding-top: 100px;
 
   .carouselContainer {
     /* background-color: blue; */
@@ -111,21 +109,20 @@ const StyledHeroProductCarousel = styled.section`
     color: #fff;
     font-size: 14px;
     font-weight: 700;
-     margin: 5px; 
+    margin: 5px;
     width: 20%;
     height: 40px;
     padding-left: 10%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    transition: text-decoration .04s;
-
+    transition: text-decoration 0.04s;
   }
 
-  .viewShop:hover{
+  .viewShop:hover {
     text-decoration: underline;
     cursor: pointer;
-    transition: text-decoration .04s;
+    transition: text-decoration 0.04s;
   }
 
   .trending {
@@ -179,5 +176,20 @@ const StyledHeroProductCarousel = styled.section`
   .navButton_right:hover {
     background-color: ${Color.primaryColor} !important;
     transition: background-color 0.4s;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .heroProductHeader {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;

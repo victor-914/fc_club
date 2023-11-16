@@ -22,8 +22,8 @@ function Home() {
       <NewsComponents /> 
       <LatestMatch />
       <HeroProductCarousel />
-      <HeroVideos />
-      <SocialMedia />
+      {/* <HeroVideos /> */}
+      {/* <SocialMedia /> */}
       {/* <HeroHistory />
       <Partners />  */}
     </div>

@@ -13,12 +13,6 @@ function LatestMatch() {
       <div className="cover"></div>
       <section className="fixtureSection">
         <header className="fixtureHeader">Latest Match</header>
-        {/* <section className="time">
-          <main className="countdownContainer">
-            <CountdownClock targetDate={targetDate} />
-          </main>
-          <div className="venue">Awka</div>
-        </section> */}
         <main className="fixtureContainer">
           <div className="home fixture">
             <div className="name homeName">Kano Pillar</div>
@@ -26,12 +20,12 @@ function LatestMatch() {
               <div className=" logo awayLogo">
                 <Image src={kanoPillar} className="img" layout="fill" />
               </div>
-              <div className="nums">1</div>
             </div>
+            <div className="nums">1</div>
           </div>
           <aside className="vs">-</aside>
           <div className="away fixture">
-          <div className="nums">4</div>
+            <div className="nums">4</div>
             <div className="logoCont">
               <div className=" logo awayLogo">
                 <Image src={rangers} className="img" layout="fill" />
@@ -117,15 +111,17 @@ const StyledFixture = styled.section`
     flex-direction: row;
     /* padding: 10px; */
     /* background-color: ${Color.primaryColor}; */
-    height: 200px;
+    height: auto;
   }
 
   .logoCont {
     width: 30%;
-    height: 100%;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: green; */
+    flex-direction:column;
   }
 
   .logo {
@@ -235,10 +231,197 @@ const StyledFixture = styled.section`
     padding: 20px;
   }
 
-  .nums{
+  .nums {
     font-size: calc(${BaseFontSize.bfs} + 1.5vw);
     color: #fff;
     font-weight: 800;
     font-family: "lato";
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .time {
+    }
+
+    .fixtureSection {
+      width: 100%;
+      padding: 0px;
+    }
+
+    .fixtureContainer {
+      height: auto;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .fixture {
+      flex-direction: column;
+      width: 100%;
+      height: 230px;
+    }
+
+    .fixtureHeader {
+    font-size: calc(${BaseFontSize.bfs} + 1.1vw);
+    font-weight: 800;
+    padding-top: 0px;
+    padding: 15px;
+  }
+
+    .home{
+      flex-direction: column;
+      display: flex;
+    }
+
+    .logoCont {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    width: 80%;
+    height: 100%;
+    position: relative;
+    align-items: center;
+  }
+
+  .nums{
+    font-size: calc(${BaseFontSize.bfs} + 3vw) !important;
+    padding: 8px;
+  }
+
+    .name {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .name {
+    width: 95%;
+    height: 100%;
+    color: #fff;
+    font-size: calc(${BaseFontSize.bfs} + 0.5vw);
+    /* text-align: end; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+   font-weight: 700;
+    
+  }
+
+  .awayName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .homeName {
+    justify-content: center;
+  }
+
+  .vs {
+    font-size: calc(${BaseFontSize.bfs} + 0.3vw);
+    color: #fff;
+    font-weight: 800;
+  }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    /* display: none; */
+    background-color: red;
+
+    .time {
+      /* background-color: green; */
+    }
+
+    .fixtureSection {
+      /* background-color: red; */
+    }
+
+    .fixtureContainer {
+      /* background-color: purple; */
+      height: auto;
+      flex-direction: column;
+    }
+
+    .fixture {
+      /* background-color: green; */
+      flex-direction: column;
+      width: 100%;
+      height: 200px;
+    }
+
+    .name {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    background-color: red;
+
+    .fixtureSection {
+      /* background-color: red; */
+    }
+
+    .fixtureContainer {
+      /* background-color: purple; */
+      height: auto;
+      flex-direction: column;
+    }
+
+    .fixture {
+      flex-direction: column;
+      height: 300px;
+      width: 60%;
+    }
+
+    .name {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      font-size: calc(${BaseFontSize.bfs} + 1.5vw);
+    }
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    /* display: none; */
+    /* background-color: red; */
+
+    .fixtureSection {
+      /* background-color: red; */
+    }
+
+    .fixtureContainer {
+      /* background-color: purple; */
+    }
+
+    .fixture {
+      flex-direction: column;
+      height: 300px;
+      width: 60%;
+    }
+
+    .name {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1201px) {
+    .fixture {
+      flex-direction: column;
+      height: 300px;
+      width: 60%;
+    }
+
+    .name {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
   }
 `;
