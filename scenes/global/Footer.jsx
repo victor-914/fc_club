@@ -53,27 +53,39 @@ const StyledFootertext = styled.div`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
-    
-
     main {
-    width: 100%;
-    justify-content: space-between;
-    color: #fff;
-    margin: auto;
-    padding: 20px;
-  }
+      width: 100%;
+      justify-content: space-between;
+      color: #fff;
+      margin: auto;
+      padding: 20px;
+    }
 
-  .footerCont{
-    width: 100%;
-  }
+    .footerCont {
+      width: 100%;
+    }
 
-  .footerCont div {
-    font-size: calc(${BaseFontSize.bfs} - 1vw);
+    .footerCont div {
+      font-size: calc(${BaseFontSize.bfs} - 1vw);
+    }
   }
-  }
-
 
   @media (min-width: 481px) and (max-width: 768px) {
+    main {
+      width: 100%;
+      justify-content: space-between;
+      color: #fff;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .footerCont {
+      width: 100%;
+    }
+
+    .footerCont div {
+      font-size: calc(${BaseFontSize.bfs} - 0.7vw);
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {

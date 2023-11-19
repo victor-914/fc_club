@@ -57,7 +57,8 @@ function HeroProductCarousel() {
               key={`carousel-image-${index}`}
             >
               <Product />
-              <Product /> <Product /> <Product />
+              <Product />
+              <Product />
             </Box>
           ))}
 
@@ -185,40 +186,25 @@ const StyledHeroProductCarousel = styled.section`
     }
 
     .navButton_right {
-      /* position: absolute; */
-      top: 41%;
-      right: 2%;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      /* padding: 30px; */
-      width: 80px;
-      height: 50px;
-      background-color: rgba(0, 0, 0, 0.6) !important;
-      z-index: 10;
-      border-radius: 0px 5px 5px 0px;
-      transition: background-color 0.4s;
+      right: 4px;
     }
 
     .navButton_left {
-      position: absolute;
-      top: 41%;
-      left: 6%;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80px;
-      height: 50px;
-      background-color: rgba(0, 0, 0, 0.6) !important;
-      z-index: 10;
-      border-radius: 8px 0px 0px 8px;
-      transition: background-color 0.4s;
+      left: 4px;
     }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
+    .heroProductHeader {
+      width: 100%;
+    }
+    .navButton_right {
+      right: 4px;
+    }
+
+    .navButton_left {
+      left: 4px;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {

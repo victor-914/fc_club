@@ -6,18 +6,6 @@ import { TwitterEmbed } from "react-social-media-embed";
 import { BaseFontSize } from "../../utils/color";
 function SocialMedia() {
   const images = [
-    // {
-    //   _id: "23",
-    //   img: "https://www.instagram.com/reel/CyvFwSZsVnM/?igshid=MzRlODBiNWFlZA==",
-    // },
-    // {
-    //   _id: "298s3",
-    //   img: "https://www.instagram.com/reel/Cy9B1yKrPm1/?igshid=MzRlODBiNWFlZA==",
-    // },
-    // {
-    //   _id: "298sw3",
-    //   img: "https://www.instagram.com/reel/CzMKUD9Myw7/?igshid=MzRlODBiNWFlZA==",
-    // },
     {
       _id: "29ddd83",
       img: "https://www.instagram.com/reel/CyKQST-outv/?igshid=MzRlODBiNWFlZA==",
@@ -25,7 +13,6 @@ function SocialMedia() {
   ];
   return (
     <StyledSocialMedia>
-      {/* <header>Shop our Socials</header> */}
       <header className="sub_socialsHeader">
         TAG & FOLLOW #RANGERSINTL ON INSTAGRAM
       </header>
@@ -61,7 +48,6 @@ function SocialMedia() {
             <TwitterEmbed
               placeholderDisabled
               url="https://x.com/Rangers_Intl/status/1724802394054435270?s=20"
-              // width={325}
               width={"100%"}
               height={"auto"}
             />
@@ -137,7 +123,7 @@ const StyledSocialMedia = styled.section`
   #linkedIn {
     width: 60%;
     height: 100%;
-  } 
+  }
 
   .sub_socialsHeader {
     font-size: calc(${BaseFontSize.bfs} + 1vw);
@@ -161,8 +147,6 @@ const StyledSocialMedia = styled.section`
 
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
-    background-color: red;
-    width: 100%;
     padding: 0px;
     margin: auto;
     height: auto;
@@ -174,8 +158,8 @@ const StyledSocialMedia = styled.section`
     }
 
     #linkedIn {
-    width: 100%;
-  }
+      width: 100%;
+    }
 
     .socialContainer {
       flex-direction: column;
@@ -204,6 +188,45 @@ const StyledSocialMedia = styled.section`
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
+    width: 100%;
+    padding: 0px;
+    margin: auto;
+    height: auto;
+    background-color: #fff;
+    /* margin-bottom: 1.00px; */
+
+    header {
+      font-size: 20px;
+    }
+
+    #linkedIn {
+      width: 100%;
+    }
+
+    .socialContainer {
+      flex-direction: column;
+      height: auto;
+      width: 95%;
+    }
+
+    .socials {
+      width: 100%;
+      height: 30vh;
+      position: relative;
+      cursor: pointer;
+      margin-bottom: 10px;
+      height: 50%;
+    }
+
+    .subSocialContainer {
+      width: 95%;
+      flex-direction: column;
+    }
+
+    .sub_socials {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {

@@ -112,7 +112,9 @@ const ItemDetails = ({ data }) => {
           </main>
         </div>
         <div className="product_info">
-          <header className="product_info_header">SHIPPING TIMES & COSTS</header>
+          <header className="product_info_header">
+            SHIPPING TIMES & COSTS
+          </header>
           <div className="info">
             Delivery costs will be calculated at checkout. For more information
             on shipping options and times, please see our delivery page here.
@@ -140,7 +142,7 @@ const StyledItemsPage = styled.section`
   padding-top: 140px;
   /* background-color: red; */
   width: 90%;
-  height: 100vh;
+  height: auto;
   margin: auto;
   display: grid;
   grid-gap: 5px;
@@ -163,6 +165,7 @@ const StyledItemsPage = styled.section`
     height: auto;
     margin: auto;
     position: relative;
+    /* display: none; */
     padding: 30px;
   }
 
@@ -261,6 +264,49 @@ const StyledItemsPage = styled.section`
     grid-area: footer;
     background-color: #000;
     height: 80px;
+    display: none;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    /* background-color: red; */
+    width: 95%;
+    margin: auto;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-areas:
+      "images"
+      "detail"
+      "related"
+      "footer";
+    height: auto;
+  }
+
+  .related_productCont {
+    justify-content: center;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+     /* background-color: red; */
+    width: 95%;
+    margin: auto;
+    grid-template-columns: repeat(1, 100%);
+    grid-template-areas:
+      "images"
+      "detail"
+      "related"
+      "footer";
+    height: auto;
+  
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;
 

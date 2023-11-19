@@ -59,7 +59,9 @@ const Product = ({ data }) => {
       </div>
 
       <section className="accesoriesCont">
-        <button className="BuyNow">Buy Now</button>
+        <button 
+          onClick={() => router.replace("/productId")}
+        className="BuyNow">Buy Now</button>
       </section>
     </StyledProductCarousel>
   );

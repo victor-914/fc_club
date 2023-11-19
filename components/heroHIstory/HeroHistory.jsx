@@ -110,6 +110,9 @@ const StyledHeroHistory = styled.section`
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
+    .textContainer{
+      width: 80%;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {

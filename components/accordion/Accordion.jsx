@@ -38,6 +38,7 @@ const AccordionContent = styled.div`
   display: ${(props) => (props.isExpanded ? "block" : "none")};
   /* transition: max-height 0.3s ease-in-out; */
   transition: display 1s;
+  /* justify-content: space-between; */
 `;
 
 const AccordionIcon = styled.div`
@@ -113,18 +114,68 @@ const StyledNewBox = styled.div`
   .headerCont header {
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: calc(${BaseFontSize.bfs} - 0.1vw);
   }
 
   .headerCont aside {
-    font-size: 14px;
+    font-size: calc(${BaseFontSize.bfs} - 0.3vw);
     top: 2px;
-    font-weight: 700;
+    /* font-weight: 700; */
     position: absolute;
     color: #333;
     left: 10px;
-    text-transform: uppercase;
-    font-size: 10px;
-    font-weight: 800px;
+    text-transform: capitalize;
+    /* font-weight: 800px; */
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .imgCont {
+      width: 30%;
+      position: relative;
+    }
+    .headerCont {
+      width: 70%;
+      height: 100%;
+      padding-left: 1%;
+    }
+
+    .headerCont header {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: calc(${BaseFontSize.bfs} - 0.9vw);
+    }
+
+    .headerCont aside {
+      left: 1%;
+      font-size: calc(${BaseFontSize.bfs} - 1.3vw);
+    }
+  }
+  @media (min-width: 481px) and (max-width: 768px) {
+    .imgCont {
+      width: 30%;
+      position: relative;
+    }
+    .headerCont {
+      width: 70%;
+      height: 100%;
+      padding-left: 1%;
+    }
+
+    .headerCont header {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: calc(${BaseFontSize.bfs} - 0.9vw);
+    }
+
+    .headerCont aside {
+      left: 1%;
+      font-size: calc(${BaseFontSize.bfs} - 1.3vw);
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;

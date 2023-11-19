@@ -474,11 +474,10 @@ export const StyledNewsGrid = styled.div`
     }
   }
 
-  @media (min-width: 481px) and (max-width: 768px) {
-    /* background-color: red; */
-    /* background-color: red; */
-    width: auto;
-    /* padding: 50px 0px 50px 0px; */
+  @media (min-width: 481px) and (max-width: 767px) {
+     /* background-color: red; */
+     width: auto;
+    padding: 50px 0px 50px 0px;
 
     .newsHeader {
       width: 95%;
@@ -488,30 +487,41 @@ export const StyledNewsGrid = styled.div`
     .gridContainer {
       display: grid;
       width: 95%;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: 10px;
+      /* background-color: green; */
+      /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+      grid-template-columns: 1fr;
+      /* grid-template-rows: repeat(4, 1fr); */
+      grid-column-gap: 30px;
       grid-template-areas:
-        "top-box-1 top-box-1"
-        "top-box-2 top-box-2"
-        "bottom-box-1 bottom-box-2"
-        "bottom-box-3 bottom-box-4";
+        "top-box-1"
+        /* "top-box-1"
+        "top-box-1" */
+        "top-box-2"
+        /* "top-box-2"
+        "top-box-2" */
+        "bottom-box-1"
+        /* "bottom-box-1"
+        "bottom-box-2" */
+        "bottom-box-2"
+        "bottom-box-3"
+        /* "bottom-box-3"
+        "bottom-box-4" */
+        "bottom-box-4";
     }
 
     .grid-box-one {
-      /* grid-area: top-box-1; */
-      /* height: 200p; */
+      grid-area: top-box-1;
+      height: 400px;
       display: none;
     }
     .grid-box-two {
       grid-area: top-box-2;
-      height: 300px;
-      width: 100%;
+      height: 400px;
     }
     .grid-box-three {
       grid-area: bottom-box-1;
       height: auto;
       display: grid;
-      /* height: 250px; */
       grid-template-columns: 1fr;
       grid-template-rows: repeat(7, 1fr);
       grid-template-areas:
@@ -527,7 +537,6 @@ export const StyledNewsGrid = styled.div`
     .grid-box-four {
       grid-area: bottom-box-2;
       display: grid;
-      height: auto;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(7, 1fr);
       grid-template-areas:
@@ -573,7 +582,7 @@ export const StyledNewsGrid = styled.div`
     }
   }
 
-  @media (min-width: 769px) and (max-width: 1024px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     /* background-color: red; */
     /* background-color: red; */
     width: auto;

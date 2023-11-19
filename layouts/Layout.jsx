@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <MobileMenu />
       <Navbar />
       <main>{children}</main>
-      {/* <HeroHistory /> */}
+      <HeroHistory />
       {/* <Partners /> */}
       <Footer />
     </>

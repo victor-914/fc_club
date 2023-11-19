@@ -80,16 +80,15 @@ const StyledNews = styled.section`
     height: auto;
     /* background-color: green; */
     margin: auto;
-    height: auto;
     padding-top: 50px;
     display: flex;
+    padding-bottom: 40px;
   }
 
   .newsContainer {
     width: 65%;
     height: auto;
     margin: auto;
-    height: 100vh;
     padding-top: 50px;
   }
 
@@ -103,30 +102,35 @@ const StyledNews = styled.section`
     height: auto;
   }
 
-  /* .dateBox {
-    font-weight: 700;
-    color: #000;
-    background-color: red;
-    width: 80%;
-    margin: auto;
-    font-size: calc(${BaseFontSize.bfs} + 0.5vw);
-    padding: 10px;
-    color: #fff;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 100%;
+
+    .container{
+      width:100%;
+    }
+
+    .newsContainer{
+      width: 95%;
+      height: auto;
+    }
   }
 
-  .subNewsContainer {
-    background-color: purple;
-    width: 80%;
-    height: 100vh;
-    margin: auto;
-  } */
-
-  /* .news {
+  @media (min-width: 481px) and (max-width: 768px) {
     width: 100%;
-    height: 50px;
-    /* border: 2px solid green; 
-  } */
+
+    .container{
+      width:100%;
+    }
+
+    .newsContainer{
+      width: 95%;
+      height: auto;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+  }
 `;

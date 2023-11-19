@@ -18,14 +18,13 @@ function Home() {
     <div className="home">
       <MainCarousel />
       <HomeCatergories />
-      <LatestFixture />
-      <NewsComponents /> 
+      <LatestFixture  hideHeader={false}/>
+      <NewsComponents />
       <LatestMatch />
-      <HeroProductCarousel />
+      <HeroProductCarousel />  
       {/* <HeroVideos /> */}
-      <SocialMedia />
-       <HeroHistory />
-      <Partners />  
+      <SocialMedia /> 
+      <Partners />   
     </div>
   );
 }

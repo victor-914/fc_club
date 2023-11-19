@@ -1,13 +1,9 @@
-import { Box, Typography, IconButton, useMediaQuery } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-
 import One from "../../assets/ranger_giphy.gif";
-// import imagetwo from "../../assets/ranger.gif";
-// import imagefour from "../../assets/football_wallpaper.webp";
-// import imagefive from "../../assets/rangerGif.webp";
 import imagesix from "../../assets/giphy_rangers.gif";
 import imageseven from "../../assets/rangers.gif";
 import Image from "next/image";
@@ -16,9 +12,7 @@ import styled from "styled-components";
 const MainCarousel = () => {
   const heroTextureImports = [
     One,
-    // imagetwo,
-    // imagefour,
-    // imagefive,
+  
     imagesix,
     imageseven,
   ];
@@ -43,7 +37,7 @@ const MainCarousel = () => {
             zIndex: "10",
           }}
         >
-          <NavigateBeforeIcon sx={{ fontSize: 40 }} />
+          {/* <NavigateBeforeIcon sx={{ fontSize: 40 }} /> */}
         </IconButton>
       )}
       renderArrowNext={(onClickHandler, hasNext, label) => (
@@ -58,7 +52,7 @@ const MainCarousel = () => {
             zIndex: "10",
           }}
         >
-          <NavigateNextIcon sx={{ fontSize: 40 }} />
+          {/* <NavigateNextIcon sx={{ fontSize: 40 }} /> */}
         </IconButton>
       )}
     >
@@ -66,35 +60,15 @@ const MainCarousel = () => {
         <StyledCarousel key={`carousel-image-${index}`}>
           <Image
             src={texture.src}
-            //  height={"700px"}
-            //  width={}
             layout="fill"
             alt={`carousel-${index}`}
             style={{
               width: "100%",
               height: "700px",
               objectFit: "cover",
-              // objectPosition: `${ isNonMobile ?    "5px 0%" : "-700px 0%"}`,
               backgroundAttachment: "fixed",
             }}
           />
-          {console.log(texture.src, "texture")}
-
-          {/* <Box
-            color="white"
-            padding="20px"
-            borderRadius="1px"
-            textAlign="left"
-            backgroundColor="rgb(0, 0, 0, 0.4)"
-            position="absolute"
-            top="46%"
-            left={isNonMobile ? "10%" : "0"}
-            right={isNonMobile ? undefined : "0"}
-            margin={isNonMobile ? undefined : "0 auto"}
-            maxWidth={isNonMobile ? undefined : "240px"}
-          > */}
-
-          {/* </Box> */}
         </StyledCarousel>
       ))}
     </Carousel>
@@ -112,10 +86,13 @@ const StyledCarousel = styled.section`
     height: 60vh;
   }
 
-@media (min-width: 481px) and (max-width: 768px) {}
+  @media (min-width: 481px) and (max-width: 768px) {
+    height: 60vh;
+  }
 
-@media (min-width: 769px) and (max-width: 1024px) {}
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
 
-@media (min-width: 1025px) and (max-width: 1200px) {}
-
+  @media (min-width: 1025px) and (max-width: 1200px) {
+  }
 `;

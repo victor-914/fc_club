@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
 import { useRouter } from "next/router";
+import { BaseFontSize, Color } from "../../utils/color";
 
 const secNavbar = [
   {
@@ -11,34 +12,30 @@ const secNavbar = [
     link: "/",
   },
   {
-    _id: "hjdhd",
-    content: "New Arrivals",
+    _id: "hjdhhjagad",
+    content: "The Club",
     link: "#",
   },
   {
-    _id: "hjdhddd",
-    content: "Men",
-    link: "men",
+    _id: "hjdhajauddd",
+    content: "Shop",
+    link: "products",
   },
   {
-    _id: "hjddjdjdhddd",
-    content: "Women",
-    link: "women",
+    _id: "hjddjdjahadhddd",
+    content: "News",
+    link: "_news",
   },
   {
-    _id: "hjdhwwddd",
-    content: "Boys",
-    link: "boys",
+    _id: "hjdhwwdshhsdd",
+    content: "Matches",
+    link: "_matches",
   },
+
   {
-    _id: "hjdhdssdd",
-    content: "Girls",
-    link: "girls",
-  },
-  {
-    _id: "hjdddhddd",
-    content: "Accessories",
-    link: "Accessories",
+    _id: "hjdddauaushddd",
+    content: "Videos",
+    link: "#",
   },
 ];
 
@@ -49,14 +46,20 @@ const MobileMenuContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  z-index: 10;
+
+  .menuSubContainer {
+    width: 100%;
+    height: 80%;
+    /* background-color: green; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   .closeButton {
-    background-color: #000;
+    background-color: ${Color.primaryColor};
     padding: 9px;
     font-weight: 800;
     color: #fff;
@@ -65,15 +68,18 @@ const MobileMenuContainer = styled.div`
 `;
 
 const MenuItem = styled.div`
-  font-size: 18px;
+  font-size: calc(${BaseFontSize} + 1vw);
   margin-bottom: 20px;
   line-height: 2;
-  font-weight: 800;
-  color: #333;
+  font-weight: 700;
+  color: #fff;
+  padding: 5px;
   text-decoration: none;
+  background-color: ${Color.primaryColor};
+  border-radius: 2px;
+  width: 70%;
   cursor: pointer;
   letter-spacing: 2px;
-
   :hover {
     text-decoration: underline;
   }
@@ -86,57 +92,31 @@ function MobileMenu() {
   const router = useRouter();
   return (
     <MobileMenuContainer style={{ display: isMobileMenu ? "flex" : "none" }}>
-      {secNavbar.map((item) => (
-        <MenuItem
-          key={item._id}
-          onClick={() => {
-            router.push({
-              pathname: "/products",
-              query: { catergory: `${item.link}` },
-            });
-          }}
+      <div className="menuSubContainer">
+        {secNavbar.map((item) => (
+          <MenuItem
+            key={item._id}
+            onClick={() => {
+              router.push({
+                pathname: `/${item.link}`,
+              }),
+                dispatch(setIsmMenuOpen({}));
+            }}
+          >
+            <span onClick={() => dispatch(setIsmMenuOpen({}))}>
+              {item.content}
+            </span>
+          </MenuItem>
+        ))}
+        <button
+          className="closeButton"
+          onClick={() => dispatch(setIsmMenuOpen({}))}
         >
-          <span onClick={() => dispatch(setIsmMenuOpen({}))}>
-            {item.content}
-          </span>
-        </MenuItem>
-      ))}
-      <button
-        className="closeButton"
-        onClick={() => dispatch(setIsmMenuOpen({}))}
-      >
-        Close
-      </button>
+          Close
+        </button>
+      </div>
     </MobileMenuContainer>
   );
 }
 
 export default MobileMenu;
-
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-// import MobileMenu from './MobileMenu';
-
-// const MobileMenuButton = styled.button`
-//   background-color: transparent;
-//   border: none;
-//   color: #333;
-//   font-size: 20px;
-//   cursor: pointer;
-// `;
-
-// function Header() {
-//   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-//   const toggleMobileMenu = () => {
-//     setMobileMenuOpen(prevState => !prevState);
-//   };
-
-//   return (
-//     <div>
-//       <MobileMenuButton onClick={toggleMobileMenu}>☰</MobileMenuButton>
-//       <MobileMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} />
-//       {/* Other header content */}
-//     </div>
-//   );
-// }

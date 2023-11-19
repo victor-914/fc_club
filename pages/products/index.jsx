@@ -93,23 +93,7 @@ function ProductListing({ productResult }) {
                 <button className="searchButton">search</button>
               </div>
             </header>
-            {/* <div className="filterCont">
-              <main className="filter_bySize">
-                <header>SIZES</header>
-                <div class="checkbox-list">
-                  {size.map((item) => (
-                    <label>
-                      <input
-                        type="checkbox"
-                        value={item.value}
-                        class="styled-checkbox"
-                      />
-                      <div className="sizeText">{item.value}</div>
-                    </label>
-                  ))}
-                </div>
-              </main>
-            </div> */}
+
             <div className="productCont">
               <Product />
               <Product />
@@ -193,7 +177,7 @@ export const StyledProductListing = styled.section`
     width: 88%;
     align-items: center;
     justify-content: space-between;
-    border: 2px solid red;
+    border: 2px solid ${Color.primaryColor};
     padding: 0px 8px 0px 0px;
   }
 
@@ -240,94 +224,22 @@ export const StyledProductListing = styled.section`
     border-bottom: 1px solid ${Color.primaryColor};
   }
 
-  .checkbox-list {
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-    flex-direction: column;
-    /* background-color: orange; */
-  }
-
-  .checkbox-list label {
-    padding: 10px;
-    width: 100%;
-    align-items: center;
-    display: flex;
-  }
-
-  .sizeText {
-    font-weight: 700;
-    font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .checkbox-list {
-    list-style: none;
-    padding: 0;
-  }
-
   label {
     display: block;
     margin-bottom: 10px;
-  }
-
-  .styled-checkbox {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid red;
-    border-radius: 4px;
-    outline: none;
-    margin-right: 8px;
-    position: relative;
-    cursor: pointer;
-  }
-
-  .styled-checkbox:checked {
-    background-color: ${Color.primaryColor};
-    border-color: ${Color.primaryColor};
   }
 
   .productCont {
     padding: 10px;
     grid-area: product;
     height: auto;
-    /* border: 2px solid green; */
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    align-items: center;
     padding-bottom: 100px;
     gap: 40px;
-    /* background-color: purple; */
   }
-
-  /* 
-  .contentHolder {
-    width: 80%;
-    padding-top: 30px;
-    margin: auto;
-    position: relative;
-    height: auto;
-    gap: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-
-  .noProduct {
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    flex-direction: center;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    font-size: 30px;
-  } */
 
   @media (min-width: 320px) and (max-width: 481px) {
     .headerText {
@@ -345,6 +257,41 @@ export const StyledProductListing = styled.section`
     .searchButton {
       width: 20%;
     }
+    .productCont {
+      justify-content: center;
+
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .headerText {
+      display: none;
+    }
+
+    .searchBar {
+      width: 100%;
+    }
+
+    .inputContainer {
+      width: 80%;
+    }
+
+    .searchButton {
+      width: 20%;
+    }
+
+    .productCont {
+      justify-content: center;
+
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;
 

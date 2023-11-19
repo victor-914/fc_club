@@ -89,6 +89,7 @@ const StyledFixture = styled.section`
   }
 
   .fixtureHeader {
+    display: ${(props) => (props.hideHeader ? "none" : "block")};
     font-size: calc(${BaseFontSize.bfs} + 1.1vw);
     font-weight: 700;
     color: #fff;

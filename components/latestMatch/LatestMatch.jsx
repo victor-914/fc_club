@@ -4,10 +4,10 @@ import { BaseFontSize, Color } from "../../utils/color";
 import Image from "next/image";
 import kanoPillar from "../../assets/kanoPillar.png";
 import rangers from "../../assets/main_logo.png";
-import CountdownClock from "../countdown/CountDown";
+// import CountdownClock from "../countdown/CountDown";
 
 function LatestMatch() {
-  const targetDate = "2023-12-31T23:59:59";
+  // const targetDate = "2023-12-31T23:59:59";
   return (
     <StyledFixture>
       <div className="cover"></div>
@@ -126,7 +126,7 @@ const StyledFixture = styled.section`
 
   .logo {
     width: 80%;
-    height: 80%;
+    height: 150px;
     position: relative;
     align-items: center;
   }
@@ -134,6 +134,11 @@ const StyledFixture = styled.section`
   .img {
     width: 100%;
     height: 100%;
+
+
+
+
+    
   }
 
   .name {
