@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import CatergoriesHeader from "../../components/catergories/CatergoriesHeader";
 import mensWear from "../../assets/products_cover.gif";
 import styled from "styled-components";
-import ProductCarousel from "../../components/productsCard/ProductCard";
 import api from "../../utils/api";
 import Pagination from "../../components/pagination/Pagination";
 import useSWR from "swr";
 import { fetcher } from "../../utils/api";
 import { useRouter } from "next/router";
-import { filterByCategory } from "../../utils/helperFunctions";
-import Loading from "../../components/loading/Loading";
 import { BaseFontSize, Color } from "../../utils/color";
 import { AiOutlineSearch } from "react-icons/ai";
 import Product from "../../components/shopProduct/ShopProduct";
@@ -51,28 +48,26 @@ function ProductListing({ productResult }) {
   ];
 
   const router = useRouter();
-  // const { data } = useSWR(
-  //   `https://pellestore-new-strapi.onrender.com/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=1`,
-  //   fetcher,
-  //   {
-  //     fallbackData: productResult,
-  //   }
-  // );
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}/api/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=5`,
+    fetcher,
+    {
+      fallbackData: productResult,
+    }
+  );
 
-  // useEffect(() => {
-  //   setState("loading");
-  //   setProduct(filterByCategory(data?.data, router.query.catergory));
-  //   setState("success");
-  //   return () => {
-  //     setProduct([]);
-  //   };
-  // }, [data, productResult, router.isReady]);
+  useEffect(() => {
+    setState("loading");
+    setProduct(data?.data);
+    setState("success");
+    return () => {
+      setProduct([]);
+    };
+  }, [data, productResult, router.isReady]);
 
   //   const catergories = ["men", "women", "girls", "boys", "Accessories"];
   return (
     <>
-      {/* {state === "loading" ? <Loading /> : null} */}
-      {/* {state === "success" ? ( */}
       <>
         <CatergoriesHeader image={mensWear} text="ALL KITS" />
         <StyledProductListing>
@@ -94,35 +89,22 @@ function ProductListing({ productResult }) {
               </div>
             </header>
 
-            <div className="productCont">
-              <Product />
-              <Product />
-              <Product />
-              <Product />
-
-              {/* <Product />  */}
-              {/* <ProductCarousel/>
-              <ProductCarousel/>
-              <ProductCarousel/> */}
-              {/* <Product /> */}
-            </div>
+            {product.length !== 0 ? (
+              <main className="productCont">
+                {product?.map((item) => (
+                  <Product data={item} />
+                ))}
+              </main>
+            ) : (
+              <div className="noProduct">No product yet</div>
+            )}
           </main>
-          {/* {product.length !== 0 ? (
-            <main className="contentHolder">
-              {product?.map((item) => (
-                <>
-                  <ProductCarousel data={item} page={"men"} />
-                </>
-              ))}
-            </main>
-          ) : (
-            <div className="noProduct">No product yet</div>
-          )} */}
-          {/* <Pagination
+
+          <Pagination
             data={data?.meta}
             stateIndex={pageIndex}
             setstateIndex={setPageIndex}
-          /> */}
+          />
         </StyledProductListing>{" "}
       </>
     </>
@@ -195,6 +177,7 @@ export const StyledProductListing = styled.section`
     color: #fff;
     width: 10%;
     height: 100%;
+    font-size: calc(${BaseFontSize.bfs} - 5px);
   }
 
   #icon {
@@ -295,17 +278,17 @@ export const StyledProductListing = styled.section`
   }
 `;
 
-// export async function getStaticProps() {
-//   const response = await api.get(
-//     "https://pellestore-new-strapi.onrender.com/api/products?populate=*&pagination[page]=1&pagination[pageSize]=1"
-//   );
+export async function getStaticProps() {
+  const response = await api.get(
+    "/api/products?populate=*&pagination[page]=1&pagination[pageSize]=6"
+  );
 
-//   let productResult = response.data;
+  let productResult = response.data;
 
-//   // Return product data as props
-//   return {
-//     props: {
-//       productResult,
-//     },
-//   };
-// }
+  // Return product data as props
+  return {
+    props: {
+      productResult,
+    },
+  };
+}

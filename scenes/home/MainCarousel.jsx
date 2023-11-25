@@ -68,6 +68,7 @@ const MainCarousel = () => {
               objectFit: "cover",
               backgroundAttachment: "fixed",
             }}
+            priority
           />
         </StyledCarousel>
       ))}

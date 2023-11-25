@@ -6,25 +6,27 @@ import Image from "next/image";
 import { useFlutterwave } from "flutterwave-react-v3";
 import { useRouter } from "next/router";
 // import { router } from "json-server";
+import logo from "../../assets/rangers.png";
+import { Color } from "../../utils/color";
 
 function ProductPreview() {
   const [totalPrice, setTotalPrice] = useState();
   const [subTotalPrice, setSubTotalPrice] = useState();
-  const router = useRouter()
+  const router = useRouter();
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.user.user);
   useEffect(() => {
     setTotalPrice(
       cart &&
         cart.reduce((total, item) => {
-          return total + item?.count * item?.attributes?.product_discount_price;
+          return total + item?.count * item?.attributes?.price;
         }, 0)
     );
 
     setSubTotalPrice(
       cart &&
         cart.map((item) => {
-          return item?.count * item?.attributes?.product_discount_price;
+          return item?.count * item?.attributes?.price;
         }, 0)
     );
 
@@ -38,14 +40,18 @@ function ProductPreview() {
     amount: totalPrice,
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
+    // customer: {
+    //   email: user.userInfo.email ,
+    //   phone_number: user.userInfo.phoneNumber,
+    // }
     customer: {
-      email: user.userInfo.email,
-      phone_number: user.userInfo.phoneNumber,
+      email: "okaforv914@gmail.com",
+      phone_number: "08144261104",
     },
     customizations: {
-      title: "ViolaPelle Payout",
+      title: "Rangers Intl Payout",
       description: "Payment for items in cart",
-      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      logo: `${logo}`,
     },
   };
 
@@ -61,16 +67,14 @@ function ProductPreview() {
   // };
 
   const handleFlutterPayment = useFlutterwave(configObj);
+  const postOrder = async () => {
+    const response = await api.post("api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+    });
+  };
 
-  // const response = await fetch("http://localhost:2000/api/orders", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(requestBody),
-  // });
-  // const session = await response.json();
-  // await stripe.redirectToCheckout({
-  //   sessionId: session.id,
-  // });
   return (
     <StyledPreview>
       <div class="small-container cart-page">
@@ -91,12 +95,12 @@ function ProductPreview() {
                     <Image
                       width="80px"
                       height="80px"
-                      src={`${item?.attributes?.product_images?.data[0]?.attributes?.url}`}
+                      src={`${item?.attributes?.images?.data[0]?.attributes?.url}`}
                       className="checkout_img"
                     />
                     <div className="item_content">
-                      <p>{item?.attributes?.product_name}</p>
-                      <small>{item?.attributes?.product_discount_price}</small>
+                      <p>{item?.attributes?.title}</p>
+                      <small>{item?.attributes?.price}</small>
                       {/* <br> */}
                       <span className="iconHolder">
                         <IoCloseOutline />
@@ -137,7 +141,7 @@ function ProductPreview() {
               handleFlutterPayment({
                 callback: (response) => {
                   // console.log(response);
-                    router.push("/")
+                  router.push("/");
                 },
                 onClose: () => {},
               })
@@ -156,7 +160,7 @@ export default ProductPreview;
 const StyledPreview = styled.section`
   width: 80%;
   margin: auto;
-  height: auto;
+  height: 100vh;
   padding-top: 50px;
   .cart-page {
     margin: 80px auto;
@@ -173,9 +177,8 @@ const StyledPreview = styled.section`
   th {
     text-align: left;
     padding: 5px;
-    background-color: green;
+    background-color: ${Color.primaryColor};
     color: #fff;
-    background: #901d78;
     font-weight: normal;
   }
   td {
@@ -187,7 +190,7 @@ const StyledPreview = styled.section`
     padding: 5px;
   }
   .iconHolder {
-    color: #901d78;
+    color: #901;
     font-size: 12px;
     font-weight: 800;
   }
@@ -207,7 +210,7 @@ const StyledPreview = styled.section`
     /* background-color: red; */
   }
   .total-price table {
-    border-top: 3px solid #901d78;
+    border-top: 3px solid ${Color.primaryColor};
     width: 100%;
     max-width: 400px;
   }

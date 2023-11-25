@@ -9,14 +9,13 @@ const Card = ({ title, imgSrc, page }) => {
     <StyledCard
       onClick={() =>
         router.push({
-          pathname: "/products",
-          query: { catergory: `${page}` },
+          pathname: `${page}`,
         })
       }
     >
       <div className="title">{title}</div>
       <main className="imageHolder">
-        <Image src={imgSrc} layout="fill" className="image" />
+        <Image src={imgSrc} layout="fill" className="image"  priority/>
       </main>
       <div className="buttonContainer">
         <button className="viewButton">SEE MORE</button>
@@ -52,6 +51,7 @@ const StyledCard = styled.section`
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
+    padding: 10px;
   }
 
   .buttonContainer {
@@ -78,24 +78,24 @@ const StyledCard = styled.section`
     width: 80%;
     height: 70%;
     margin: auto;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     position: relative;
     object-fit: center;
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
     width: 90%;
-    /* height: 300px; */
+    height: auto;
     .title {
       font-size: 16px;
       letter-spacing: 1px;
     }
     .image {
-      object-fit: cover;
+      object-fit: contain;
     }
     .imageHolder {
-      width: 90%;
-      height: 80%;
+      width: 100%;
+      height: 380px;
     }
   }
 
@@ -103,15 +103,14 @@ const StyledCard = styled.section`
     width: 90%;
     /* height: 300px; */
     /* background-color: green; */
-
+    height: auto;
     .imageHolder {
-      width: 90%;
-      height: 80;
+      width: 100%;
+      height: 380px;
     }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
-
     width: 55%;
   }
 `;

@@ -12,12 +12,13 @@ import {
   setShippingAddress,
   setUserDetails,
 } from "../../state/profile";
+import { Color } from "../../utils/color";
 
 const StyledButton = styled.button`
   width: 100%;
 
   height: 40px;
-  background-color: #000;
+  background-color: ${Color.primaryColor} !important;
   color: #fff;
 
   /* :hover{

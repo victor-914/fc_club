@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { saveCartToLocalStorage } from "./localStorage";
-
+import PropTypes from 'prop-types';
 const initialState = {
   isCartOpen: false,
   cart: [],
   items: [],
 };
+
 
 export const cartSlice = createSlice({
   name: "cart",

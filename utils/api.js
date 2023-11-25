@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://pellestore-new-strapi.onrender.com",
+  baseURL: process.env.NEXT_PUBLIC_URL,
 });
 
 export default api;

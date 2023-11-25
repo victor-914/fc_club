@@ -12,6 +12,7 @@ import {
   setIsCartOpen,
 } from "../../state";
 import { useRouter } from "next/router";
+import { Color } from "../../utils/color";
 
 
 const FlexBox = styled(Box)`
@@ -25,8 +26,7 @@ const CartMenu = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isCartOpen = useSelector((state) => state.cart.isCartOpen);
   const totalPrice = cart?.reduce((total, item) => {
-    console.log(item, "item");
-    return total + item?.count * item?.attributes?.product_discount_price;
+    return total + item?.count * item?.attributes?.price;
   }, 0);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const router = useRouter();
@@ -53,7 +53,7 @@ const CartMenu = () => {
         <Box padding="30px" overflow="auto" height="100%">
           {/* HEADER */}
           <FlexBox mb="15px">
-            <Typography variant="h3">SHOPPING BAG ({cart.length})</Typography>
+            <Typography variant="h3">SHOPPING CART ({cart.length})</Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen({}))}>
               <CloseIcon />
             </IconButton>
@@ -62,7 +62,7 @@ const CartMenu = () => {
           {/* CART LIST */}
           <Box>
             {cart.map((item) => (
-              <Box key={`${item?.attributes?.product_name}-${item.id}`}>
+              <Box key={`${item?.attributes?.title}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     {console.log(item, "item")}
@@ -70,7 +70,7 @@ const CartMenu = () => {
                       alt={item?.product_name}
                       width="123px"
                       height="164px"
-                      src={`${item?.attributes?.product_images?.data[0]?.attributes?.url}`}
+                      src={`${item?.attributes?.images?.data[0]?.attributes?.url}`}
                     />
                   </Box>
                   <Box flex="1 1 60%">
@@ -110,7 +110,7 @@ const CartMenu = () => {
                         </IconButton>
                       </Box>
                       <Typography fontWeight="bold">
-                        ₦{item?.attributes?.product_discount_price}
+                        ₦{item?.attributes?.price}
                       </Typography>
                     </FlexBox>
                   </Box>
@@ -128,8 +128,8 @@ const CartMenu = () => {
             </FlexBox>
             <Button
               sx={{
-                backgroundColor: shades.primary[900],
-                color: "#000",
+                backgroundColor:`${Color.primaryColor} !important`,
+                color: "#fff !important",
                 borderRadius: 0,
                 minWidth: "100%",
                 padding: "20px 40px",
