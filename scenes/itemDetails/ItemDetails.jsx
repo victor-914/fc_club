@@ -95,8 +95,8 @@ const ItemDetails = ({ data }) => {
       </div>
 
       <div className="detailsCont">
-        <div className="product_title">
-          <main className="title"></main>
+        {/* <div className="product_title"> */}
+          <main className="title">{product?.attributes?.title}</main>
           <div className="price_details">
             &#8358;
             {addCommasToNumber(product?.attributes?.price)}
@@ -117,7 +117,7 @@ const ItemDetails = ({ data }) => {
               ADD TO CART
             </button>
           </div>
-        </div>
+        {/* </div> */}
         <div className="product_info">
           <header className="product_info_header">Product info</header>
           <main className="info">{product?.attributes?.description}</main>
@@ -188,11 +188,12 @@ const StyledItemsPage = styled.section`
     /* background-color: purple; */
   }
 
-  .product_title {
-  }
+ 
 
   .title {
     font-size: calc(${BaseFontSize.bfs} + 0.5vw);
+    font-weight: 500;
+    text-transform: capitalize;
   }
 
   .price_details {

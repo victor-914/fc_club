@@ -179,7 +179,7 @@ function Navbar() {
             columnGap="20px"
             zIndex="2"
           >
-            {/* <Badge
+            <Badge
               badgeContent={wishList.length}
               color="secondary"
               invisible={wishList.length === 0}
@@ -193,20 +193,20 @@ function Navbar() {
                 },
               }}
             >
-              <IconButton
+              {/* <IconButton
                 onClick={() => dispatch(setIsWishListOpen({}))}
                 sx={{ color: "black" }}
               >
                 <AiOutlineHeart />
-              </IconButton>
-            </Badge> */}
+              </IconButton> */}
+            </Badge>
 
-            {/* <IconButton
+            <IconButton
               sx={{ color: "black" }}
               onClick={() => router.push("/profile")}
             >
               <PersonOutline />
-            </IconButton> */}
+            </IconButton>
             <Badge
               badgeContent={cart.length}
               color="secondary"

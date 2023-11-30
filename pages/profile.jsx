@@ -9,7 +9,7 @@ function ProfilePage() {
 
   return (
     <>
-    <ProfileLayout/>
+    <Profile/>
     </>
   );
 }
