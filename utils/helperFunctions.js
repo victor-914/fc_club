@@ -1,3 +1,5 @@
+import api from "./api";
+
 export function filterByCategory(data, catergory) {
   let filteredData = [];
   data.forEach((ele) => {
@@ -22,107 +24,39 @@ export function addCommasToNumber(number) {
   }
 }
 
-export async function validateProducts(products) {
-  try {
-    // Make API request to validate product quantities
-    let response = await api.get("/api/products");
-    response = response?.data
-
-    return response.data;
-  } catch (error) {
-    console.error("Product validation failed:", error.message);
-    return { success: false };
-  }
-}
-
-export function deductProductQuantities(products) {
-  // Implement your deduction logic here
-  // Update the product quantities in your database or wherever they are stored
-  return products.map((product) => ({
-    id: product.id,
-    quantity: product.quantity, // Deducted quantity
-  }));
-}
-
 export async function createOrder(products) {
   try {
-    // Make API request to create an order and get order ID
-    const response = await axios.post("YOUR_API_URL/create-order", {
-      products,
-    });
-    return response.data.orderId;
+    const response = await api.post("api/product-orders", products);
+    return response;
   } catch (error) {
     console.error("Order creation failed:", error.message);
     throw new Error("Failed to create order");
   }
 }
 
-export async function initiatePayment(orderId, userId) {
+export async function updateOrderStatus(orderId, load) {
   try {
-    // Make API request to initiate payment
-    const response = await axios.post("YOUR_API_URL/initiate-payment", {
-      orderId,
-      userId,
-    });
-    return response.data.status;
-  } catch (error) {
-    console.error("Payment initiation failed:", error.message);
-    throw new Error("Failed to initiate payment");
-  }
-}
-
-export async function handlePaymentStatus(
-  status,
-  deductedQuantities,
-  orderId,
-  res
-) {
-  switch (status) {
-    case "pending":
-      // Payment is pending, do nothing for now
-      res.status(200).json({ success: true });
-      break;
-    case "cancelled":
-    case "failed":
-      // Payment failed or cancelled, add back deducted quantities
-      addBackDeductedQuantities(deductedQuantities);
-      // Optionally, you might want to update order status here
-      // For simplicity, we are not making a separate API call to update order status
-      res.status(500).json({ error: "Payment failed or cancelled" });
-      break;
-    case "successful":
-      // Payment successful, update order status
-      await updateOrderStatus(orderId);
-      res.status(200).json({ success: true });
-      break;
-    default:
-      res.status(500).json({ error: "Invalid payment status" });
-  }
-}
-
-function addBackDeductedQuantities(deductedQuantities) {
-  // Implement logic to add back deducted quantities
-  // Update the product quantities in your database or wherever they are stored
-  deductedQuantities.forEach((product) => {
-    // Add back the deducted quantity
-    // Update product quantity in your database
-  });
-}
-
-export async function updateOrderStatus(orderId) {
-  try {
+    const authToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNDQyMDQ2LCJleHAiOjE3MDQwMzQwNDZ9.MTewXe-kDqSZ2H8Kbhw9eC_VK9op5jBikSbfCWAJjl4";
     // Make API request to update order status
-    const response = await axios.put(`YOUR_API_URL/update-order/${orderId}`);
-    if (!response.data.success) {
-      throw new Error("Failed to update order status");
-    }
+    console.log(orderId, "updated");
+    const url = `api/product-orders/${orderId}`;
+    console.log(url, "url");
+    if (orderId === null || load === {}) return;
+    const response = await api.put(url, load, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+
+    console.log(response, "response");
   } catch (error) {
     console.error("Order status update failed:", error.message);
     throw new Error("Failed to update order status");
   }
 }
 
-const sendEmail = async () => {
+export const sendEmail = async () => {
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -149,3 +83,15 @@ const sendEmail = async () => {
     }
   });
 };
+
+export async function signIn(username, password) {
+  try {
+    const res = await api.post("/api/auth/local", {
+      identifier: username,
+      password: password,
+    });
+    return res?.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

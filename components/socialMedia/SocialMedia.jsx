@@ -20,7 +20,7 @@ function SocialMedia() {
       <section>
         <main className="socialContainer">
           {images.map((item) => (
-            <div className="socials">
+            <div  key={item._id} className="socials">
               <InstagramEmbed
                 placeholderDisabled
                 url={item.img}

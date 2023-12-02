@@ -1,11 +1,41 @@
 import React from "react";
 import ItemDetails from "../../scenes/itemDetails/ItemDetails";
 import api from "../../utils/api";
-
+import Breadcrumbs from "nextjs-breadcrumbs";
+import { Color } from "../../utils/color";
+import { FaBeer } from "react-icons/fa";
 function PerProduct({ productResult }) {
-  console.log(productResult, "@itemdetail");
+  const v = "&#8594;";
   return (
     <div>
+      <Breadcrumbs
+        omitRootLabel
+        activeItemClassName="brActive"
+        omitIndexList={[1]}
+        containerStyle={{
+          width: "90%",
+          margin: "auto",
+          borderBottom: `1px solid ${Color.primaryColor}`,
+          height: "auto",
+          paddingTop: "11vh",
+        }}
+        listStyle={{
+          display: "flex",
+          marginLeft: "5px",
+          padding: "5px",
+
+          textTransform: "capitalize",
+          fontSize: "15px",
+        }}
+        inactiveItemStyle={{
+          padding: "5px",
+          color: `${Color.primaryColor}`,
+          fontWeight: "700",
+          color: "#000",
+        }}
+        transformLabel={(title) => "/" + title}
+      />
+
       <ItemDetails data={productResult} />
     </div>
   );
@@ -19,7 +49,6 @@ export async function getStaticProps({ params }) {
   );
 
   let productResult = response.data;
-  // Return product data as props
   return {
     props: {
       productResult,

@@ -11,7 +11,7 @@ import { BaseFontSize, Color } from "../../utils/color";
 import { AiOutlineSearch } from "react-icons/ai";
 import Product from "../../components/shopProduct/ShopProduct";
 
-function ProductListing({ productResult }) {
+function ProductListing({ productResult: data }) {
   const [pageIndex, setPageIndex] = useState(1);
   const [product, setProduct] = useState([]);
   const [state, setState] = useState("loading");
@@ -48,24 +48,29 @@ function ProductListing({ productResult }) {
   ];
 
   const router = useRouter();
-  const { data } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=5`,
-    fetcher,
-    {
-      fallbackData: productResult,
-    }
-  );
+  // const { data } = useSWR(
+  //   `${process.env.NEXT_PUBLIC_URL}/api/products?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=5`,
+  //   fetcher,
+  //   {
+  //     fallbackData: productResult,
+  //   }
+  // );
+
+  console.log(data, "product");
 
   useEffect(() => {
-    setState("loading");
+    // setState("loading");
     setProduct(data?.data);
-    setState("success");
+    // setState("success");
     return () => {
       setProduct([]);
     };
-  }, [data, productResult, router.isReady]);
+  }, [
+    data,
+    // productResult,
+    router.isReady,
+  ]);
 
-  //   const catergories = ["men", "women", "girls", "boys", "Accessories"];
   return (
     <>
       <>
@@ -89,7 +94,7 @@ function ProductListing({ productResult }) {
               </div>
             </header>
 
-            {product.length !== 0 ? (
+            {product?.length !== 0 ? (
               <main className="productCont">
                 {product?.map((item) => (
                   <Product data={item} />

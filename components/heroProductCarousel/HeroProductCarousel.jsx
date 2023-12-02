@@ -1,20 +1,16 @@
 import React from "react";
 import ProductCarousel from "../productsCard/ProductCard";
-import { Box, Typography, IconButton, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import One from "../../assets/ranger_giphy.gif";
-import imagefour from "../../assets/football_wallpaper.webp";
-import imagesix from "../../assets/giphy_rangers.gif";
-import imageseven from "../../assets/rangers.gif";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
-import Product from "../shopProduct/ShopProduct";
 
 function HeroProductCarousel() {
-  const heroTextureImports = [One, imagefour, imagesix, imageseven];
+  const heroTextureImports = [One];
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   return (
@@ -56,9 +52,7 @@ function HeroProductCarousel() {
               }}
               key={`carousel-image-${index}`}
             >
-              <Product />
-              <Product />
-              <Product />
+              <ProductCarousel  />
             </Box>
           ))}
 

@@ -18,7 +18,9 @@ function HighLights() {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube-nocookie.com/embed/4zUiWcX7wM0?si=5JVD-ujqRiaJJ88R&amp;start=19"
+            controls="0"
+            // modestbranding="1"
+            src="https://www.youtube-nocookie.com/embed/4zUiWcX7wM0?si=5JVD-ujqRiaJJ88R&amp;start=19&controls=0"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -35,7 +37,7 @@ function HighLights() {
           </aside>
         </main>
       </section>
-      <RelatedVideo  />
+      <RelatedVideo />
     </StyledHighLights>
   );
 }

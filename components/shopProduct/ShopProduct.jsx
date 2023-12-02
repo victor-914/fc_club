@@ -23,6 +23,9 @@ const Product = ({ data }) => {
   const dispatch = useDispatch();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+
+  console.log(data,"data")
+
   const heroTextureImports = [
     One,
     // imagetwo,
@@ -32,9 +35,9 @@ const Product = ({ data }) => {
     imageseven,
   ];
 
-  console.log(data, "data", "data", data?.attributes.images?.data[0].attributes.url);
+  // console.log(data, "data", "data", data?.attributes.images?.data[0].attributes.url);
   const loadImg = (src) => {
-    return data?.attributes.images?.data[0]?.attributes?.url
+    return data?.attributes?.images?.data?.[0]?.attributes?.url
   };
   return (
     <StyledProductCarousel>

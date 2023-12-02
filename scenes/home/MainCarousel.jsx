@@ -10,12 +10,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const MainCarousel = () => {
-  const heroTextureImports = [
-    One,
-  
-    imagesix,
-    imageseven,
-  ];
+  const heroTextureImports = [One, imagesix, imageseven];
   const isNonMobile = useMediaQuery("(min-width:600px)");
   return (
     <Carousel
@@ -78,7 +73,7 @@ const MainCarousel = () => {
 
 export default MainCarousel;
 
-const StyledCarousel = styled.section`
+export const StyledCarousel = styled.section`
   width: 100%;
   height: 80vh;
   position: relative;

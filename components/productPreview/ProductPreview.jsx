@@ -3,17 +3,24 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
-import { useFlutterwave } from "flutterwave-react-v3";
+// import { useFlutterwave } from "flutterwave-react-v3";
 import { useRouter } from "next/router";
 import logo from "../../assets/rangers.png";
 import { Color } from "../../utils/color";
-import { validateProducts } from "../../utils/helperFunctions";
+import {
+  createOrder,
+  sendEmail,
+  validateProducts,
+} from "../../utils/helperFunctions";
+import { usePaystackPayment } from "react-paystack";
+import { debounce } from "lodash";
 function ProductPreview() {
   const [totalPrice, setTotalPrice] = useState();
-  const [totalQuantity, setTotalQuantity] = useState();
+  const [orderId, setOrderId] = useState(null);
   const router = useRouter();
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.user.user);
+
   useEffect(() => {
     setTotalPrice(
       cart &&
@@ -22,84 +29,80 @@ function ProductPreview() {
         }, 0)
     );
 
-    setTotalQuantity(
-      cart &&
-        cart.reduce((total, item) => {
-          return total + item?.count;
-        }, 0)
-    );
-
-    console.log(user, "user", user, "user");
-
     return () => {};
   }, [cart]);
 
-  // create payment configuration key
-  const configObj = {
-    public_key: `${process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY}`,
-    tx_ref: Date.now(),
-    // amount: totalPrice,
-    amount: 233,
-    currency: "NGN",
-    payment_options: "card,mobilemoney",
-    customer: {
-      email: user?.userInfo?.email,
-      phone_number: user?.userInfo?.phoneNumber,
-    },
-    customizations: {
-      title: "Rangers Intl Payout",
-      description: "Payment for items in cart",
-      logo: `${logo}`,
-    },
+  // FROM JWT TOKEN
+  const config = {
+    email: "okaforv914@gmail.com",
+    amount: 10000,
+    publicKey: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY,
+    channel: ["card", "bank", "ussd", "mobile_money"],
   };
 
-  // initialising flutterwave
-  const handleFlutterPayment = useFlutterwave(configObj);
+  const onSuccess = async (r) => {
+    // handle status
+    // create order
+    //  paylaod == ship address , transaction details, order details
+    // write to log file
+    // send email
+    // clear cart
+    // verify amount and products from backend
 
-    validateProducts
-
-  // validate product quantity and deduct
-  // create product order and validate against duplicate
-  // make payment
-  // resolve payment status
-  // update product order status
-
-  const postOrder = async (res) => {
-    // product order info
-    const requestBody = {
-      title: "product payment",
-      customer_name: "victor",
-      customer_email: "okaforv914@gmail.com",
-      total_price: 100000,
-      status: "pending",
-      customer_phoneNumber: "08144261104",
-      quantity: totalQuantity,
-      products: cart.map(({ id, attributes, count }) => ({
-        id,
-        title: attributes.title,
-        quantity: count,
-      })),
+    const payLoad = {
+      data: {
+        // title: `${customeremail} + ${d}`,
+        customer_name:"",
+        customer_email:"",
+        total_price:"",
+        shipping_status:"",
+        shipping_address :"",
+        country:"",
+        state:"",
+        streetAddress:"", 
+        streetAddress2:"",
+        zipCode:"",
+        city:"",
+        customer_phoneNumber:"",
+        products:"",
+        users:"",
+        quantity:"",
+        gateway_response:""
+      },
     };
 
-    // post request to order endpoint
-    const response = await api.post("/api/product-orders", {
-      data: {
-        requestBody,
-      },
-    });
-
-    console.log(
-      data,
-      "data",
-      cart.map((item) => console.log(item, "item"))
-    );
-
-    console.log(response, "response");
+    try {
+      const response = await createOrder(payLoad, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      console.log(response, "response");
+      console.log("Payment successful:", r, payLoad);
+    } catch (error) {}
   };
+
+  const onClose = () => {
+    console.log("Payment closed");
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
+  const authToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNDQyMDQ2LCJleHAiOjE3MDQwMzQwNDZ9.MTewXe-kDqSZ2H8Kbhw9eC_VK9op5jBikSbfCWAJjl4";
+  const handlePaymentInit = async () => {
+    try {
+      initializePayment(onSuccess, onClose);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // const debouncedHandlePaymentInit = debounce(handlePaymentInit, 1000);
 
   return (
     <StyledPreview>
-      <div class="small-container cart-page">
+      <div className="small-container cart-page">
         <table>
           <thead>
             <tr>
@@ -108,12 +111,13 @@ function ProductPreview() {
               <th>Subtotal</th>
             </tr>
           </thead>
-          {/* <tbody> */}
-          {cart?.map((item) => (
-            <tbody>
+          <tbody>
+            {" "}
+            {/* Add tbody here */}
+            {cart?.map((item) => (
               <tr key={item.id}>
                 <td>
-                  <div class="cart-info">
+                  <div className="cart-info">
                     <Image
                       width="80px"
                       height="80px"
@@ -123,7 +127,6 @@ function ProductPreview() {
                     <div className="item_content">
                       <p>{item?.attributes?.title}</p>
                       <small>{item?.attributes?.price}</small>
-                      {/* <br> */}
                       <span className="iconHolder">
                         <IoCloseOutline />
                       </span>
@@ -135,40 +138,24 @@ function ProductPreview() {
                 </td>
                 <td>&#x20A6; {item?.attributes?.price * item.count}</td>
               </tr>
-            </tbody>
-          ))}
+            ))}
+          </tbody>
         </table>
-        <div class="total-price">
+        <div className="total-price">
           <table>
-            <tr>
-              <td>Total</td>
-              <td> &#x20A6; {totalPrice}</td>
-            </tr>
+            <tbody>
+              {" "}
+              {/* Add tbody here */}
+              <tr>
+                <td>Total</td>
+                <td> &#x20A6; {totalPrice}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
-
+        <button onClick={handlePaymentInit}>pay</button>
         <aside>
-          <StyledButton
-            color="primary"
-            variant="contained"
-            sx={{
-              boxShadow: "none",
-              color: "white",
-              borderRadius: 0,
-            }}
-            onClick={() =>
-              handleFlutterPayment({
-                callback: (response) => {
-                  console.log(response);
-                  postOrder(response);
-                  router.push("/");
-                },
-                onClose: () => {},
-              })
-            }
-          >
-            Pay with Flutterwave
-          </StyledButton>
+          <PaystackHookExample />
         </aside>
       </div>
     </StyledPreview>
@@ -307,3 +294,20 @@ const StyledButton = styled.button`
     color: #000;
     } */
 `;
+
+// const postOrder = async (res) => {
+//   // product order info
+//   const requestBody = {
+//     title: "product payment",
+//     customer_name: "victor",
+//     customer_email: "okaforv914@gmail.com",
+//     total_price: 100000,
+//     status: "pending",
+//     customer_phoneNumber: "08144261104",
+//     quantity: totalQuantity,
+//     products: cart.map(({ id, attributes, count }) => ({
+//       id,
+//       title: attributes.title,
+//       quantity: count,
+//     })),
+//   };

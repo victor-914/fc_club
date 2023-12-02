@@ -12,10 +12,11 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import Layout from "../layouts/Layout";
 import store, { persistor } from "../state/store";
 import "react-toastify/dist/ReactToastify.css";
-
+import Breadcrumbs from "nextjs-breadcrumbs";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
-import { hydrateRoot } from "react-dom";
+// import { hydrateRoot } from "react-dom";
+import MaintenanceSign from "../components/maintainance/maintain";
 
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
@@ -44,24 +45,6 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Reggae+One&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <Helmet>
         <meta charSet="utf-8" />
@@ -69,10 +52,12 @@ function MyApp({ Component, pageProps }) {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="En" />
       </Helmet>
+      
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Layout>
             <ToastContainer />
+            {/* <MaintenanceSign /> */}
             <CssBaseline />
             <PersistGate loading={null} persistor={persistor}>
               <Component {...pageProps} />

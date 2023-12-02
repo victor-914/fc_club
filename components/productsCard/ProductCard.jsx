@@ -3,17 +3,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { shades } from "../../theme";
-import { FaShoppingCart } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
-import { AiFillEye } from "react-icons/ai";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../state";
-import { addToWishList } from "../../state/wishlist";
 import One from "../../assets/RangersKit2.png";
 // import imagetwo from "../../assets/ranger.gif";
 import imagefour from "../../assets/RangersKit1.png";
@@ -29,9 +22,7 @@ const ProductCarousel = ({ data }) => {
 
   const heroTextureImports = [
     One,
-    // imagetwo,
     imagefour,
-    // imagefive,
     imagesix,
     imageseven,
   ];
@@ -97,15 +88,13 @@ const ProductCarousel = ({ data }) => {
       <div class="showcase-content">
         <h3>
           <p class="showcase-title">
-            {data?.attributes?.product_name}
-            Home sweaters
+            Ranger football club jersey
           </p>
         </h3>
 
         <div class="price-box">
           <p class="price">
-            &#x20A6; 59.00
-            {data?.attributes?.product_discount_price}
+            &#x20A6; 10,000
           </p>
         </div>
       </div>
@@ -122,6 +111,7 @@ export default ProductCarousel;
 const StyledProductCarousel = styled.section`
   width: 300px;
   height: auto;
+  padding: 10px;
   position: relative;
   background-color: #fff;
   border-radius: 0px 0px 5px 5px;
