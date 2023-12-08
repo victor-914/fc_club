@@ -67,7 +67,8 @@ function ProductPreview() {
         products:"",
         users:"",
         quantity:"",
-        gateway_response:""
+        gateway_response:"", 
+        transaction_id:""
       },
     };
 

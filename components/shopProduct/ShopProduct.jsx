@@ -35,7 +35,6 @@ const Product = ({ data }) => {
     imageseven,
   ];
 
-  // console.log(data, "data", "data", data?.attributes.images?.data[0].attributes.url);
   const loadImg = (src) => {
     return data?.attributes?.images?.data?.[0]?.attributes?.url
   };

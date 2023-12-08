@@ -15,6 +15,43 @@ const MaintenanceSignContainer = styled.div`
   height: 100%;
   bottom: 0px;
 
+  .imgCont {
+    width: 50%;
+    height: 80%;
+    position: relative;
+    margin: auto;
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .imgCont {
+      width: 100%;
+      height: 70%;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .imgCont {
+      width: 90%;
+      height: 70%;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .imgCont {
+      width: 60%;
+      height: 80%;
+    }
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+    .imgCont {
+      width: 60%;
+      height: 80%;
+    }
+  }
+`;
+
+const StyledLoader = styled.div`
   .loader {
     --s: 25px;
     --g: 5px;
@@ -70,48 +107,17 @@ const MaintenanceSignContainer = styled.div`
       background-position: 0% 0%, 0 0;
     }
   }
-
-  .imgCont {
-    width: 50%;
-    height: 80%;
-    position: relative;
-    margin: auto;
-  }
-
-  @media (min-width: 320px) and (max-width: 480px) {
-    .imgCont {
-      width: 100%;
-      height: 70%;
-    }
-  }
-
-  @media (min-width: 481px) and (max-width: 768px) {
-    .imgCont {
-      width: 90%;
-      height: 70%;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .imgCont {
-      width: 60%;
-      height: 80%;
-    }
-  }
-
-  @media (min-width: 1025px) and (max-width: 1200px) {
-    .imgCont {
-      width: 60%;
-      height: 80%;
-    }
-  }
 `;
+
+export const Loader = () => {
+  return <StyledLoader class="loader"></StyledLoader>;
+};
 
 const MaintenanceSign = () => {
   return (
     <MaintenanceSignContainer>
+      <Loader />
       {/* <div class="lds-dual-ring"></div> */}
-      <div class="loader"></div>
 
       {/* <PiWarningCircleFill /> */}
       <strong>Under upgrade</strong>

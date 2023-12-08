@@ -92,7 +92,7 @@ const secNavbar = [
   {
     _id: "hjdhwwdsadd",
     content: "News",
-    link: "/_news",
+    link: "/News",
   },
   {
     _id: "hjdddssaaddhddd",
@@ -116,7 +116,6 @@ function Navbar() {
   const wishList = useSelector((state) => state.wishList.wishList);
   const router = useRouter();
 
-  console.log(router.pathname, "hhdh");
   return (
     <>
       <StyledSecNavBar className="">

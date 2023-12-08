@@ -31,6 +31,9 @@ const StyledFootertext = styled.div`
   width: 100%;
   border-top: 2px solid #fff;
   background-color: #000;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: -100vh;
 
   main {
     width: 80%;

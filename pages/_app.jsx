@@ -12,18 +12,21 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import Layout from "../layouts/Layout";
 import store, { persistor } from "../state/store";
 import "react-toastify/dist/ReactToastify.css";
-import Breadcrumbs from "nextjs-breadcrumbs";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
-// import { hydrateRoot } from "react-dom";
-import MaintenanceSign from "../components/maintainance/maintain";
+import Router from "next/router";
+import NProgress from "nprogress";
+import "./page-loader.css"
 
+NProgress.configure({ easing: "ease", speed: 500 });
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
   return getLayout(
     <>
       <Head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -42,9 +45,6 @@ function MyApp({ Component, pageProps }) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
       </Head>
       <Helmet>
         <meta charSet="utf-8" />
@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="En" />
       </Helmet>
-      
+
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Layout>

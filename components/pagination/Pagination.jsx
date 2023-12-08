@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Color } from "../../utils/color";
 function Pagination({ data, stateIndex, setstateIndex }) {
   return (
     <StyledPagination>
       <div id="pagination" className="space-x-2 space-y-2">
         <button
           className={`md:p-2 rounded py-2  text-white p-2 ${
-            stateIndex === 1 ? "bg-gray-300" : "bg-purple-800"
+            stateIndex === 1 ? "bg-red-300" : "bg-red-600"
           }`}
           disabled={stateIndex === 1}
           onClick={() => setstateIndex(stateIndex - 1)}
@@ -18,7 +19,7 @@ function Pagination({ data, stateIndex, setstateIndex }) {
           className={`md:p-2 rounded py-2 text-white p-2 ${
             stateIndex === (data && data?.pagination.pageCount)
               ? "bg-gray-300"
-              : "bg-purple-800"
+              : "bg-red-600"
           }`}
           disabled={stateIndex === (data && data?.pagination.pageCount)}
           onClick={() => setstateIndex(stateIndex + 1)}
@@ -44,7 +45,7 @@ const StyledPagination = styled.section`
   }
 
   button:hover {
-    background-color: #901d78;
+    background-color:${Color.primaryColor};
     color: #fff;
   }
 `;

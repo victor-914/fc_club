@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 // import { BaseFontSize } from "../../utils/color";
 import { Accordion, NewsBox } from "../../components/accordion/Accordion";
 import { BaseFontSize } from "../../utils/color";
-function News() {
+import Head from "next/head";
+import api, { fetcher } from "../../utils/api";
+import Pagination from "../../components/pagination/Pagination";
+import useSWR from "swr";
+function News({ news }) {
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=${currentPage}`,
+    fetcher,
+    {
+      fallbackData: news,
+    }
+  );
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+
   return (
     <StyledNews>
+      <Head>
+        <title>Rangers FC News</title>
+      </Head>
       <main className="header_news">
         <div className="cover"></div>
         <header className="news_header">News</header>
@@ -14,23 +35,25 @@ function News() {
       <section className="container">
         <main className="newsContainer">
           <div className="newsSubCont">
-            <Accordion title="November 14, 2023">
-              {[1].map(() => (
-                <div>
-                  <NewsBox /> <NewsBox /> <NewsBox /> <NewsBox />
-                </div>
-              ))}
-            </Accordion>
-            <Accordion title="November 12, 2023">
-              <NewsBox /> <NewsBox /> <NewsBox /> <NewsBox />
-            </Accordion>
+            {data?.data?.map((item) => (
+              <Accordion title={item.attributes.title}>
+                {item?.attributes?.articles?.data?.map((news) => (
+                  <div>
+                    <NewsBox data={news} />
+                  </div>
+                ))}
+              </Accordion>
+            ))}
           </div>
         </main>
 
-        {/* <aside className="dontMiss"></aside> */}
       </section>
 
-      {/* </main> */}
+      <Pagination
+        data={data.meta}
+        stateIndex={currentPage}
+        setstateIndex={setCurrentPage}
+      />
     </StyledNews>
   );
 }
@@ -105,11 +128,11 @@ const StyledNews = styled.section`
   @media (min-width: 320px) and (max-width: 480px) {
     width: 100%;
 
-    .container{
-      width:100%;
+    .container {
+      width: 100%;
     }
 
-    .newsContainer{
+    .newsContainer {
       width: 95%;
       height: auto;
     }
@@ -118,11 +141,11 @@ const StyledNews = styled.section`
   @media (min-width: 481px) and (max-width: 768px) {
     width: 100%;
 
-    .container{
-      width:100%;
+    .container {
+      width: 100%;
     }
 
-    .newsContainer{
+    .newsContainer {
       width: 95%;
       height: auto;
     }
@@ -134,3 +157,21 @@ const StyledNews = styled.section`
   @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;
+
+export async function getServerSideProps() {
+  try {
+    const initialData = await api.get(
+      "/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=1"
+    );
+    const news = initialData.data;
+    return {
+      props: {
+        news,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
+}
