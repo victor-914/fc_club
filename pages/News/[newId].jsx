@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import api from "../../utils/api";
 import { BaseFontSize, Color } from "../../utils/color";
-import Breadcrumbs from "nextjs-breadcrumbs";
+// import Breadcrumbs from "nextjs-breadcrumbs";
 import l from "../../assets/afriinvest.png";
 import parserHook from "../../hooks/parserHook";
 function PerArticle({ data }) {
@@ -26,7 +26,7 @@ function PerArticle({ data }) {
 
   return (
     <>
-      <Breadcrumbs
+      {/* <Breadcrumbs
         omitRootLabel
         activeItemClassName="brActive"
         omitIndexList={[1]}
@@ -54,7 +54,7 @@ function PerArticle({ data }) {
           color: "#000",
         }}
         transformLabel={(title) => "go back - " + title}
-      />
+      /> */}
       <Container>
         <DateComponent
           date={data?.data?.attributes?.createdAt}

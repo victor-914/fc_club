@@ -1,41 +1,20 @@
 import React from "react";
-import { Box, Typography, IconButton, useMediaQuery } from "@mui/material";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../state";
-import { addToWishList } from "../../state/wishlist";
-import One from "../../assets/RangersKit2.png";
-// import imagetwo from "../../assets/ranger.gif";
 import imagefour from "../../assets/pro_5.jpeg";
-// import imagefive from "../../assets/rangerGif.webp";
-import imagesix from "../../assets/product_3.jpeg";
-import imageseven from "../../assets/productone.jpeg";
 import { Color } from "../../utils/color";
 import { addCommasToNumber } from "../../utils/helperFunctions";
 
 const Product = ({ data }) => {
-  const count = 1;
   const router = useRouter();
-  const dispatch = useDispatch();
-  const isNonMobile = useMediaQuery("(min-width:600px)");
 
 
-  console.log(data,"data")
 
-  const heroTextureImports = [
-    One,
-    // imagetwo,
-    imagefour,
-    // imagefive,
-    imagesix,
-    imageseven,
-  ];
 
-  const loadImg = (src) => {
+
+  const loadImg = () => {
     return data?.attributes?.images?.data?.[0]?.attributes?.url
   };
   return (
@@ -82,7 +61,6 @@ const StyledProductCarousel = styled.section`
   border-radius: 0px 0px 5px 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   border-top: 4px solid ${Color.primaryColor};
-  /* background-color: red; */
   padding: 10px;
 
   .imgContainer {
@@ -104,14 +82,11 @@ const StyledProductCarousel = styled.section`
 
   .accesoriesCont {
     width: 100%;
-    /* position: absolute; */
-    /* z-index: 100; */
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
     padding-bottom: 10px;
     padding-top: 10px;
-    /* visibility: hidden; */
   }
 
   .iconCont {
@@ -142,7 +117,6 @@ const StyledProductCarousel = styled.section`
     padding: 5px;
     font-size: 10;
     flex-direction: column;
-    /* justify-content: space-around; */
   }
 
   .price {
@@ -150,15 +124,12 @@ const StyledProductCarousel = styled.section`
     font-size: 16px;
     font-family: "Lato";
     text-align: center;
-    /* padding: 5px; */
     color: ${Color.primaryColor};
   }
   .showcase-title {
     text-align: center;
-    /* background-color: green; */
     font-weight: 600;
     text-transform: uppercase;
-    /* color:${Color.primaryColor}; */
     font-size: 15px;
     font-family: "Lato";
     padding: 5px;

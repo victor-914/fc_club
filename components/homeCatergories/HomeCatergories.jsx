@@ -1,14 +1,19 @@
 import Card from "./Card";
 import imgTwo from "../../assets/theclub.jpg";
 import imgFour from "../../assets/Welcome-to-Ranger-Elmer.jpg";
-import imgFive from "../../assets/RangersKit1.png";
+// import imgFive from "../../assets/RangersKit1.png";
+import imgSix from "../../assets/video_wallpaper.jpg";
+import imgFive from "../../assets/news_wallpaper1.png";
 import styled from "styled-components";
+
 const HomeCatergories = () => {
   const cardData = [
-    { title: "The Club", img: imgTwo, page: "#" },
+    { title: "Fixtures", img: imgSix, page: "_fixtures" },
+    // { title: "The Club", img: imgTwo, page: "#" },
     // { title: "Schedule", img: imgThree, page: "men" },
     { title: "News", img: imgFour, page: "_news" },
-    { title: "Shop", img: imgFive, page: "products" },
+        { title: "Highlights", img: imgFive, page: "_highlights" },
+    // { title: "Shop", img: imgFive, page: "products" },
     // { title: "Tickets", img: imgSix, page: "Accessories" },
   ];
 

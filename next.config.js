@@ -12,7 +12,6 @@ const nextConfig = {
       "https://picsum.photos",
       "https://istockphoto.com",
       "www.instagram.com",
-      "https://pellestore-new-strapi.onrender.com",
     ],
   },
   future: { webpack5: true },

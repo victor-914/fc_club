@@ -1,47 +1,44 @@
 import styled from "styled-components";
-import { Color } from "../../utils/color";
+import { BaseFontSize, Color } from "../../utils/color";
 export const StyledHeroVideo = styled.section`
-  width: 90%;
-  /* height: auto; */
+  width: 98%;
   margin: auto;
-  /* background-color: #f1f2f3; */
-  /* margin-bottom: 100px; */
-  /* background-color: red; */
-  padding-top: 100px;
+  height: auto;
+  padding: 150px 0px 150px 0px;
 
   .newsHeader {
-    font-weight: 600;
-    font-size: 20px;
-    width: 100%;
-    height: 55px;
-    text-transform: uppercase;
+    font-size: calc(${BaseFontSize.bfs} + 0.8vw);
+    width: 80%;
+    height: auto;
     margin: auto;
     background-color: ${Color.primaryColor};
     margin-bottom: 40px;
     color: #fff;
     letter-spacing: 1.5px;
-    padding: 10px;
+    padding: 8px;
   }
 
   .gridContainer {
-    width: 100%;
-    margin: auto;
-
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    column-gap: 30px;
-    row-gap: 30px;
+    width: 80%;
+    margin: auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    grid-template-areas:
+      "top-box-1       top-box-1 top-box-2       top-box-2"
+      "bottom-box-1 bottom-box-2 bottom-box-3 bottom-box-4";
   }
+
   .content {
     border-radius: 5px;
   }
-
   .grid-box-one {
-    grid-column: 1/5;
+    grid-area: top-box-1;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.7s;
     height: 45vh;
     position: relative;
+    border-radius: 8px;
     display: flex;
   }
 
@@ -78,19 +75,19 @@ export const StyledHeroVideo = styled.section`
     cursor: pointer;
   }
 
-  .redLine {
-    /* margin-lef: 8px; */
+  /* .redLine {
+    /* margin-lef: 8px; 
     width: 50%;
     transition: width 0.4s;
     height: 2px;
     background-color: ${Color.primaryColor};
-  }
+  } */
 
-  .textContent {
+  /* .textContent {
     font-size: 16px;
     padding: 8px;
     height: 75%;
-  }
+  } */
 
   .grid-box-one-aside-footer {
     /* position: absolute; */
@@ -118,22 +115,22 @@ export const StyledHeroVideo = styled.section`
     padding: 8px;
     font-size: 20px;
   }
-
+  /* 
   #img {
     border-radius: 5px 0px 0px 5px;
     transition: transform 0.5s;
-  }
+  } */
 
   .grid-box-one:hover {
     transition: box-shadow 0.4s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   }
 
-  .grid-box-one:hover .redLine {
+  /* .grid-box-one:hover .redLine {
     width: 100%;
     transition: width 0.4s;
     cursor: pointer;
-  }
+  } */
 
   .grid-box-one:hover #grid_two_img {
     /* width: 100%; */
@@ -144,7 +141,7 @@ export const StyledHeroVideo = styled.section`
   }
 
   .grid-box-two {
-    grid-column: 5/9;
+    grid-area: top-box-2;
     position: relative;
     border-radius: 8px;
     cursor: pointer;
@@ -191,7 +188,7 @@ export const StyledHeroVideo = styled.section`
     margin: 0;
   }
 
-  .grid_two_header {
+  /* .grid_two_header {
     font-size: 25px;
     font-weight: 700;
     text-transform: uppercase;
@@ -200,7 +197,15 @@ export const StyledHeroVideo = styled.section`
     margin: auto;
     line-height: 1.3;
     padding-left: 13px;
-    /* text-decoration: underline; */
+    /* text-decoration: underline; 
+  } */
+
+  .grid_two_header {
+    font-size: calc(${BaseFontSize.bfs} + 0.7vw);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: underline;
   }
 
   .timeCont_gridtwo {
@@ -224,7 +229,6 @@ export const StyledHeroVideo = styled.section`
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.7s;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-
   }
 
   .grid-box-three:hover {
@@ -333,5 +337,17 @@ export const StyledHeroVideo = styled.section`
   .grid-box-five:hover .grid_three_img {
     transition: transform 0.7s;
     transform: scale(1.2);
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
   }
 `;

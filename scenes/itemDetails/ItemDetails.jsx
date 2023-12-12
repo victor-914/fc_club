@@ -1,6 +1,5 @@
 import { IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
-
 import { addToCart } from "../../state";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -23,6 +22,7 @@ const ItemDetails = ({ data }) => {
   useEffect(() => {
     setProduct(data?.data);
   }, [data]);
+
 
   return (
     <StyledItemsPage>
@@ -84,20 +84,13 @@ const ItemDetails = ({ data }) => {
       </div>
 
       <div className="detailsCont">
-        {/* <div className="product_title"> */}
         <main className="title">{product?.attributes?.title}</main>
         <div className="price_details">
           &#8358;
           {addCommasToNumber(product?.attributes?.price)}
         </div>
         <div className="buttonCont">
-          {/* <button
-              onClick={() =>
-                dispatch(addToWishList({ item: { ...product, count } }))
-              }
-            >
-              ADD TO WISHLIST
-            </button> */}
+       
           <button
             onClick={() => {
               toast.success("Added to cart", {
@@ -112,7 +105,6 @@ const ItemDetails = ({ data }) => {
             ADD TO CART
           </button>
         </div>
-        {/* </div> */}
         <div className="product_info">
           <header className="product_info_header">Product info</header>
           <main className="info">{product?.attributes?.description}</main>
@@ -152,7 +144,6 @@ const StyledItemsPage = styled.section`
   .imgCont {
     background-color: #f3f3f2;
     grid-area: images;
-    /* position: relative; */
     width: 100%;
     height: auto;
   }
@@ -162,7 +153,6 @@ const StyledItemsPage = styled.section`
     height: auto;
     margin: auto;
     position: relative;
-    /* display: none; */
     padding: 30px;
   }
 
@@ -171,7 +161,6 @@ const StyledItemsPage = styled.section`
     width: auto;
     padding: 10px;
     height: fit-content;
-    /* background-color: purple; */
   }
 
   .title {
@@ -215,7 +204,6 @@ const StyledItemsPage = styled.section`
   }
 
   .product_info {
-    /* background-color: orange; */
     height: max-content;
   }
 
@@ -234,7 +222,6 @@ const StyledItemsPage = styled.section`
 
   .related {
     grid-area: related;
-    /* background-color: orange; */
     height: auto;
     padding-bottom: 40px;
     display: flex;
@@ -253,7 +240,6 @@ const StyledItemsPage = styled.section`
   }
 
   .related_productCont {
-    /* background-color: blue; */
     height: auto;
     width: 100%;
     padding-bottom: 40px;
@@ -293,7 +279,6 @@ const StyledItemsPage = styled.section`
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
-    /* background-color: red; */
     width: 95%;
     margin: auto;
     grid-template-columns: repeat(1, 100%);

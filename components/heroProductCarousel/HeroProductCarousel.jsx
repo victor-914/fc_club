@@ -8,8 +8,13 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import One from "../../assets/ranger_giphy.gif";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
+import Product from "../shopProduct/ShopProduct";
 
-function HeroProductCarousel() {
+function HeroProductCarousel({ item }) {
+  console.log(
+    "🚀 ~ file: HeroProductCarousel.jsx:13 ~ HeroProductCarousel ~ item:",
+    item
+  );
   const heroTextureImports = [One];
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
@@ -37,7 +42,7 @@ function HeroProductCarousel() {
             </button>
           )}
         >
-          {heroTextureImports.map((texture, index) => (
+          {item?.data.map((texture, index) => (
             <Box
               sx={{
                 display: "flex",
@@ -52,13 +57,13 @@ function HeroProductCarousel() {
               }}
               key={`carousel-image-${index}`}
             >
-              <ProductCarousel  />
+              <Product data={texture} />
+              <Product data={texture} />
             </Box>
           ))}
-
-          {/* <button className="viewShop">Enter shop</button> */}
         </Carousel>
       </div>
+      <button className="viewShop">Enter shop</button>
     </StyledHeroProductCarousel>
   );
 }
@@ -119,6 +124,9 @@ const StyledHeroProductCarousel = styled.section`
     text-decoration: underline;
     cursor: pointer;
     transition: text-decoration 0.04s;
+    background-color: red;
+    position: relative;
+    height: 40px;
   }
 
   .trending {

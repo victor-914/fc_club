@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, Box, IconButton } from "@mui/material";
+import { Badge, Box, IconButton, useMediaQuery } from "@mui/material";
 import {
   PersonOutline,
   ShoppingBagOutlined,
   MenuOutlined,
-  SearchOutlined,
 } from "@mui/icons-material";
-// import { useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 import { setIsCartOpen } from "../../state";
 import { useRouter } from "next/router";
@@ -14,18 +12,14 @@ import logo from "../../assets/RANGERS-web-icon.webp";
 import Image from "next/image";
 import styled from "styled-components";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
-import { AiOutlineHeart } from "react-icons/ai";
-import { setIsWishListOpen } from "../../state/wishlist";
 import { Color } from "../../utils/color";
 
 const StyledMenuLi = styled.li`
   font-size: 17px;
   font-weight: 600;
   list-style: none;
-  /* color: #fff; */
   letter-spacing: 1.3px;
   text-transform: uppercase;
-  /* padding: 10px; */
   width: 15%;
   text-align: center;
   border: 10px solid transparent;
@@ -81,14 +75,14 @@ const StyledSecNavBar = styled.section`
 const secNavbar = [
   {
     _id: "hjxssdhd",
-    content: "Matches",
-    link: "/_matches",
+    content: "Fixtures",
+    link: "/_fixtures",
   },
-  {
-    _id: "hjdhddd",
-    content: "The Club",
-    link: "/_club",
-  },
+  // {
+  //   _id: "hjdhddd",
+  //   content: "The Club",
+  //   link: "/_club",
+  // },
   {
     _id: "hjdhwwdsadd",
     content: "News",
@@ -96,14 +90,14 @@ const secNavbar = [
   },
   {
     _id: "hjdddssaaddhddd",
-    content: "Highlights",
+    content: "Videos",
     link: "/_highlights",
   },
-  {
-    _id: "hjdddhddd",
-    content: "Shop",
-    link: "/products",
-  },
+  // {
+  //   _id: "hjdddhddd",
+  //   content: "Shop",
+  //   link: "/products",
+  // },
   // {
   //   _id: "hjdddhddd",
   //   content: "Contact",
@@ -115,6 +109,7 @@ function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
   const wishList = useSelector((state) => state.wishList.wishList);
   const router = useRouter();
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
 
   return (
     <>
@@ -200,12 +195,12 @@ function Navbar() {
               </IconButton> */}
             </Badge>
 
-            <IconButton
+            {/* <IconButton
               sx={{ color: "black" }}
               onClick={() => router.push("/profile")}
             >
               <PersonOutline />
-            </IconButton>
+            </IconButton> */}
             <Badge
               badgeContent={cart.length}
               color="secondary"
@@ -222,14 +217,19 @@ function Navbar() {
             >
               <IconButton
                 onClick={() => dispatch(setIsCartOpen({}))}
-                sx={{ color: "black" }}
+                sx={{
+                  color: "black",
+                }}
               >
                 <ShoppingBagOutlined />
               </IconButton>
             </Badge>
             <IconButton
               onClick={() => dispatch(setIsmMenuOpen({}))}
-              sx={{ color: "black" }}
+              sx={{
+                color: "black",
+                display: !isSmallScreen ? "none" : "block",
+              }}
             >
               <MenuOutlined />
             </IconButton>

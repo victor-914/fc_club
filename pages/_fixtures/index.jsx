@@ -1,90 +1,88 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Accordion, NewsBox } from "../../components/accordion/Accordion";
+import { Accordion } from "../../components/accordion/Accordion";
 import { BaseFontSize } from "../../utils/color";
-import Head from "next/head";
+import Ticket from "../../components/tickets/Ticket";
+import LatestFixture from "../../components/latestFixture/LatestFixture";
 import api, { fetcher } from "../../utils/api";
-import Pagination from "../../components/pagination/Pagination";
 import useSWR from "swr";
-function News({ news }) {
-  
+import Pagination from "../../components/pagination/Pagination";
+function MatchesFixture({ fixturesData, fixture_dateData }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/group-by-dates?sort[0]=title:desc&populate[ticket_fixtures][fields][0]=*&populate[ticket_fixtures][populate][away_logo][fields][0]=url&pagination[pageSize]=2&pagination[page]=${currentPage}`,
     fetcher,
     {
-      fallbackData: news,
+      fallbackData: fixturesData,
     }
   );
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
-
-
   return (
-    <StyledNews>
-      <Head>
-        <title>Rangers FC News</title>
-      </Head>
+    <StyledMatches>
       <main className="header_news">
         <div className="cover"></div>
-        <header className="news_header">News</header>
+        <header className="news_header">Matches</header>
       </main>
-
+      <LatestFixture item={fixture_dateData} />
       <section className="container">
         <main className="newsContainer">
           <div className="newsSubCont">
             {data?.data?.map((item) => (
-              <Accordion title={item.attributes.title}>
-                {item?.attributes?.articles?.data?.map((news) => (
+              <Accordion
+                key={item?.attributes?.title}
+                title={item?.attributes?.title}
+              >
+                {item?.attributes?.ticket_fixtures?.data?.map((data) => (
                   <div>
-                    <NewsBox data={news} />
+                    <Ticket key={data?.attributes?.title} item={data} />
                   </div>
                 ))}
               </Accordion>
             ))}
           </div>
         </main>
-
       </section>
-
       <Pagination
         data={data.meta}
         stateIndex={currentPage}
         setstateIndex={setCurrentPage}
       />
-    </StyledNews>
+    </StyledMatches>
   );
 }
 
-export default News;
+export default MatchesFixture;
 
-const StyledNews = styled.section`
+const StyledMatches = styled.section`
   height: auto;
   background-color: #f1f2f3;
+  height: auto;
+  padding: 50px 0px 50px 0px;
 
   .header_news {
     width: 100%;
     height: 30vh;
+    display: none;
     background-image: url("/news_banner.png");
     background-position: 100% 40%;
     background-repeat: no-repeat;
     position: relative;
     background-color: #f3f3f3;
+    margin-bottom: 5px;
   }
 
   .cover {
     position: absolute;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0,0,0,0.7); */
     background-color: rgba(23, 32, 48, 0.7);
   }
 
   .news_header {
     width: 50%;
     height: 100%;
-    /* background-color: green;  */
     position: relative;
     margin: auto;
     display: flex;
@@ -100,11 +98,10 @@ const StyledNews = styled.section`
   .container {
     width: 80%;
     height: auto;
-    /* background-color: green; */
     margin: auto;
+    height: auto;
     padding-top: 50px;
     display: flex;
-    padding-bottom: 40px;
   }
 
   .newsContainer {
@@ -116,7 +113,6 @@ const StyledNews = styled.section`
 
   .dontMiss {
     width: 35%;
-    /* background-color: purple; */
     height: 100vh;
   }
 
@@ -125,28 +121,24 @@ const StyledNews = styled.section`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
-    width: 100%;
-
     .container {
       width: 100%;
+      padding-top: 20px;
     }
-
     .newsContainer {
-      width: 95%;
-      height: auto;
+      width: 90%;
+      padding-bottom: 50px;
     }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
-    width: 100%;
-
     .container {
       width: 100%;
+      padding-top: 20px;
     }
-
     .newsContainer {
-      width: 95%;
-      height: auto;
+      width: 90%;
+      padding-bottom: 50px;
     }
   }
 
@@ -157,20 +149,42 @@ const StyledNews = styled.section`
   }
 `;
 
-export async function getServerSideProps() {
+export async function fetchData(url) {
+  const response = await api.get(url);
+  return response.data;
+}
+
+async function getData() {
+  const fixtures =
+    "/api/ticket-fixtures?populate=*&pagination[page]=1&pagination[pageSize]=1";
+  const fixture_date =
+    "/api/group-by-dates?sort[0]=title:desc&populate[ticket_fixtures][fields][0]=*&populate[ticket_fixtures][populate][away_logo][fields][0]=url&pagination[pageSize]=2&pagination[page]=1";
+
+  const [fixture_dateData, fixturesData] = await Promise.all([
+    fetchData(fixtures),
+    fetchData(fixture_date),
+  ]);
+
+  return { fixturesData, fixture_dateData };
+}
+
+export async function getServerSideProps(context) {
   try {
-    const initialData = await api.get(
-      "/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=1"
-    );
-    const news = initialData.data;
+    const { fixturesData, fixture_dateData } = await getData();
+
     return {
       props: {
-        news,
+        fixturesData,
+        fixture_dateData,
       },
     };
   } catch (error) {
+    console.error("Error fetching data:", error);
+
     return {
-      props: {},
+      props: {
+        error: "An error occurred while fetching data.",
+      },
     };
   }
 }

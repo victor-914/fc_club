@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 // import { BaseFontSize, Color } from "../../utils/color";
 import HeroVideos from "../../components/heroVideo/HeroVideos";
 import { BaseFontSize, Color } from "../../utils/color";
 import RelatedVideo from "../../components/relatedVideos/RelatedVideo";
+import api from "../../utils/api";
+function HighLights({ videos }) {
+  const [bannerVideo, setBannerVideo] = useState();
+  console.log(
+    "🚀 ~ file: index.jsx:10 ~ HighLights ~ bannerVideo:",
+    bannerVideo
+  );
 
-function HighLights() {
+  useEffect(() => {
+    return () => {
+      setBannerVideo(videos?.data?.[0]);
+    };
+  }, []);
+
   return (
     <StyledHighLights>
       <main className="header_news">
@@ -20,24 +32,21 @@ function HighLights() {
             height="100%"
             controls="0"
             // modestbranding="1"
-            src="https://www.youtube-nocookie.com/embed/4zUiWcX7wM0?si=5JVD-ujqRiaJJ88R&amp;start=19&controls=0"
+            src={`${bannerVideo?.attributes?.url}`}
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
         <main className="titleContainer">
-          <main>
-            Steph Catley and Lia Walti go head-to-head in Invisi Goals
-          </main>
+          <main>{bannerVideo?.attributes?.title}</main>
           <aside className="subTitle">
-            Steph and Lia guess the invisible goalscorer from these classic
-            Arsenal Women fixtures
+            {bannerVideo?.attributes?.description}
           </aside>
         </main>
       </section>
-      <RelatedVideo />
+      {/* <RelatedVideo /> */}
     </StyledHighLights>
   );
 }
@@ -119,4 +128,39 @@ const StyledHighLights = styled.section`
     color: #fff;
     padding-top: 10px;
   }
+  @media (min-width: 320px) and (max-width: 480px) {
+    .news_header {
+      width: 100%;
+    }
+
+    .videoIframe {
+      width: 95%;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+  }
+
+  @media (min-width: 1025px) and (max-width: 1200px) {
+  }
 `;
+
+export async function getServerSideProps() {
+  try {
+    const initialData = await api.get("/api/videos");
+    const videos = initialData.data;
+
+    return {
+      props: {
+        videos,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
+}

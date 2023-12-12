@@ -3,7 +3,6 @@ import { BaseFontSize, Color } from "../../utils/color";
 export const StyledNewsGrid = styled.div`
   width: 100%;
   height: auto;
-  /* background-color: red; */
   padding: 150px 0px 150px 0px;
 
   .newsHeader {
@@ -50,7 +49,6 @@ export const StyledNewsGrid = styled.div`
     width: 50%;
     height: 100%;
     cursor: pointer;
-    /* background-color: red; */
   }
 
   .grid-box-one-aside-header {
@@ -63,7 +61,6 @@ export const StyledNewsGrid = styled.div`
   }
 
   .redLine {
-    /* margin-lef: 8px; */
     width: 50%;
     transition: width 0.4s;
     height: 2px;
@@ -77,7 +74,6 @@ export const StyledNewsGrid = styled.div`
   }
 
   .grid-box-one-aside-footer {
-    /* position: absolute; */
     width: 100%;
     display: flex;
     align-items: center;
@@ -120,10 +116,8 @@ export const StyledNewsGrid = styled.div`
   }
 
   .grid-box-one:hover #img {
-    /* width: 100%; */
     border-radius: 8px;
     transition: transform 0.7s;
-    /* cursor: pointer; */
     transform: scale(1.2);
   }
 
@@ -160,7 +154,6 @@ export const StyledNewsGrid = styled.div`
   }
 
   .mediaCont {
-    /* background-color: red; */
     z-index: 7;
     position: absolute;
     width: 100%;
@@ -179,7 +172,6 @@ export const StyledNewsGrid = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     color: #fff;
-    /* line-height: 2.5; */
     text-decoration: underline;
   }
 
@@ -264,17 +256,13 @@ export const StyledNewsGrid = styled.div`
     font-size: 16px;
     padding: 8px;
     grid-area: content;
-    font-weight: 600;
+    text-align: justify;
+    font-weight: 400;
   }
 
   .grid_three_footer {
     grid-area: footer;
   }
-
-  /* .grid-box-four {
-    grid-area: bottom-box-2;
-    /* width: 381px; 
-  } */
 
   .grid-box-five {
     grid-area: bottom-box-3;
@@ -356,48 +344,25 @@ export const StyledNewsGrid = styled.div`
     color: #fff;
   }
 
-  /* .grid_two_footer {
-    grid-area: footer;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-  } */
-
   @media (min-width: 320px) and (max-width: 480px) {
-    /* background-color: red; */
     width: auto;
     padding: 50px 0px 50px 0px;
 
     .newsHeader {
       width: 95%;
-      /* margin: auto; */
     }
 
     .gridContainer {
       display: grid;
       width: 95%;
-      /* background-color: green; */
-      /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
       grid-template-columns: 1fr;
-      /* grid-template-rows: repeat(4, 1fr); */
       grid-column-gap: 30px;
       grid-template-areas:
         "top-box-1"
-        /* "top-box-1"
-        "top-box-1" */
         "top-box-2"
-        /* "top-box-2"
-        "top-box-2" */
         "bottom-box-1"
-        /* "bottom-box-1"
-        "bottom-box-2" */
         "bottom-box-2"
         "bottom-box-3"
-        /* "bottom-box-3"
-        "bottom-box-4" */
         "bottom-box-4";
     }
 
@@ -420,7 +385,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -435,7 +399,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -450,7 +413,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -466,7 +428,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -475,37 +436,25 @@ export const StyledNewsGrid = styled.div`
   }
 
   @media (min-width: 481px) and (max-width: 767px) {
-     /* background-color: red; */
-     width: auto;
+    width: auto;
     padding: 50px 0px 50px 0px;
 
     .newsHeader {
       width: 95%;
-      /* margin: auto; */
     }
 
     .gridContainer {
       display: grid;
       width: 95%;
-      /* background-color: green; */
-      /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+
       grid-template-columns: 1fr;
-      /* grid-template-rows: repeat(4, 1fr); */
       grid-column-gap: 30px;
       grid-template-areas:
         "top-box-1"
-        /* "top-box-1"
-        "top-box-1" */
         "top-box-2"
-        /* "top-box-2"
-        "top-box-2" */
         "bottom-box-1"
-        /* "bottom-box-1"
-        "bottom-box-2" */
         "bottom-box-2"
         "bottom-box-3"
-        /* "bottom-box-3"
-        "bottom-box-4" */
         "bottom-box-4";
     }
 
@@ -528,7 +477,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -543,7 +491,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -558,7 +505,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -574,7 +520,6 @@ export const StyledNewsGrid = styled.div`
         "image"
         "image"
         "image"
-        /* "image" */
         "title"
         "content"
         "content"
@@ -583,14 +528,10 @@ export const StyledNewsGrid = styled.div`
   }
 
   @media (min-width: 768px) and (max-width: 1024px) {
-    /* background-color: red; */
-    /* background-color: red; */
     width: auto;
-    /* padding: 50px 0px 50px 0px; */
 
     .newsHeader {
       width: 95%;
-      /* margin: auto; */
     }
 
     .gridContainer {
@@ -606,8 +547,6 @@ export const StyledNewsGrid = styled.div`
     }
 
     .grid-box-one {
-      /* grid-area: top-box-1; */
-      /* height: 200p; */
       display: none;
     }
     .grid-box-two {
@@ -619,7 +558,6 @@ export const StyledNewsGrid = styled.div`
       grid-area: bottom-box-1;
       height: auto;
       display: grid;
-      /* height: 250px; */
       grid-template-columns: 1fr;
       grid-template-rows: repeat(8, 1fr);
       grid-template-areas:
@@ -682,14 +620,10 @@ export const StyledNewsGrid = styled.div`
   }
 
   @media (min-width: 1025px) and (max-width: 1200px) {
-    /* background-color: red; */
-    /* background-color: red; */
     width: auto;
-    /* padding: 50px 0px 50px 0px; */
 
     .newsHeader {
       width: 95%;
-      /* margin: auto; */
     }
 
     .gridContainer {
@@ -705,8 +639,6 @@ export const StyledNewsGrid = styled.div`
     }
 
     .grid-box-one {
-      /* grid-area: top-box-1; */
-      /* height: 200p; */
       display: none;
     }
     .grid-box-two {
@@ -718,7 +650,6 @@ export const StyledNewsGrid = styled.div`
       grid-area: bottom-box-1;
       height: auto;
       display: grid;
-      /* height: 250px; */
       grid-template-columns: 1fr;
       grid-template-rows: repeat(8, 1fr);
       grid-template-areas:
@@ -780,11 +711,8 @@ export const StyledNewsGrid = styled.div`
     }
   }
   @media (min-width: 1201px) {
-
-
     .newsHeader {
       width: 98%;
-
     }
 
     .gridContainer {

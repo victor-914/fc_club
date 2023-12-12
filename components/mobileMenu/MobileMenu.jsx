@@ -11,31 +11,31 @@ const secNavbar = [
     content: "Home",
     link: "/",
   },
-  {
-    _id: "hjdhhjagad",
-    content: "The Club",
-    link: "#",
-  },
-  {
-    _id: "hjdhajauddd",
-    content: "Shop",
-    link: "products",
-  },
+  // {
+  //   _id: "hjdhhjagad",
+  //   content: "The Club",
+  //   link: "#",
+  // },
+  // {
+  //   _id: "hjdhajauddd",
+  //   content: "Shop",
+  //   link: "products",
+  // },
   {
     _id: "hjddjdjahadhddd",
     content: "News",
-    link: "_news",
+    link: "News",
   },
   {
     _id: "hjdhwwdshhsdd",
-    content: "Matches",
-    link: "_matches",
+    content: "Fixtures",
+    link: "_fixtures",
   },
 
   {
     _id: "hjdddauaushddd",
     content: "Videos",
-    link: "#",
+    link: "_highlights",
   },
 ];
 

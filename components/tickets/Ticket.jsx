@@ -4,7 +4,19 @@ import { BaseFontSize, Color } from "../../utils/color";
 import kano from "../../assets/kanoPillar.png";
 import Image from "next/image";
 import { RiArrowRightSLine } from "react-icons/ri";
-function Ticket() {
+import { useRouter } from "next/router";
+function Ticket({ item }) {
+  const router = useRouter();
+  function formatDateStringToLocal(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleString();
+    return formattedDate;
+  }
+
+  const handleClick = (id) => {
+    router.replace(`/_fixtures/${id}`);
+  };
+
   return (
     <StyledTicket>
       <main className="container">
@@ -13,35 +25,35 @@ function Ticket() {
             <div className="imageContainer">
               <Image src={kano} layout="fill" />
             </div>
-            <div className="enemyTeamName">KANO PILLAR</div>
-            <aside id="homeIndicator_responsive" className="homeOrAway">
-              <button>A</button>
-            </aside>
+            <div className="enemyTeamName">{item.attributes.home_title}</div>
           </main>
         </div>
 
         <div className="venue">
           <aside id="homeOrAwayResponsive" className="homeOrAway">
-            <button>A</button>
+            <button>
+              {item?.attributes?.ticket_type === "BASIC" ? "A" : "H"}
+            </button>
           </aside>
           <main className="venuInfo">
-            <div className="dateAndTime">Sat Nov 25 - 17:30</div>
-            <div className="Location">Gtech Community Stadium</div>
-            <div className="catergory">Soccer League</div>
+            <div className="dateAndTime">
+              {formatDateStringToLocal(item?.attributes?.date)}
+            </div>
+            <div className="Location">{item?.attributes?.venue}</div>
           </main>
         </div>
       </main>
 
       <footer className="ticketFooter">
-        <main className="ticketContainer">
-          <button className="learnMore">
+        {/* <main className="ticketContainer">
+          <button onClick={() => handleClick(item?.id)} className="learnMore">
             News & Video <RiArrowRightSLine />
           </button>
 
-          <button className="learnMore">
+          <button onClick={() => handleClick(item?.id)} className="learnMore">
             Buy Ticket <RiArrowRightSLine />
           </button>
-        </main>
+        </main> */}
       </footer>
     </StyledTicket>
   );
@@ -57,7 +69,6 @@ const StyledTicket = styled.div`
   margin-top: 30px;
   box-shadow: 0px 0px 4px 2px rgba(236, 229, 229, 0.2),
     -1px -0px 3px 2px rgba(233, 227, 227, 0.2);
-  /* padding: 10px; */
   padding: 0px 30px 0px 30px;
 
   .imageContainer {
@@ -69,16 +80,13 @@ const StyledTicket = styled.div`
   .container {
     width: 100%;
     height: auto;
-    /* background-color: green; */
   }
 
   .againstWhom {
     width: 50%;
-    /* padding: 10px; */
-    /* background-color: blue; */
   }
 
-  #homeIndicator_responsive{
+  #homeIndicator_responsive {
     display: none;
   }
 
@@ -86,12 +94,13 @@ const StyledTicket = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    text-align: center;
   }
 
   .enemyTeamName {
     font-weight: 700;
     color: #333;
-    font-size: calc(${BaseFontSize.bfs} + 0.4vw);
+    font-size: calc(${BaseFontSize.bfs} + 0.2vw);
     padding: 8px;
   }
 
@@ -99,7 +108,6 @@ const StyledTicket = styled.div`
     width: 50%;
     display: flex;
     align-items: center;
-    /* background-color: orange; */
   }
 
   .homeOrAway {
@@ -121,14 +129,12 @@ const StyledTicket = styled.div`
 
   .dateAndTime {
     font-weight: 700;
-    /* font-weight: 800; */
     font-size: calc(${BaseFontSize.bfs});
     line-height: 1.8;
   }
 
   .Location {
     font-weight: 700;
-    /* font-weight: 800; */
     font-size: calc(${BaseFontSize.bfs} - 0.1vw);
     line-height: 1.8;
     color: rgba(53, 49, 49, 0.9);
@@ -136,7 +142,6 @@ const StyledTicket = styled.div`
 
   .catergory {
     font-weight: 700;
-    /* font-weight: 800; */
     font-size: calc(${BaseFontSize.bfs} - 0.2vw);
     line-height: 1.8;
     color: rgba(53, 49, 49, 0.8);
@@ -148,27 +153,22 @@ const StyledTicket = styled.div`
     margin-top: 10px;
     padding: 10px 0px 10px 0px;
     border-top: 1px solid #312e2e41;
-    /* background-color: purple; */
   }
 
   .ticketContainer {
     width: 30%;
     display: flex;
     justify-content: space-between;
-    /* padding: 10px; */
-    /* margin: auto; */
   }
 
   .learnMore {
     padding: 10px;
-    /* background-color: ${Color.primaryColor}; */
     margin-top: 3%;
     font-weight: 700;
     text-transform: uppercase;
     border-radius: 1px;
     transition: all 0.2s;
     font-size: calc(${BaseFontSize.bfs} - 0.2vw);
-    /* border-radius: 20px; */
     color: #000;
     display: flex;
     align-items: center;
@@ -182,7 +182,6 @@ const StyledTicket = styled.div`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
-    /* background-color: green; */
     padding: 5px;
 
     .container {
@@ -190,7 +189,6 @@ const StyledTicket = styled.div`
       justify-content: space-between;
       align-items: center;
       flex-direction: column-reverse;
-      /* background-color: red; */
       width: 100%;
     }
 
@@ -200,7 +198,6 @@ const StyledTicket = styled.div`
 
     .venue {
       width: 100%;
-      /* background-color: green; */
     }
 
     .venuInfo {
@@ -211,7 +208,6 @@ const StyledTicket = styled.div`
     }
 
     .homeOrAway {
-      /* display: none; */
     }
 
     #homeOrAwayResponsive {
@@ -219,13 +215,11 @@ const StyledTicket = styled.div`
     }
 
     .dateAndTime {
-      /* font-weight: 800; */
       font-size: calc(${BaseFontSize.bfs} - 0.4vw);
       line-height: 1.2;
     }
 
     .Location {
-      /* font-weight: 800; */
       font-size: calc(${BaseFontSize.bfs} - 0.6vw);
       line-height: 1.2;
     }
@@ -245,124 +239,104 @@ const StyledTicket = styled.div`
       width: 100%;
       display: flex;
       justify-content: space-between;
-      /* background-color: green; */
-      /* padding: 10px; */
-      /* margin: auto; */
     }
 
-
-  #homeIndicator_responsive{
-    display: block;
-  }
-
+    #homeIndicator_responsive {
+      display: block;
+    }
 
     .learnMore {
-    padding: 10px;
-    /* background-color: ${Color.primaryColor}; */
-    margin-top: 3%;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 1px;
-    transition: all 0.2s;
-    font-size: calc(${BaseFontSize.bfs} - 1vw);
-    /* border-radius: 20px; */
-    color: #000;
-    display: flex;
-    align-items: center;
-    margin-right: 4px;
-  }
+      padding: 10px;
+      margin-top: 3%;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 1px;
+      transition: all 0.2s;
+      font-size: calc(${BaseFontSize.bfs} - 1vw);
+      color: #000;
+      display: flex;
+      align-items: center;
+      margin-right: 4px;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
-      /* background-color: green; */
-      padding: 5px;
+    padding: 5px;
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column-reverse;
-  /* background-color: red; */
-  width: 100%;
-}
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column-reverse;
+      width: 100%;
+    }
 
-.againstWhom {
-  width: 95%;
-}
+    .againstWhom {
+      width: 95%;
+    }
 
-.venue {
-  width: 100%;
-  /* background-color: green; */
-}
+    .venue {
+      width: 100%;
+    }
 
-.venuInfo {
-  padding-bottom: 15px;
-  padding-left: 0px;
-  text-align: center;
-  width: 100%;
-}
+    .venuInfo {
+      padding-bottom: 15px;
+      padding-left: 0px;
+      text-align: center;
+      width: 100%;
+    }
 
-.homeOrAway {
-  /* display: none; */
-}
+    .homeOrAway {
+    }
 
-#homeOrAwayResponsive {
-  display: none;
-}
+    #homeOrAwayResponsive {
+      display: none;
+    }
 
-.dateAndTime {
-  /* font-weight: 800; */
-  font-size: calc(${BaseFontSize.bfs} - 0.4vw);
-  line-height: 1.2;
-}
+    .dateAndTime {
+      font-size: calc(${BaseFontSize.bfs} - 0.4vw);
+      line-height: 1.2;
+    }
 
-.Location {
-  /* font-weight: 800; */
-  font-size: calc(${BaseFontSize.bfs} - 0.6vw);
-  line-height: 1.2;
-}
+    .Location {
+      font-size: calc(${BaseFontSize.bfs} - 0.6vw);
+      line-height: 1.2;
+    }
 
-.catergory {
-  font-size: calc(${BaseFontSize.bfs} - 0.8vw);
-  line-height: 1.2;
-}
+    .catergory {
+      font-size: calc(${BaseFontSize.bfs} - 0.8vw);
+      line-height: 1.2;
+    }
 
-.imageContainer {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
+    .imageContainer {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
 
-.ticketContainer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  /* background-color: green; */
-  /* padding: 10px; */
-  /* margin: auto; */
-}
+    .ticketContainer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
 
+    #homeIndicator_responsive {
+      display: block;
+      width: 30%;
+      text-align: end;
+    }
 
-#homeIndicator_responsive{
-    display: block;
-    width: 30%;
-   text-align: end;
-  }
-
-
-.learnMore {
-padding: 10px;
-/* background-color: ${Color.primaryColor}; */
-text-transform: uppercase;
-border-radius: 1px;
-transition: all 0.2s;
-font-size: calc(${BaseFontSize.bfs} - 1vw);
-/* border-radius: 20px; */
-color: #000;
-display: flex;
-align-items: center;
-margin-right: 4px;
-}
+    .learnMore {
+      padding: 10px;
+      text-transform: uppercase;
+      border-radius: 1px;
+      transition: all 0.2s;
+      font-size: calc(${BaseFontSize.bfs} - 1vw);
+      color: #000;
+      display: flex;
+      align-items: center;
+      margin-right: 4px;
+    }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {

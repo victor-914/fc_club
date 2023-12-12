@@ -32,7 +32,7 @@ const CountdownClock = ({ targetDate }) => {
   return (
     <StyledCountClock>
       <li>
-        <span id="days">{timeLeft.days > 0 && timeLeft.days}</span>Days
+        <span id="days">{timeLeft.days}</span>Days
       </li>
       <li>
         <span id="hours">{timeLeft.hours}</span>Hours
@@ -57,7 +57,6 @@ const StyledCountClock = styled.div`
   border: 1px solid #fff;
   margin-bottom: 4px;
   display: flex;
- 
 
   li {
     display: inline-block;
@@ -72,14 +71,10 @@ const StyledCountClock = styled.div`
     font-size: 4.5rem;
   }
 
-
-
   @media (min-width: 320px) and (max-width: 480px) {
-   
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
-
     li {
       font-size: calc(2.125rem * var(--smaller));
       font-weight: 700;

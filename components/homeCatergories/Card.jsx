@@ -15,7 +15,13 @@ const Card = ({ title, imgSrc, page }) => {
     >
       <div className="title">{title}</div>
       <main className="imageHolder">
-        <Image src={imgSrc} layout="fill" className="image"  priority/>
+        <Image
+          src={imgSrc}
+          layout="fill"
+          quality={100}
+          className="image"
+          priority
+        />
       </main>
       <div className="buttonContainer">
         <button className="viewButton">SEE MORE</button>
