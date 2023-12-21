@@ -1,8 +1,6 @@
 import { IconButton, useMediaQuery } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import One from "../../assets/ranger_giphy.gif";
 import imagesix from "../../assets/giphy_rangers.gif";
 import imageseven from "../../assets/rangers.gif";
@@ -32,7 +30,6 @@ const MainCarousel = () => {
             zIndex: "10",
           }}
         >
-          {/* <NavigateBeforeIcon sx={{ fontSize: 40 }} /> */}
         </IconButton>
       )}
       renderArrowNext={(onClickHandler, hasNext, label) => (
@@ -47,7 +44,6 @@ const MainCarousel = () => {
             zIndex: "10",
           }}
         >
-          {/* <NavigateNextIcon sx={{ fontSize: 40 }} /> */}
         </IconButton>
       )}
     >

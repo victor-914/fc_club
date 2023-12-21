@@ -3,57 +3,63 @@ import api from "../utils/api";
 export default function HomePage(props) {
   return (
     <>
-      <Home data={props} /> 
+      <Home data={props} />
     </>
   );
 }
 
- export async function fetchData(url) {
+export async function fetchData(url) {
   const response = await api.get(url);
   return response.data;
 }
 
 async function getData() {
-  const videos =
-    "/api/videos?populate=*&pagination[page]=1&pagination[pageSize]=6";
-  const matches =
-    "/api/matches?populate=*&pagination[page]=1&pagination[pageSize]=6";
-  const fixtures =
-    "/api/ticket-fixtures?populate=*&pagination[page]=1&pagination[pageSize]=6";
+  // const videos =
+  //   "/api/videos?populate=*&pagination[page]=1&pagination[pageSize]=6";
+
+  const fixtures = "/api/fixture-countdowns?populate=*";
   const articles =
     "/api/articles?populate=*&pagination[page]=1&pagination[pageSize]=6";
-  const products =
-    "/api/products?populate=*&pagination[page]=1&pagination[pageSize]=6";
+  // const products =
+  //   "/api/products?populate=*&pagination[page]=1&pagination[pageSize]=6";
 
-  const [videosData, matchesData, fixturesData, articlesData, productsData] =
+  const [
+    // videosData,
+     fixturesData, articlesData,
+      // productsData
+    ] =
     await Promise.all([
-      fetchData(videos),
-      fetchData(matches),
+      // fetchData(videos),
       fetchData(fixtures),
       fetchData(articles),
-      fetchData(products),
+      // fetchData(products),
     ]);
 
-  return { videosData, matchesData, fixturesData, articlesData, productsData };
+  return {
+    //  videosData,
+     fixturesData, 
+     articlesData,
+      // productsData 
+    };
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   try {
     const {
-      videosData,
-      matchesData,
+      // videosData,
+      // matchesData,
       fixturesData,
       articlesData,
-      productsData,
+      // productsData,
     } = await getData();
 
     return {
       props: {
-        videosData,
-        matchesData,
+        // videosData,
+        // matchesData,
         fixturesData,
         articlesData,
-        productsData,
+        // productsData,
       },
     };
   } catch (error) {

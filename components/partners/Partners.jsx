@@ -13,15 +13,15 @@ function Partners() {
           <header className="partnerHeader">Principal Club Partners</header>
           <div className="logoContainer">
             <div className="fc_logo">
-              <Image src={afri} layout="fill" />
+              <Image src={afri} priority objectFit="contain" />
             </div>
             <div className="fc_logo">
-              <Image src={enugu} layout="fill" />
+              <Image src={enugu} priority objectFit="contain" />
             </div>
-          </div>
 
-          <div className="fc_logo">
-            <Image src={logo} layout="fill" />
+            <div className="fc_logo">
+              <Image src={logo} layout="fill" />
+            </div>
           </div>
         </div>
       </main>
@@ -56,9 +56,9 @@ const StyledPartner = styled.div`
   }
 
   .logoContainer {
-    width: 80%;
+    width: 95%;
+    height: 30vh;
     margin: auto;
-    padding: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -73,33 +73,29 @@ const StyledPartner = styled.div`
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
-
-  .fc_logo {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    margin: auto;
-  }
+    .fc_logo {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      margin: auto;
+    }
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
     .fc_logo {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    margin: auto;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      margin: auto;
 
-    
-    .partnerHeader {
-    /* font-size: calc(${BaseFontSize.bfs} + 1345vw ) !important; */
-    letter-spacing: 1px;
-  }
-  }
+      .partnerHeader {
+        /* font-size: calc(${BaseFontSize.bfs} + 1345vw ) !important; */
+        letter-spacing: 1px;
+      }
+    }
 
-  @media (min-width: 769px) and (max-width: 1024px) {
-    
-  }
-
+    @media (min-width: 769px) and (max-width: 1024px) {
+    }
   }
 
   @media (min-width: 1025px) and (max-width: 1200px) {

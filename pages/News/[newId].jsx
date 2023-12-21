@@ -3,14 +3,27 @@ import Image from "next/image";
 import styled from "styled-components";
 import api from "../../utils/api";
 import { BaseFontSize, Color } from "../../utils/color";
-// import Breadcrumbs from "nextjs-breadcrumbs";
+import Breadcrumbs from "nextjs-breadcrumbs";
 import l from "../../assets/afriinvest.png";
 import parserHook from "../../hooks/parserHook";
 function PerArticle({ data }) {
   const [url, setUrl] = useState(null);
-
+  const [cont, setCont] = useState();
   const content = parserHook(data?.data?.attributes?.content);
+
   useEffect(() => {
+    if (content) {
+      const paragraphs = content.split("\n");
+      // Output each paragraph using a loop
+      // const p = paragraphs.forEach((paragraph) => {
+      //   paragraph.trim();
+      //   return paragraph;
+      // });
+
+      setCont(paragraphs);
+      // console.log("🚀 ~ file: [newId].jsx:26 ~ useEffect ~ p:", p);
+    }
+
     setUrl(
       data?.data?.attributes?.images?.data[0]?.attributes?.formats?.large?.url
     );
@@ -19,6 +32,10 @@ function PerArticle({ data }) {
       setUrl(null);
     };
   }, [data]);
+  console.log(
+    "🚀 ~ file: [newId].jsx:35 ~ useEffect ~ attributes:",
+    data?.data?.attributes?.images?.data[0]?.attributes?.formats
+  );
 
   const imgLoader = () => {
     return url;
@@ -26,7 +43,7 @@ function PerArticle({ data }) {
 
   return (
     <>
-      {/* <Breadcrumbs
+      <Breadcrumbs
         omitRootLabel
         activeItemClassName="brActive"
         omitIndexList={[1]}
@@ -54,7 +71,7 @@ function PerArticle({ data }) {
           color: "#000",
         }}
         transformLabel={(title) => "go back - " + title}
-      /> */}
+      />
       <Container>
         <DateComponent
           date={data?.data?.attributes?.createdAt}
@@ -64,7 +81,12 @@ function PerArticle({ data }) {
         <Title>{data?.data?.attributes?.title}</Title>
 
         <BannerImage>
-          <Image src={l} loader={imgLoader} layout="fill" />
+          <Image
+            src={l}
+            // sizes="(max-width: 480px) 100vw,(max-width: 1200px) 50vw"
+            loader={imgLoader}
+            layout="fill"
+          />
         </BannerImage>
 
         <Content
@@ -114,16 +136,18 @@ const Container = styled.div`
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
+    width: 90%;
   }
 
-  @media (min-width: 1025px) and (max-width: 1200px) {
-  }
+  /* @media (min-width: 1025px) and (max-width: 1200px) {
+    
+  } */
 `;
 
 const BannerImage = styled.div`
-  width: 100%;
+  /* width: 100%;
   height: 400px;
-  width: 100%;
+  width: 100%; */
   display: flex;
   justify-content: center;
   position: relative;
@@ -131,18 +155,20 @@ const BannerImage = styled.div`
 
   @media (min-width: 320px) and (max-width: 480px) {
     height: 300px;
-    width: 100%;
+    /* width: 100%; */
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
     height: 300px;
-    width: 100%;
+    /* width: 100%; */
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
+    height: 300px;
   }
 
-  @media (min-width: 1025px) and (max-width: 1200px) {
+  @media (min-width: 1025px) {
+    height: 450px;
   }
 `;
 
@@ -151,10 +177,15 @@ const Title = styled.h1`
   font-weight: 700;
   line-height: 1.2;
   text-align: justify;
-  padding: 10px;
+  /* padding: 10px; */
   padding-bottom: 10px;
 
-  @media (max-width: 760px) {
+  @media (min-width: 320px) and (max-width: 480px) {
+    text-align: start;
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    text-align: start;
   }
 `;
 
@@ -168,7 +199,7 @@ const Content = styled.div`
 const DateContainer = styled.div`
   font-size: 0.8rem;
   color: #333;
-  padding: 16px;
+  padding: 16px 16px 16px 0px;
   font-weight: 700;
 `;
 

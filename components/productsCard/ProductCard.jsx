@@ -11,8 +11,8 @@ import One from "../../assets/RangersKit2.png";
 // import imagetwo from "../../assets/ranger.gif";
 import imagefour from "../../assets/RangersKit1.png";
 // import imagefive from "../../assets/rangerGif.webp";
-import imagesix from "../../assets/product_3.jpeg";
-import imageseven from "../../assets/productone.jpeg";
+// import imagesix from "../../assets/product_3.jpeg";
+// import imageseven from "../../assets/productone.jpeg";
 import { Color } from "../../utils/color";
 const ProductCarousel = ({ data }) => {
   const count = 1;
@@ -23,8 +23,8 @@ const ProductCarousel = ({ data }) => {
   const heroTextureImports = [
     One,
     imagefour,
-    imagesix,
-    imageseven,
+    // imagesix,
+    // imageseven,
   ];
   return (
     <StyledProductCarousel>

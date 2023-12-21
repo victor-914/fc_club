@@ -51,7 +51,6 @@ const MobileMenuContainer = styled.div`
   .menuSubContainer {
     width: 100%;
     height: 80%;
-    /* background-color: green; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,25 +86,19 @@ const MenuItem = styled.div`
 
 function MobileMenu() {
   const dispatch = useDispatch();
-  const isMobileMenu = useSelector((state) => state.mMenu.isMobileMenuOpen);
-
   const router = useRouter();
+  const isMobileMenu = useSelector((state) => state.mMenu.isMobileMenuOpen);
+  const handleNav = (item) => {
+    dispatch(setIsmMenuOpen({}));
+    router.push(`${item.link}`);
+  };
+
   return (
     <MobileMenuContainer style={{ display: isMobileMenu ? "flex" : "none" }}>
       <div className="menuSubContainer">
         {secNavbar.map((item) => (
-          <MenuItem
-            key={item._id}
-            onClick={() => {
-              router.push({
-                pathname: `/${item.link}`,
-              }),
-                dispatch(setIsmMenuOpen({}));
-            }}
-          >
-            <span onClick={() => dispatch(setIsmMenuOpen({}))}>
-              {item.content}
-            </span>
+          <MenuItem key={item._id} onClick={() => handleNav(item)}>
+            <span>{item.content}</span>
           </MenuItem>
         ))}
         <button

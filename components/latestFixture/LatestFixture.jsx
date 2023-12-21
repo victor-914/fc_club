@@ -46,6 +46,7 @@ function LatestFixture({ item }) {
                   className="img"
                   src={rangers}
                   layout="fill"
+                  objectFit="contain"
                   quality={100}
                 />
               </div>
@@ -59,6 +60,7 @@ function LatestFixture({ item }) {
                   loader={loaderAway}
                   className="img"
                   layout="fill"
+                  objectFit="contain"
                   quality={100}
                   src={rangers}
                   placeholder="blur"
@@ -73,12 +75,12 @@ function LatestFixture({ item }) {
         </main>
 
         <aside className="ticket">
-          <button
+          {/* <button
             // onClick={() => router.replace("/")}
             className="learnMore"
           >
             Buy Ticket
-          </button>
+          </button> */}
         </aside>
       </section>
     </StyledFixture>
@@ -97,6 +99,7 @@ const StyledFixture = styled.section`
   position: relative;
   background-position: 40% 30%;
   animation: changeBackground 10s infinite;
+  margin-bottom: 40px;
 
   @keyframes changeBackground {
     0% {
@@ -111,7 +114,7 @@ const StyledFixture = styled.section`
   }
 
   .cover {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(30, 27, 27, 0.96);
     width: 100%;
     height: 100%;
     position: absolute;

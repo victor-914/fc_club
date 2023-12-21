@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import ing from "../../assets/products-page-heading.jpg";
 import Image from "next/image";
 import { BaseFontSize } from "../../utils/color";
-// const img = ing;
 function CatergoriesHeader({ image, text }) {
   return (
     <StyledCatergories>
@@ -53,7 +51,7 @@ const StyledCatergories = styled.section`
     color: #fff;
     letter-spacing: 1px;
     text-shadow: 1px 1px #000;
-    /* background-color: RED; */
+    background-color: RED;
   }
 
   .latestProduct {

@@ -1,5 +1,4 @@
-// import ShoppingList from "./ShoppingList";
-// import Subscribe from "./Subscribe";
+
 import MainCarousel from "./MainCarousel";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import HomeCatergories from "../../components/homeCatergories/HomeCatergories";
@@ -16,8 +15,7 @@ function Home({ data }) {
       <MainCarousel />
       <HomeCatergories />
       <LatestFixture item={data.fixturesData} />
-      <NewsComponents item={data.articlesData} video={data.videosData} />
-      <LatestMatch item={data.matchesData} />
+      {/* <NewsComponents item={data.articlesData} video={data.videosData} /> */}
       {/* <HeroProductCarousel item={data.productsData} /> */}
       {/* <HeroVideos item={data.videosData} /> */}
       <SocialMedia />

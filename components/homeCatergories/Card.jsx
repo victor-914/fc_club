@@ -17,8 +17,8 @@ const Card = ({ title, imgSrc, page }) => {
       <main className="imageHolder">
         <Image
           src={imgSrc}
-          layout="fill"
           quality={100}
+          objectFit="center"
           className="image"
           priority
         />
@@ -36,7 +36,7 @@ const StyledCard = styled.section`
   width: 30%;
   height: 400px;
   cursor: pointer;
-  padding: 20px;
+  /* padding: 20px; */
 
   .image {
     object-fit: contain;
@@ -57,7 +57,7 @@ const StyledCard = styled.section`
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
   }
 
   .buttonContainer {
@@ -69,7 +69,6 @@ const StyledCard = styled.section`
   }
 
   .viewButton {
-    /* line-height: 2; */
     width: 60%;
     margin: auto;
     text-align: center;
@@ -82,11 +81,9 @@ const StyledCard = styled.section`
 
   .imageHolder {
     width: 80%;
-    height: 70%;
+    height: auto;
     margin: auto;
-    /* margin-top: 10px; */
     position: relative;
-    object-fit: center;
   }
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -101,7 +98,7 @@ const StyledCard = styled.section`
     }
     .imageHolder {
       width: 100%;
-      height: 380px;
+      height: auto;
     }
   }
 

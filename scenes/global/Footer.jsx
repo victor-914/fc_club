@@ -1,8 +1,4 @@
 import { useTheme } from "@emotion/react";
-import { Box, Typography } from "@mui/material";
-import { shades } from "../../theme";
-import logo from "../../assets/viola-removebg-preview.png";
-import Image from "next/image";
 import styled from "styled-components";
 import { BaseFontSize } from "../../utils/color";
 function Footer() {
@@ -13,10 +9,10 @@ function Footer() {
     <StyledFootertext>
       <main>
         <section className="footerCont">
-          <div>Privacy Policy</div>
+          {/* <div>Privacy Policy</div>
           <div>Help & Support</div>
           <div>Jobs & Careers</div>
-          <div>Team of Use</div>
+          <div>Team of Use</div> */}
         </section>
       </main>
     </StyledFootertext>
@@ -26,7 +22,6 @@ function Footer() {
 export default Footer;
 
 const StyledFootertext = styled.div`
-  background-color: red;
   text-align: justify;
   width: 100%;
   border-top: 2px solid #fff;

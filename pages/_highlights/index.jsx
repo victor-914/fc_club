@@ -7,10 +7,6 @@ import RelatedVideo from "../../components/relatedVideos/RelatedVideo";
 import api from "../../utils/api";
 function HighLights({ videos }) {
   const [bannerVideo, setBannerVideo] = useState();
-  console.log(
-    "🚀 ~ file: index.jsx:10 ~ HighLights ~ bannerVideo:",
-    bannerVideo
-  );
 
   useEffect(() => {
     return () => {

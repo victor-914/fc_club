@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
 import kano from "../../assets/kanoPillar.png";
 import Image from "next/image";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { addToCart } from "../../state";
+import { useDispatch } from "react-redux";
+
 function Ticket({ item }) {
+  const [ticket, setTicket] = useState();
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  useEffect(() => {
+    setTicket(item);
+    setImg(item?.attributes?.againstWhom_logo?.data?.attributes?.url);
+    return () => {};
+  }, [item]);
+
   function formatDateStringToLocal(dateString) {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleString();
@@ -17,23 +29,26 @@ function Ticket({ item }) {
     router.replace(`/_fixtures/${id}`);
   };
 
+  const handleLogo = () => {
+    return ticket?.attributes?.againstWhom_logo?.data?.attributes?.url;
+  };
+
   return (
     <StyledTicket>
       <main className="container">
         <div className="againstWhom">
           <main className="enemyTeam">
-            <div className="imageContainer">
-              <Image src={kano} layout="fill" />
-            </div>
-            <div className="enemyTeamName">{item.attributes.home_title}</div>
+            {/* <div className="imageContainer">
+             
+            </div> */}
+
+            <div className="enemyTeamName">{`${item?.attributes?.home_title} Vs ${item?.attributes?.away_title} `}</div>
           </main>
         </div>
 
         <div className="venue">
           <aside id="homeOrAwayResponsive" className="homeOrAway">
-            <button>
-              {item?.attributes?.ticket_type === "BASIC" ? "A" : "H"}
-            </button>
+            <button>{item?.attributes?.symbol}</button>
           </aside>
           <main className="venuInfo">
             <div className="dateAndTime">
@@ -45,15 +60,23 @@ function Ticket({ item }) {
       </main>
 
       <footer className="ticketFooter">
-        {/* <main className="ticketContainer">
+        <main className="ticketContainer">
           <button onClick={() => handleClick(item?.id)} className="learnMore">
             News & Video <RiArrowRightSLine />
           </button>
 
-          <button onClick={() => handleClick(item?.id)} className="learnMore">
-            Buy Ticket <RiArrowRightSLine />
-          </button>
-        </main> */}
+          {item?.attributes?.isTicketAvailable && (
+            <button
+              onClick={() => {
+                handleClick(item?.id);
+                // dispatch(addToCart({ item: { ...product, count } }));
+              }}
+              className="learnMore"
+            >
+              Buy Ticket <RiArrowRightSLine />
+            </button>
+          )}
+        </main>
       </footer>
     </StyledTicket>
   );
@@ -227,12 +250,6 @@ const StyledTicket = styled.div`
     .catergory {
       font-size: calc(${BaseFontSize.bfs} - 0.8vw);
       line-height: 1.2;
-    }
-
-    .imageContainer {
-      position: relative;
-      width: 100px;
-      height: 100px;
     }
 
     .ticketContainer {

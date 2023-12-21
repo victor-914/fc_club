@@ -14,9 +14,9 @@ function HeroHistory() {
               football talents in Nigeria.”
             </p>
 
-            <button className="learnMore">
+            {/* <button className="learnMore">
               <span>Learn more</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </main>

@@ -10,36 +10,89 @@ import Pagination from "../../components/pagination/Pagination";
 function MatchesFixture({ fixturesData, fixture_dateData }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/group-by-dates?sort[0]=title:desc&populate[ticket_fixtures][fields][0]=*&populate[ticket_fixtures][populate][away_logo][fields][0]=url&pagination[pageSize]=2&pagination[page]=${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/ticket-fixtures?sort[0]=date:desc&populate[away_logo][fields][0]=url&populate[home_logo][fields][0]=url&fields[0]=*&pagination[page]=${currentPage}`,
     fetcher,
     {
-      fallbackData: fixturesData,
+      fallbackData: fixture_dateData,
     }
   );
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
+
+  const months = [
+    { id: 1, name: "January" },
+    { id: 2, name: "February" },
+    { id: 3, name: "March" },
+    { id: 4, name: "April" },
+    { id: 5, name: "May" },
+    { id: 6, name: "June" },
+    { id: 7, name: "July" },
+    { id: 8, name: "August" },
+    { id: 9, name: "September" },
+    { id: 10, name: "October" },
+    { id: 11, name: "November" },
+    { id: 12, name: "December" },
+  ];
+
+  const groupFixturesByMonth = (fixtures, months) => {
+    const fixturesByMonth = {};
+
+    months.forEach((month) => {
+      fixturesByMonth[month.name] = { fixtures: [] };
+    });
+
+    fixtures?.forEach((fixture) => {
+      const fixtureMonth = new Date(fixture.attributes.date).toLocaleString(
+        "en-US",
+        { month: "long" }
+      );
+      fixturesByMonth[fixtureMonth].fixtures.push(fixture);
+    });
+
+    for (const month in fixturesByMonth) {
+      if (fixturesByMonth[month].fixtures.length === 0) {
+        delete fixturesByMonth[month];
+      }
+    }
+
+    const sortedMonths = Object.keys(fixturesByMonth).sort((a, b) => {
+      const aDate = new Date(a);
+      const bDate = new Date(b);
+      return aDate - bDate;
+    });
+
+    const sortedFixtures = sortedMonths.map((month) => ({
+      month,
+      fixtures: fixturesByMonth[month].fixtures,
+    }));
+
+    return sortedFixtures;
+  };
+
+  const fixturesByMonth = groupFixturesByMonth(data?.data, months);
+  console.log(fixturesByMonth);
+
   return (
     <StyledMatches>
       <main className="header_news">
         <div className="cover"></div>
         <header className="news_header">Matches</header>
       </main>
-      <LatestFixture item={fixture_dateData} />
+      <LatestFixture item={fixturesData} />
       <section className="container">
         <main className="newsContainer">
           <div className="newsSubCont">
-            {data?.data?.map((item) => (
-              <Accordion
-                key={item?.attributes?.title}
-                title={item?.attributes?.title}
-              >
-                {item?.attributes?.ticket_fixtures?.data?.map((data) => (
-                  <div>
-                    <Ticket key={data?.attributes?.title} item={data} />
-                  </div>
-                ))}
-              </Accordion>
+            {fixturesByMonth?.map((item) => (
+              <>
+                <Accordion title={item.month}>
+                  {item?.fixtures?.map((data, indx) => (
+                    <div>
+                      <Ticket key={indx} item={data} />
+                    </div>
+                  ))}
+                </Accordion>
+              </>
             ))}
           </div>
         </main>
@@ -155,27 +208,25 @@ export async function fetchData(url) {
 }
 
 async function getData() {
-  const fixtures =
-    "/api/ticket-fixtures?populate=*&pagination[page]=1&pagination[pageSize]=1";
-  const fixture_date =
-    "/api/group-by-dates?sort[0]=title:desc&populate[ticket_fixtures][fields][0]=*&populate[ticket_fixtures][populate][away_logo][fields][0]=url&pagination[pageSize]=2&pagination[page]=1";
+  const fixtures = "/api/fixture-countdowns?populate=*";
+  const fixture_date = "/api/ticket-fixtures?populate=*";
 
   const [fixture_dateData, fixturesData] = await Promise.all([
-    fetchData(fixtures),
     fetchData(fixture_date),
+    fetchData(fixtures),
   ]);
 
-  return { fixturesData, fixture_dateData };
+  return { fixture_dateData, fixturesData };
 }
 
 export async function getServerSideProps(context) {
   try {
-    const { fixturesData, fixture_dateData } = await getData();
+    const { fixture_dateData, fixturesData } = await getData();
 
     return {
       props: {
-        fixturesData,
         fixture_dateData,
+        fixturesData,
       },
     };
   } catch (error) {
