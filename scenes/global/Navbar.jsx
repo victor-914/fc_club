@@ -13,7 +13,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
 import { Color } from "../../utils/color";
-
+import { AiOutlineHeart } from "react-icons/ai";
 const StyledMenuLi = styled.li`
   font-size: 17px;
   font-weight: 600;
@@ -93,21 +93,25 @@ const secNavbar = [
     content: "Videos",
     link: "/_highlights",
   },
-  // {
-  //   _id: "hjdddhddd",
-  //   content: "Shop",
-  //   link: "/products",
-  // },
+  {
+    _id: "hjdddhnajdddd",
+    content: "Shop",
+    link: "/products",
+  },
   // {
   //   _id: "hjdddhddd",
   //   content: "Contact",
   //   link: "accessories",
   // },
+   {
+    _id: "hjdddhdjkdjddd",
+    content: "Profile",
+    link: "profile",
+  },
 ];
 function Navbar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  const wishList = useSelector((state) => state.wishList.wishList);
   const router = useRouter();
   const isSmallScreen = useMediaQuery("(max-width:600px)");
 
@@ -121,13 +125,13 @@ function Navbar() {
               link={item.link}
               // style={{
               //   color:
-              //     router.pathname === `${item.page}` ? "#000" : "#fff",
-              //     // backgroundColor:  router.pathname === `${item.page}` ? "#000" : "transparent",
-              //     // border:router.pathname === `${item.page}` ? `10px solid green` : `10px solid ${Color.primaryColor}`
+              //     router.pathname.includes(`${item.page}`) ? "#000" : "#fff",
+              //     backgroundColor:  router.pathname === `${item.page}` ? "#000" : "transparent",
+              //     border:router.pathname.includes(`${item.page}`) ? `10px solid green` : `10px solid ${Color.primaryColor}`
               // }}
               key={item._id}
               onClick={() => {
-                router.push({
+                router.replace({
                   pathname: item.link,
                 });
               }}
@@ -173,34 +177,14 @@ function Navbar() {
             columnGap="20px"
             zIndex="2"
           >
-            <Badge
-              badgeContent={wishList.length}
-              color="secondary"
-              invisible={wishList.length === 0}
-              sx={{
-                "& .MuiBadge-badge": {
-                  right: 5,
-                  top: 5,
-                  padding: "0 4px",
-                  height: "14px",
-                  minWidth: "13px",
-                },
-              }}
-            >
-              {/* <IconButton
-                onClick={() => dispatch(setIsWishListOpen({}))}
-                sx={{ color: "black" }}
-              >
-                <AiOutlineHeart />
-              </IconButton> */}
-            </Badge>
+            
 
-            {/* <IconButton
+            <IconButton
               sx={{ color: "black" }}
               onClick={() => router.push("/profile")}
             >
               <PersonOutline />
-            </IconButton> */}
+            </IconButton>
             <Badge
               badgeContent={cart.length}
               color="secondary"

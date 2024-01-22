@@ -11,10 +11,24 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { BaseFontSize, Color } from "../../utils/color";
 import { addCommasToNumber } from "../../utils/helperFunctions";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+
 const ItemDetails = ({ data }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [product, setProduct] = useState([]);
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  // console.log("🚀 ~ ItemDetails ~ ID:", ID)
+
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
+
+  const handleSize = (event) => {
+    setSelectedSize(event.target.value);
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -23,6 +37,36 @@ const ItemDetails = ({ data }) => {
     setProduct(data?.data);
   }, [data]);
 
+  const handleAddToCart = () => {
+    const ID = uuidv4();
+    if (!selectedGender || !selectedSize) {
+      toast.error("gender or size required", {
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        position: "top-center",
+      });
+    } else {
+      toast.success("Added to cart", {
+        autoClose: 1000,
+        hideProgressBar: false,
+        position: "top-center",
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      dispatch(
+        addToCart({
+          item: {
+            ...product,
+            id: ID,
+            count,
+            selectedGender,
+            selectedSize,
+          },
+        })
+      );
+    }
+  };
 
   return (
     <StyledItemsPage>
@@ -68,7 +112,6 @@ const ItemDetails = ({ data }) => {
         >
           {product?.attributes?.images?.data?.map((texture, index) => (
             <div className="imageContainer" key={`carousel-image-${index}`}>
-              {console.log(texture, "texture")}
               <Image
                 src={texture?.attributes?.url}
                 alt={`carousel-${index}`}
@@ -89,25 +132,50 @@ const ItemDetails = ({ data }) => {
           &#8358;
           {addCommasToNumber(product?.attributes?.price)}
         </div>
-        <div className="buttonCont">
-       
-          <button
-            onClick={() => {
-              toast.success("Added to cart", {
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-              });
-              dispatch(addToCart({ item: { ...product, count } }));
-            }}
-          >
-            ADD TO CART
-          </button>
-        </div>
+
         <div className="product_info">
           <header className="product_info_header">Product info</header>
           <main className="info">{product?.attributes?.description}</main>
+        </div>
+
+        <main className="optionContainer">
+          <div className="gender">
+            <label htmlFor="gender">Select your gender:</label>
+            <select
+              id="gender"
+              name="gender"
+              value={selectedGender}
+              onChange={handleGenderChange}
+            >
+              <option value="">select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="K">Kids</option>
+            </select>
+
+            <p>Gender: {selectedGender}</p>
+          </div>
+
+          <div className="size">
+            <label htmlFor="size">Select your size:</label>
+            <select
+              id="size"
+              name="size"
+              value={selectedSize}
+              onChange={handleSize}
+            >
+              <option value="">Select</option>
+              <option value="S">Small</option>
+              <option value="M">Medium</option>
+              <option value="L">Large</option>
+              <option value="XL">Extra Large</option>
+            </select>
+
+            <p>Size: {selectedSize}</p>
+          </div>
+        </main>
+        <div className="buttonCont">
+          <button onClick={handleAddToCart}>ADD TO CART</button>
         </div>
         <div className="product_info">
           <header className="product_info_header">
@@ -146,6 +214,15 @@ const StyledItemsPage = styled.section`
     grid-area: images;
     width: 100%;
     height: auto;
+  }
+
+  .optionContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px 0px 20px 0px;
+    font-size: 18px;
+    justify-content: space-between;
   }
 
   .imageContainer {

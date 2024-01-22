@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
-// import { useFlutterwave } from "flutterwave-react-v3";
 import { useRouter } from "next/router";
-import logo from "../../assets/rangers.png";
 import { Color } from "../../utils/color";
-import {
-  createOrder,
-  sendEmail,
-  validateProducts,
-} from "../../utils/helperFunctions";
 import { usePaystackPayment } from "react-paystack";
-import { debounce } from "lodash";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import { removeFromCart } from "../../state";
 function ProductPreview() {
   const [totalPrice, setTotalPrice] = useState();
-  const [orderId, setOrderId] = useState(null);
   const router = useRouter();
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.user.user);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [token, setToken] = useState("");
+  const dispatch = useDispatch();
 
+  const [quantity, setQuantity] = useState(cart.length);
   useEffect(() => {
     setTotalPrice(
       cart &&
@@ -28,78 +30,102 @@ function ProductPreview() {
           return total + item?.count * item?.attributes?.price;
         }, 0)
     );
-
+    const jwt = Cookies.get("user_jwt");
+    setToken(jwt);
     return () => {};
   }, [cart]);
 
-  // FROM JWT TOKEN
-  const config = {
-    email: "okaforv914@gmail.com",
-    amount: 10000,
-    publicKey: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY,
-    channel: ["card", "bank", "ussd", "mobile_money"],
-  };
-
-  const onSuccess = async (r) => {
-    // handle status
-    // create order
-    //  paylaod == ship address , transaction details, order details
-    // write to log file
-    // send email
-    // clear cart
-    // verify amount and products from backend
-
-    const payLoad = {
-      data: {
-        // title: `${customeremail} + ${d}`,
-        customer_name:"",
-        customer_email:"",
-        total_price:"",
-        shipping_status:"",
-        shipping_address :"",
-        country:"",
-        state:"",
-        streetAddress:"", 
-        streetAddress2:"",
-        zipCode:"",
-        city:"",
-        customer_phoneNumber:"",
-        products:"",
-        users:"",
-        quantity:"",
-        gateway_response:"", 
-        transaction_id:""
-      },
-    };
+  const postItem = async (item, ref, gw_res) => {
+    const url = "https://rangersadmin.rangersintl.com/api/product-orders";
 
     try {
-      const response = await createOrder(payLoad, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      const response = await axios.post(
+        url,
+        {
+          title: item?.attributes?.title,
+          total_price: totalPrice,
+          gateway_response: gw_res,
+          gatewayRef_id: ref,
+          gender: item?.selectedGender,
+          quantity: quantity,
+          size: item?.selectedSize,
+          portal: "WEB",
+          price: item?.attributes?.price,
         },
-      });
-      console.log(response, "response");
-      console.log("Payment successful:", r, payLoad);
-    } catch (error) {}
-  };
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-  const onClose = () => {
-    console.log("Payment closed");
-  };
-
-  const initializePayment = usePaystackPayment(config);
-
-  const authToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAxNDQyMDQ2LCJleHAiOjE3MDQwMzQwNDZ9.MTewXe-kDqSZ2H8Kbhw9eC_VK9op5jBikSbfCWAJjl4";
-  const handlePaymentInit = async () => {
-    try {
-      initializePayment(onSuccess, onClose);
-    } catch (err) {
-      console.log(err);
+      return response.data;
+    } catch (error) {
+      throw error;
     }
   };
 
-  // const debouncedHandlePaymentInit = debounce(handlePaymentInit, 1000);
+  const handleCall = () => {
+    Promise.all(cart.map((item) => postItem(item)))
+      .then((results) => {
+        toast.success("purchase successful!") &&
+          cart.map((item) => dispatch(removeFromCart({ id: item.id }))) &&
+          router.push("/profile");
+      })
+      .catch((error) => {
+        toast.error("purchase unsuccessful. Try again later") &&
+          router.push("/profile");
+      });
+  };
+
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: email,
+    amount: totalPrice * 100,
+    publicKey: "pk_live_be3ce25eef07a69d80632b9fb7463a32d99f03de",
+    channels: ["card"],
+  };
+
+  const onSuccess = (reference) => {
+    console.log(reference);
+
+    Promise.all(cart.map((item) => postItem(item)))
+      .then((results) => {
+        console.log("All items have been successfully posted:", results);
+      })
+      .catch((error) => {
+        console.error("Error posting items:", error);
+      });
+  };
+
+  const onClose = () => {
+    console.log("closed");
+  };
+
+  const PaystackHook = () => {
+    const initializePayment = usePaystackPayment(config);
+    return (
+      <div>
+        <button
+          className="paystack-button"
+          onClick={() => {
+            initializePayment(onSuccess, onClose);
+          }}
+        >
+          Pay Now
+        </button>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    setPhone(user?.userInfo?.customer_phoneNumber);
+    setEmail(user?.userInfo?.email);
+    setName(user?.userInfo?.email);
+    setAmount(totalPrice * 100);
+    return () => {};
+  });
 
   return (
     <StyledPreview>
@@ -128,6 +154,11 @@ function ProductPreview() {
                     <div className="item_content">
                       <p>{item?.attributes?.title}</p>
                       <small>{item?.attributes?.price}</small>
+                      <br />
+                      <small>{item?.selectedSize}</small>
+                      <br />
+                      <small>{item?.selectedGender}</small>
+                      <br />
                       <span className="iconHolder">
                         <IoCloseOutline />
                       </span>
@@ -145,8 +176,6 @@ function ProductPreview() {
         <div className="total-price">
           <table>
             <tbody>
-              {" "}
-              {/* Add tbody here */}
               <tr>
                 <td>Total</td>
                 <td> &#x20A6; {totalPrice}</td>
@@ -154,9 +183,11 @@ function ProductPreview() {
             </tbody>
           </table>
         </div>
-        <button onClick={handlePaymentInit}>pay</button>
-        <aside>
-          <PaystackHookExample />
+
+        {/* <button onClick={handleCall}>kkdjdjjdj</button> */}
+
+        <aside className="pay_stackContainer">
+          <PaystackHook />
         </aside>
       </div>
     </StyledPreview>
@@ -171,6 +202,28 @@ const StyledPreview = styled.section`
   height: 100vh;
   padding-top: 50px;
   font-size: 18px;
+
+  .pay_stackContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px 30px 0px;
+  }
+
+  .paystack-button {
+    background-color: ${Color.primaryColor};
+    color: #fff;
+    font-weight: 500;
+    width: auto;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .paystack-button:hover {
+    background-color: red;
+  }
+
   .cart-page {
     margin: 80px auto;
   }

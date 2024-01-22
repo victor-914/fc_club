@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { saveCartToLocalStorage } from "./localStorage";
-import PropTypes from 'prop-types';
 const initialState = {
   isCartOpen: false,
   cart: [],
   items: [],
 };
-
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -17,19 +14,7 @@ export const cartSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      console.log(action.payload, "catrtitself");
-
-      const isDuplicate = state.cart.some(
-        (item) => item.id === action.payload.item.id
-      );
-
-      if (!isDuplicate) {
-        state.cart = [...state.cart, action.payload.item];
-
-      }
-      // console.log(action, "action", isDuplicate);
-
-     
+      state.cart = [...state.cart, action.payload.item];
     },
 
     removeFromCart: (state, action) => {
@@ -55,7 +40,6 @@ export const cartSlice = createSlice({
     },
 
     setIsCartOpen: (state) => {
-      console.log(state, "state");
       state.isCartOpen = !state.isCartOpen;
     },
   },

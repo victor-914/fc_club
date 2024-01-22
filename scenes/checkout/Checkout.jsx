@@ -3,83 +3,53 @@ import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
-import Payment from "./Payment";
 import Shipping from "./Shipping";
 import styled from "styled-components";
-import { useRouter } from "next/router";
-import {
-  setBillingAddress,
-  setShippingAddress,
-  setUserDetails,
-} from "../../state/profile";
 import { Color } from "../../utils/color";
-
+import { setUserDetails } from "../../state/profile";
+import { useRouter } from "next/router";
 const StyledButton = styled.button`
   width: 100%;
-
   height: 40px;
   background-color: ${Color.primaryColor} !important;
   color: #fff;
-
-  /* :hover{
-      background-color: #fff;
-    color: #000;
-    } */
 `;
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const cart = useSelector((state) => state.cart.cart);
-  const isFirstStep = activeStep === 0;
-  const isSecondStep = activeStep === 1;
-  const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const handleFormSubmit = async (values, actions) => {
-    setActiveStep(activeStep + 1);
-
-    if (isFirstStep && values.shippingAddress.isSameAddress) {
-      actions.setFieldValue("shippingAddress", {
-        ...values.billingAddress,
-        isSameAddress: true,
-      });
-    }
-
-    if (isSecondStep) {
-      // makePayment(values);
-      dispatch(setShippingAddress(values));
+  const [t, st] = useState(false);
+  const router = useRouter();
+  const handleFormSubmit = (values, actions) => {
+    if (values) {
       dispatch(
         setUserDetails({
-          email: values.email,
-          phoneNumber: values.phoneNumber,
+          zip_code: values?.shippingAddress.zipCode,
+          country: values?.shippingAddress.country,
+          email: values?.shippingAddress.email,
+          customer_phoneNumber: values?.shippingAddress.phoneNumber,
+          city: values?.shippingAddress.city,
+          address: values?.shippingAddress.street1,
         })
       );
-      dispatch(setBillingAddress(values));
+      st(true);
     }
 
-    actions.setTouched({});
+    t && router.push("/_productCheckout");
   };
 
-  // async function makePayment(values) {
-  //   console.log(values);
-  // }
-
   return (
-    <Box width="80%" m="100px auto">
+    <Box width="80%" m="200px auto">
       <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
         <Step>
-          <StepLabel>Billing</StepLabel>
+          <StepLabel>Shipping Address</StepLabel>
         </Step>
         <Step>
-          <StepLabel>Payment</StepLabel>
+          <StepLabel>Product Review</StepLabel>
         </Step>
       </Stepper>
       <Box>
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema[activeStep]}
-        >
+        <Formik onSubmit={handleFormSubmit} initialValues={initialValues}>
           {({
             values,
             errors,
@@ -90,56 +60,16 @@ const Checkout = () => {
             setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
-              {isFirstStep && (
-                <Shipping
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {isSecondStep && (
-                <Payment
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              <Box display="flex" justifyContent="space-between" gap="50px">
-                {!isFirstStep && (
-                  <StyledButton
-                    fullWidth
-                    color="primary"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "red",
-                      boxShadow: "none",
-                      color: "white",
-                      borderRadius: 0,
-                      padding: "15px 40px",
-                    }}
-                    onClick={() => setActiveStep(activeStep - 1)}
-                  >
-                    Back
-                  </StyledButton>
-                )}
-                <StyledButton fullWidth type="submit">
-                  {!isSecondStep ? (
-                    "Next"
-                  ) : (
-                    <StyledButton
-                      onClick={() => router.push("_productCheckout")}
-                    >
-                      Proceed to Checkout Page
-                    </StyledButton>
-                  )}
-                </StyledButton>
-              </Box>
+              <Shipping
+                values={values}
+                errors={errors}
+                touched={touched}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                setFieldValue={setFieldValue}
+              />
+              <StyledButton type="submit">Proceed to Checkout</StyledButton>
+              {/* </Box> */}
             </form>
           )}
         </Formik>
@@ -149,20 +79,9 @@ const Checkout = () => {
 };
 
 const initialValues = {
-  billingAddress: {
-    firstName: "",
-    lastName: "",
-    country: "",
-    street1: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-  },
   shippingAddress: {
-    isSameAddress: true,
-    firstName: "",
-    lastName: "",
+    email: "",
+    phoneNumber: "",
     country: "",
     street1: "",
     street2: "",
@@ -170,8 +89,6 @@ const initialValues = {
     state: "",
     zipCode: "",
   },
-  email: "",
-  phoneNumber: "",
 };
 
 const checkoutSchema = [

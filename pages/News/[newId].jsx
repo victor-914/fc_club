@@ -5,25 +5,12 @@ import api from "../../utils/api";
 import { BaseFontSize, Color } from "../../utils/color";
 import Breadcrumbs from "nextjs-breadcrumbs";
 import l from "../../assets/afriinvest.png";
-import parserHook from "../../hooks/parserHook";
+import Markdown from "react-markdown";
+
 function PerArticle({ data }) {
   const [url, setUrl] = useState(null);
-  const [cont, setCont] = useState();
-  const content = parserHook(data?.data?.attributes?.content);
 
   useEffect(() => {
-    if (content) {
-      const paragraphs = content.split("\n");
-      // Output each paragraph using a loop
-      // const p = paragraphs.forEach((paragraph) => {
-      //   paragraph.trim();
-      //   return paragraph;
-      // });
-
-      setCont(paragraphs);
-      // console.log("🚀 ~ file: [newId].jsx:26 ~ useEffect ~ p:", p);
-    }
-
     setUrl(
       data?.data?.attributes?.images?.data[0]?.attributes?.formats?.large?.url
     );
@@ -32,10 +19,6 @@ function PerArticle({ data }) {
       setUrl(null);
     };
   }, [data]);
-  console.log(
-    "🚀 ~ file: [newId].jsx:35 ~ useEffect ~ attributes:",
-    data?.data?.attributes?.images?.data[0]?.attributes?.formats
-  );
 
   const imgLoader = () => {
     return url;
@@ -53,15 +36,11 @@ function PerArticle({ data }) {
           height: "auto",
           paddingTop: "11vh",
           position: "-webkit-sticky",
-          // position: "sticky",
-          // top: 0,
         }}
         listStyle={{
           display: "flex",
           marginLeft: "5px",
           padding: "5px",
-
-          textTransform: "capitalize",
           fontSize: "15px",
         }}
         inactiveItemStyle={{
@@ -70,30 +49,20 @@ function PerArticle({ data }) {
           fontWeight: "700",
           color: "#000",
         }}
-        transformLabel={(title) => "go back - " + title}
+        transformLabel={(title) => "Back to all " + title}
       />
       <Container>
+        <Title>{data?.data?.attributes?.title}</Title>
+        <BannerImage>
+          <Image src={l} loader={imgLoader} layout="fill" objectFit="contain" />
+        </BannerImage>
         <DateComponent
           date={data?.data?.attributes?.createdAt}
           type="published"
         />
-
-        <Title>{data?.data?.attributes?.title}</Title>
-
-        <BannerImage>
-          <Image
-            src={l}
-            // sizes="(max-width: 480px) 100vw,(max-width: 1200px) 50vw"
-            loader={imgLoader}
-            layout="fill"
-          />
-        </BannerImage>
-
-        <Content
-          dangerouslySetInnerHTML={{
-            __html: content,
-          }}
-        />
+        <Content>
+          <Markdown>{data?.data?.attributes?.content}</Markdown>
+        </Content>
       </Container>
     </>
   );
@@ -101,27 +70,26 @@ function PerArticle({ data }) {
 
 export default PerArticle;
 
-export async function getStaticPaths() {
-  const res = await api.get(`/api/articles?fields[0]=title`);
-  const paths = res?.data?.data?.map((item) => ({
-    params: { newId: item.id.toString() },
-  }));
-  return { paths, fallback: true };
+export async function getServerSideProps(context) {
+  try {
+    const initialData = await api.get(
+      `/api/articles/${context.params.newId}?populate=*`
+    );
+    const data = initialData.data;
+
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
 }
 
-export async function getStaticProps({ params }) {
-  const initialData = await api.get(
-    `/api/articles/${params?.newId}?populate[images][fields][0]=*&fields[0]=title&fields[1]=content&fields[2]=slug&fields[3]=createdAt`
-  );
-  const data = initialData.data;
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
-const Container = styled.div`
+ export const Container = styled.div`
   width: 50%;
   margin: auto;
   padding: 5px;
@@ -138,16 +106,9 @@ const Container = styled.div`
   @media (min-width: 769px) and (max-width: 1024px) {
     width: 90%;
   }
-
-  /* @media (min-width: 1025px) and (max-width: 1200px) {
-    
-  } */
 `;
 
-const BannerImage = styled.div`
-  /* width: 100%;
-  height: 400px;
-  width: 100%; */
+ export const BannerImage = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
@@ -155,12 +116,10 @@ const BannerImage = styled.div`
 
   @media (min-width: 320px) and (max-width: 480px) {
     height: 300px;
-    /* width: 100%; */
   }
 
   @media (min-width: 481px) and (max-width: 768px) {
     height: 300px;
-    /* width: 100%; */
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -172,12 +131,12 @@ const BannerImage = styled.div`
   }
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: calc(${BaseFontSize.bfs} + 0.4vw);
   font-weight: 700;
   line-height: 1.2;
   text-align: justify;
-  /* padding: 10px; */
+  text-transform: capitalize;
   padding-bottom: 10px;
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -189,14 +148,17 @@ const Title = styled.h1`
   }
 `;
 
-const Content = styled.div`
+ export const Content = styled.div`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 20px;
   text-align: justify;
+  p {
+    margin-bottom: 20px;
+  }
 `;
 
-const DateContainer = styled.div`
+export const DateContainer = styled.div`
   font-size: 0.8rem;
   color: #333;
   padding: 16px 16px 16px 0px;

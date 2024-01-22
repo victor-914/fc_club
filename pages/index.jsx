@@ -14,32 +14,32 @@ export async function fetchData(url) {
 }
 
 async function getData() {
-  // const videos =
-  //   "/api/videos?populate=*&pagination[page]=1&pagination[pageSize]=6";
+  const videos =
+    "/api/videos?populate=*";
 
   const fixtures = "/api/fixture-countdowns?populate=*";
   const articles =
     "/api/articles?populate=*&pagination[page]=1&pagination[pageSize]=6";
-  // const products =
-  //   "/api/products?populate=*&pagination[page]=1&pagination[pageSize]=6";
+  const products =
+    "/api/products?populate=*&pagination[page]=1&pagination[pageSize]=6";
 
   const [
     // videosData,
      fixturesData, articlesData,
-      // productsData
+      productsData
     ] =
     await Promise.all([
       // fetchData(videos),
       fetchData(fixtures),
       fetchData(articles),
-      // fetchData(products),
+      fetchData(products),
     ]);
 
   return {
     //  videosData,
      fixturesData, 
      articlesData,
-      // productsData 
+      productsData 
     };
 }
 
@@ -50,7 +50,7 @@ export async function getServerSideProps() {
       // matchesData,
       fixturesData,
       articlesData,
-      // productsData,
+      productsData,
     } = await getData();
 
     return {
@@ -59,7 +59,7 @@ export async function getServerSideProps() {
         // matchesData,
         fixturesData,
         articlesData,
-        // productsData,
+        productsData,
       },
     };
   } catch (error) {

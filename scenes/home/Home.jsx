@@ -1,24 +1,19 @@
-
 import MainCarousel from "./MainCarousel";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import HomeCatergories from "../../components/homeCatergories/HomeCatergories";
-import NewsComponents from "../../components/news/NewsComponents";
 import HeroProductCarousel from "../../components/heroProductCarousel/HeroProductCarousel";
-import HeroVideos from "../../components/heroVideo/HeroVideos";
-// import HeroHistory from "../../components/heroHIstory/HeroHistory";
 import Partners from "../../components/partners/Partners";
 import LatestFixture from "../../components/latestFixture/LatestFixture";
-import LatestMatch from "../../components/latestMatch/LatestMatch";
+import AuthComponent from "../../components/authComponent/AuthComponent";
 function Home({ data }) {
   return (
     <div className="home">
       <MainCarousel />
       <HomeCatergories />
       <LatestFixture item={data.fixturesData} />
-      {/* <NewsComponents item={data.articlesData} video={data.videosData} /> */}
-      {/* <HeroProductCarousel item={data.productsData} /> */}
-      {/* <HeroVideos item={data.videosData} /> */}
+      <HeroProductCarousel item={data.productsData} />
       <SocialMedia />
+      <AuthComponent />
       <Partners />
     </div>
   );

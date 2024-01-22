@@ -75,12 +75,22 @@ function LatestFixture({ item }) {
         </main>
 
         <aside className="ticket">
-          {/* <button
-            // onClick={() => router.replace("/")}
-            className="learnMore"
+          <a
+            href="https://www.shopurban.co/seniorbarman"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            Buy Ticket
-          </button> */}
+            <button
+              className="learnMore"
+            >
+              Buy Home Ticket
+            </button>
+          </a>
         </aside>
       </section>
     </StyledFixture>
@@ -239,8 +249,6 @@ const StyledFixture = styled.section`
     font-size: 20px;
     font-weight: 700;
   }
-
-
 
   .learnMore {
     padding: 10px;

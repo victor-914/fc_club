@@ -1,4 +1,11 @@
-import { Box, Button, Divider, IconButton, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -13,8 +20,10 @@ import {
 } from "../../state";
 import { useRouter } from "next/router";
 import { Color } from "../../utils/color";
-
-
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { v4 as uuidv4 } from "uuid";
 const FlexBox = styled(Box)`
   display: flex;
   justify-content: space-between;
@@ -30,6 +39,32 @@ const CartMenu = () => {
   }, 0);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const router = useRouter();
+ const keys = uuidv4()
+  const [isLoggedIn, setIsLoggedIn] = useState();
+
+  useEffect(() => {
+    const isUserLoggedIn = Cookies.get("user_jwt", { path: "" });
+    if (isUserLoggedIn) {
+      setIsLoggedIn(true);
+    } else if (!isUserLoggedIn) {
+      setIsLoggedIn(false);
+    }
+
+    return () => {};
+  });
+
+  const handleCheckout = () => {
+    if (isLoggedIn) {
+      router.replace("/_checkout");
+      dispatch(setIsCartOpen({}));
+    } else if (!isLoggedIn) {
+      dispatch(setIsCartOpen({}));
+      toast.error("Authentication required");
+      router.replace("/_signup");
+    }
+  };
+
+  // const
   return (
     <Box
       display={isCartOpen ? "flex" : "none"}
@@ -65,7 +100,6 @@ const CartMenu = () => {
               <Box key={`${item?.attributes?.title}-${item.id}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
-                    {console.log(item, "item")}
                     <img
                       alt={item?.product_name}
                       width="123px"
@@ -128,17 +162,14 @@ const CartMenu = () => {
             </FlexBox>
             <Button
               sx={{
-                backgroundColor:`${Color.primaryColor} !important`,
+                backgroundColor: `${Color.primaryColor} !important`,
                 color: "#fff !important",
                 borderRadius: 0,
                 minWidth: "100%",
                 padding: "20px 40px",
                 m: "20px 0",
               }}
-              onClick={() => {
-                router.push("/_checkout");
-                dispatch(setIsCartOpen({}));
-              }}
+              onClick={handleCheckout}
             >
               <Typography fontWeight="bold"> CHECKOUT</Typography>
             </Button>

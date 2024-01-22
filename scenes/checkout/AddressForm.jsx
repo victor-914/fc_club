@@ -28,7 +28,7 @@ const AddressForm = ({
   return (
     <Box
       display="grid"
-      gap="15px"
+      gap="20px"
       gridTemplateColumns="repeat(4, minmax(0, 1fr))"
       sx={{
         "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -36,28 +36,29 @@ const AddressForm = ({
     >
       <TextField
         fullWidth
-        type="text"
-        label="First Name"
+        type="email"
+        label="Email"
         onBlur={handleBlur}
         onChange={handleChange}
-        value={values.firstName}
-        name={formattedName("firstName")}
-        error={formattedError("firstName")}
-        helperText={formattedHelper("firstName")}
+        value={values.email}
+        name={formattedName("email")}
+        error={formattedError("email")}
+        helperText={formattedHelper("email")}
         sx={{ gridColumn: "span 2" }}
       />
       <TextField
         fullWidth
-        type="text"
-        label="Last Name"
+        type="number"
+        label="Phone number"
         onBlur={handleBlur}
         onChange={handleChange}
-        value={values.lastName}
-        name={formattedName("lastName")}
-        error={formattedError("lastName")}
-        helperText={formattedHelper("lastName")}
+        value={values.phoneNumber}
+        name={formattedName("phoneNumber")}
+        error={formattedError("phoneNumber")}
+        helperText={formattedHelper("phoneNumber")}
         sx={{ gridColumn: "span 2" }}
       />
+
       <TextField
         fullWidth
         type="text"
@@ -80,18 +81,6 @@ const AddressForm = ({
         name={formattedName("street1")}
         error={formattedError("street1")}
         helperText={formattedHelper("street1")}
-        sx={{ gridColumn: "span 2" }}
-      />
-      <TextField
-        fullWidth
-        type="text"
-        label="Street Address 2 (optional)"
-        onBlur={handleBlur}
-        onChange={handleChange}
-        value={values.street2}
-        name={formattedName("street2")}
-        error={formattedError("street2")}
-        helperText={formattedHelper("street2")}
         sx={{ gridColumn: "span 2" }}
       />
       <TextField
@@ -120,7 +109,7 @@ const AddressForm = ({
       />
       <TextField
         fullWidth
-        type="text"
+        type="number"
         label="Zip Code"
         onBlur={handleBlur}
         onChange={handleChange}

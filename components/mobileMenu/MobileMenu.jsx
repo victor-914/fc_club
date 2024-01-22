@@ -17,6 +17,11 @@ const secNavbar = [
   //   link: "#",
   // },
   // {
+  //   _id: "hjdhhjagad",
+  //   content: "Profile",
+  //   link: "profile",
+  // },
+  // {
   //   _id: "hjdhajauddd",
   //   content: "Shop",
   //   link: "products",

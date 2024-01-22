@@ -3,9 +3,7 @@ import ItemDetails from "../../scenes/itemDetails/ItemDetails";
 import api from "../../utils/api";
 import Breadcrumbs from "nextjs-breadcrumbs";
 import { Color } from "../../utils/color";
-import { FaBeer } from "react-icons/fa";
 function PerProduct({ productResult }) {
-  const v = "&#8594;";
   return (
     <div>
       <Breadcrumbs
@@ -33,7 +31,7 @@ function PerProduct({ productResult }) {
           fontWeight: "700",
           color: "#000",
         }}
-        transformLabel={(title) => "/" + title}
+        transformLabel={(title) => "Back to products"}
       />
 
       <ItemDetails data={productResult} />

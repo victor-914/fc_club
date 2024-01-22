@@ -1,30 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Accordion, NewsBox } from "../../components/accordion/Accordion";
+import { NewsBox } from "../../components/accordion/Accordion";
 import { BaseFontSize } from "../../utils/color";
 import Head from "next/head";
 import api, { fetcher } from "../../utils/api";
 import Pagination from "../../components/pagination/Pagination";
 import useSWR from "swr";
+
 function News({ news }) {
-  
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=${currentPage}`,
+  const { data, error ,isLoading} = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}/api/articles?sort[0]=publishedAt:desc&populate[images][fields][0]=*&fields[0]=title&fields[1]=publishedAt&pagination[pageSize]=3&pagination[page]=${currentPage}`,
     fetcher,
     {
       fallbackData: news,
     }
   );
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
-
+  //  if(isLoading) return <div>loading</div>
 
   return (
     <StyledNews>
       <Head>
-        <title>Rangers FC News</title>
+        <title>News</title>
       </Head>
       <main className="header_news">
         <div className="cover"></div>
@@ -35,21 +33,14 @@ function News({ news }) {
         <main className="newsContainer">
           <div className="newsSubCont">
             {data?.data?.map((item) => (
-              <Accordion title={item.attributes.title}>
-                {item?.attributes?.articles?.data?.map((news) => (
-                  <div>
-                    <NewsBox data={news} />
-                  </div>
-                ))}
-              </Accordion>
+              <NewsBox key={item?.id} data={item} />
             ))}
           </div>
         </main>
-
       </section>
 
       <Pagination
-        data={data.meta}
+        data={data?.meta}
         stateIndex={currentPage}
         setstateIndex={setCurrentPage}
       />
@@ -77,14 +68,12 @@ const StyledNews = styled.section`
     position: absolute;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0,0,0,0.7); */
     background-color: rgba(23, 32, 48, 0.7);
   }
 
   .news_header {
     width: 50%;
     height: 100%;
-    /* background-color: green;  */
     position: relative;
     margin: auto;
     display: flex;
@@ -100,7 +89,6 @@ const StyledNews = styled.section`
   .container {
     width: 80%;
     height: auto;
-    /* background-color: green; */
     margin: auto;
     padding-top: 50px;
     display: flex;
@@ -116,7 +104,6 @@ const StyledNews = styled.section`
 
   .dontMiss {
     width: 35%;
-    /* background-color: purple; */
     height: 100vh;
   }
 
@@ -160,9 +147,10 @@ const StyledNews = styled.section`
 export async function getServerSideProps() {
   try {
     const initialData = await api.get(
-      "/api/group-by-dates?sort[0]=title:desc&populate[articles][fields][0]=title&populate[articles][populate][images][fields][0]=url&fields[0]=title&pagination[pageSize]=3&pagination[page]=1"
+      "/api/articles?sort[0]=publishedAt:desc&populate[images][fields][0]=*&fields[0]=title&fields[1]=publishedAt&pagination[pageSize]=3&pagination[page]=1"
     );
     const news = initialData.data;
+
     return {
       props: {
         news,

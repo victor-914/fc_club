@@ -12,6 +12,7 @@ const nextConfig = {
       "https://picsum.photos",
       "https://istockphoto.com",
       "www.instagram.com",
+      "https://www.youtube.com"
     ],
   },
   future: { webpack5: true },

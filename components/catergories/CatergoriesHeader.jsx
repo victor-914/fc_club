@@ -51,7 +51,6 @@ const StyledCatergories = styled.section`
     color: #fff;
     letter-spacing: 1px;
     text-shadow: 1px 1px #000;
-    background-color: RED;
   }
 
   .latestProduct {

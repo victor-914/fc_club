@@ -1,7 +1,9 @@
 import { useTheme } from "@emotion/react";
 import styled from "styled-components";
 import { BaseFontSize } from "../../utils/color";
+import { useRouter } from "next/router";
 function Footer() {
+  const router = useRouter();
   const {
     palette: { neutral },
   } = useTheme();
@@ -9,8 +11,8 @@ function Footer() {
     <StyledFootertext>
       <main>
         <section className="footerCont">
-          {/* <div>Privacy Policy</div>
-          <div>Help & Support</div>
+          <div onClick={() => router.push("_privacy")}>Privacy Policy</div>
+          {/* <div>Help & Support</div>
           <div>Jobs & Careers</div>
           <div>Team of Use</div> */}
         </section>
@@ -48,8 +50,11 @@ const StyledFootertext = styled.div`
 
   .footerCont div {
     font-size: calc(${BaseFontSize.bfs} + 0.1vw);
+    cursor: pointer;
   }
-
+  .footerCont div:hover{
+    text-decoration:underline;
+  }
   @media (min-width: 320px) and (max-width: 480px) {
     main {
       width: 100%;

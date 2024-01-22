@@ -3,22 +3,16 @@ import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
 import RelatedVideo from "../../components/relatedVideos/RelatedVideo";
 import api from "../../utils/api";
-
-function HighLights({ videos }) {
+function PerVideoView(video) {
   return (
-    <StyledHighLights>
-      <main className="header_news">
-        <div className="cover"></div>
-        <header className="news_header">Latest Videos</header>
-        <span className="line"></span>
-      </main>
+    <StyledPerView>
       <section className="videoContainer">
         <div className="videoIframe">
           <iframe
             width="100%"
             height="100%"
             controls="0"
-            src={videos?.data?.[0]?.attributes?.url}
+            src={video.video.data.attributes.url}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -26,59 +20,23 @@ function HighLights({ videos }) {
           ></iframe>
         </div>
         <main className="titleContainer">
-          <main>{videos?.data?.[0]?.attributes.title}</main>
+          <main>{video.video.data.attributes.title}</main>
           <aside className="subTitle">
-            {videos?.data?.[0]?.attributes.description}
+            {video.video.data.attributes.description}
           </aside>
         </main>
       </section>
 
       <RelatedVideo />
-    </StyledHighLights>
+    </StyledPerView>
   );
 }
 
-export default HighLights;
-
-const StyledHighLights = styled.section`
-  width: 100%;
-  height: auto;
-
-  .header_news {
-    width: 100%;
-    height: 40vh;
-    background-image: url("/news_banner.png");
-    background-position: 100% 40%;
-    background-repeat: no-repeat;
-    position: relative;
-    background-color: #f3f3f3;
-  }
-
-  .news_header {
-    width: 50%;
-    height: 100%;
-    position: relative;
-    margin: auto;
-    display: flex;
-    align-items: end;
-    text-transform: uppercase;
-    justify-content: center;
-    font-weight: 800;
-    color: #fff;
-    font-size: calc(${BaseFontSize.bfs} + 1.5vw);
-  }
-
-  .cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #11192fc1;
-    box-shadow: inset 350px -40px 60px ${Color.secondaryColor};
-  }
-
+const StyledPerView = styled.section`
   .videoContainer {
     width: 100%;
     height: auto;
+    padding-top: 12.2vh;
     background-color: ${Color.secondaryColor};
     padding-bottom: 50px;
   }
@@ -115,9 +73,9 @@ const StyledHighLights = styled.section`
 
     .videoIframe {
       width: 95%;
-      height: 50vh;
+      height: 50vh !important;
     }
-
+    
     .titleContainer{
     width: 95%;
     }
@@ -126,7 +84,7 @@ const StyledHighLights = styled.section`
   @media (min-width: 481px) and (max-width: 768px) {
     .videoIframe {
       width: 95%;
-      height: 50vh;
+      height: 50vh !important ;
     }
 
     .titleContainer{
@@ -141,15 +99,16 @@ const StyledHighLights = styled.section`
   }
 `;
 
-export async function getServerSideProps() {
-  try {
-    const initialData = await api.get("/api/latest-videos");
-    const videos = initialData.data;
+export default PerVideoView;
 
+export async function getServerSideProps(context) {
+  try {
+    const initialData = await api.get(
+      `api/videos/${context.params.vidId}`
+    );
+    const video = initialData.data;
     return {
-      props: {
-        videos,
-      },
+      props: { video },
     };
   } catch (error) {
     return {

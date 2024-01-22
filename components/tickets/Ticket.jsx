@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
-import kano from "../../assets/kanoPillar.png";
-import Image from "next/image";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useRouter } from "next/router";
-import { addToCart } from "../../state";
-import { useDispatch } from "react-redux";
-
 function Ticket({ item }) {
-  const [ticket, setTicket] = useState();
-  const dispatch = useDispatch();
   const router = useRouter();
-
-  useEffect(() => {
-    setTicket(item);
-    setImg(item?.attributes?.againstWhom_logo?.data?.attributes?.url);
-    return () => {};
-  }, [item]);
 
   function formatDateStringToLocal(dateString) {
     const date = new Date(dateString);
@@ -29,19 +16,11 @@ function Ticket({ item }) {
     router.replace(`/_fixtures/${id}`);
   };
 
-  const handleLogo = () => {
-    return ticket?.attributes?.againstWhom_logo?.data?.attributes?.url;
-  };
-
   return (
     <StyledTicket>
       <main className="container">
         <div className="againstWhom">
           <main className="enemyTeam">
-            {/* <div className="imageContainer">
-             
-            </div> */}
-
             <div className="enemyTeamName">{`${item?.attributes?.home_title} Vs ${item?.attributes?.away_title} `}</div>
           </main>
         </div>
@@ -66,14 +45,19 @@ function Ticket({ item }) {
           </button>
 
           {item?.attributes?.isTicketAvailable && (
-            <button
-              onClick={() => {
-                handleClick(item?.id);
-                // dispatch(addToCart({ item: { ...product, count } }));
-              }}
-              className="learnMore"
-            >
-              Buy Ticket <RiArrowRightSLine />
+            <button className="learnMore">
+              <a
+                href="https://www.shopurban.co/seniorbarman"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display:"flex",
+                  justifyContent:"space-between",
+                  alignItems:"center"
+                }}
+              >
+                Buy Ticket <RiArrowRightSLine />
+              </a>
             </button>
           )}
         </main>
@@ -84,7 +68,7 @@ function Ticket({ item }) {
 
 export default Ticket;
 
-const StyledTicket = styled.div`
+export const StyledTicket = styled.div`
   width: 100%;
   height: auto;
   background-color: #fff;
@@ -94,14 +78,9 @@ const StyledTicket = styled.div`
     -1px -0px 3px 2px rgba(233, 227, 227, 0.2);
   padding: 0px 30px 0px 30px;
 
-  .imageContainer {
-    position: relative;
-    width: 150px;
-    height: 150px;
-  }
 
   .container {
-    width: 100%;
+    width: 100% !important;
     height: auto;
   }
 
@@ -325,12 +304,7 @@ const StyledTicket = styled.div`
       line-height: 1.2;
     }
 
-    .imageContainer {
-      position: relative;
-      width: 100px;
-      height: 100px;
-    }
-
+   
     .ticketContainer {
       width: 100%;
       display: flex;

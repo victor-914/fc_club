@@ -1,69 +1,27 @@
 import React from "react";
-import ProductCarousel from "../productsCard/ProductCard";
-import { Box, useMediaQuery } from "@mui/material";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import One from "../../assets/ranger_giphy.gif";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
 import Product from "../shopProduct/ShopProduct";
+import { useRouter } from "next/router";
 
 function HeroProductCarousel({ item }) {
-  console.log(
-    "🚀 ~ file: HeroProductCarousel.jsx:13 ~ HeroProductCarousel ~ item:",
-    item
-  );
-  const heroTextureImports = [One];
-  const isNonMobile = useMediaQuery("(min-width:600px)");
-
+   const router = useRouter()
   return (
     <StyledHeroProductCarousel className="carouselContainer">
       <div className="carouselContainer">
         <header className="heroProductHeader">
           <div className="trending">Trending Now</div>
         </header>
-        <Carousel
-          infiniteLoop={true}
-          showThumbs={false}
-          showIndicators={false}
-          showStatus={false}
-          swipeable={false}
-          autoPlay={true}
-          renderArrowPrev={(onClickHandler, hasPrev, label) => (
-            <button onClick={onClickHandler} className="navButton_left">
-              <NavigateBeforeIcon sx={{ fontSize: 40 }} />
-            </button>
-          )}
-          renderArrowNext={(onClickHandler, hasNext, label) => (
-            <button onClick={onClickHandler} className="navButton_right">
-              <NavigateNextIcon sx={{ fontSize: 40 }} />
-            </button>
-          )}
-        >
+
+        <div className="productContainer">
           {item?.data.map((texture, index) => (
-            <Box
-              sx={{
-                display: "flex",
-                backgroundColor: "transparent",
-                flexWrap: "wrap",
-                height: "auto",
-                width: "100%",
-                padding: "10px",
-                margin: "auto",
-                gap: "30px",
-                justifyContent: "space-around",
-              }}
-              key={`carousel-image-${index}`}
-            >
-              <Product data={texture} />
-              <Product data={texture} />
-            </Box>
+            <Product data={texture} />
           ))}
-        </Carousel>
+        </div>
       </div>
-      <button className="viewShop">Enter shop</button>
+      <button
+       onClick={() => router.push("/products")}
+      className="viewShop">Enter shop</button>
     </StyledHeroProductCarousel>
   );
 }
@@ -73,7 +31,6 @@ export default HeroProductCarousel;
 const StyledHeroProductCarousel = styled.section`
   width: 100%;
   height: auto;
-  /* background-color: green; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -82,7 +39,6 @@ const StyledHeroProductCarousel = styled.section`
   padding-top: 100px;
 
   .carouselContainer {
-    /* background-color: blue; */
     background-image: url("/news_wallpaper1.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,6 +46,13 @@ const StyledHeroProductCarousel = styled.section`
     background-position: center;
     padding: 40px 0px 40px 0px;
     width: 100%;
+  }
+
+  .productContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
   }
 
   .heroProductHeader {
@@ -102,8 +65,6 @@ const StyledHeroProductCarousel = styled.section`
     padding: 8px;
     color: #fff;
     font-weight: 700;
-    /* border-radius: 5px; */
-    /* margin: auto; */
   }
 
   .viewShop {
@@ -113,10 +74,8 @@ const StyledHeroProductCarousel = styled.section`
     margin: 5px;
     width: 20%;
     height: 40px;
-    padding-left: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    background-color: ${Color.primaryColor};
+    text-align: center;
     transition: text-decoration 0.04s;
   }
 
@@ -124,7 +83,6 @@ const StyledHeroProductCarousel = styled.section`
     text-decoration: underline;
     cursor: pointer;
     transition: text-decoration 0.04s;
-    background-color: red;
     position: relative;
     height: 40px;
   }

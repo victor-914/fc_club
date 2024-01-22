@@ -2,8 +2,7 @@ import React, { useRouter } from "next/router";
 import { signIn } from "../utils/helperFunctions";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { setCookie } from "nookies";
-
+import Cookies from "js-cookie";
 export default function SignInSide() {
   const router = useRouter();
 
@@ -22,12 +21,10 @@ export default function SignInSide() {
         userData.username,
         userData.password.toString()
       );
+      console.log("🚀 ~ onSubmit ~ result:", result);
       if (result) {
-        setCookie(null, "jwt", result.jwt, {
-          secure: false,
-          maxAge: 30 * 24 * 60 * 60,
-          path: "/",
-        });
+        Cookies.set("user_jwt", result.jwt, { expires: 7, path: "" });
+        Cookies.set("user_id", result.user.id, { expires: 7, path: "" });
         toast.success("login successful");
         router.push("/");
         return;

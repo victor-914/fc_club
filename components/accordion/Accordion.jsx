@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
-import demo from "../../assets/news_demo.jpg";
 import Image from "next/image";
 import router from "next/router";
+
 const AccordionWrapper = styled.div`
   width: 100%;
   margin: 10px 0px 10px 0px;

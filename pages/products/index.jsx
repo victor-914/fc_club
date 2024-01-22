@@ -289,6 +289,7 @@ export async function getStaticProps() {
   );
 
   let productResult = response.data;
+  console.log("🚀 ~ getStaticProps ~ response:", response)
 
   // Return product data as props
   return {

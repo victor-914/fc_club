@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 function Login() {
   const router = useRouter();
   const [userData, setUserData] = useState({
@@ -13,9 +14,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/api/auth/local/register", userData);
+      const res = await api.post("/api/auth/local/register", userData);
       toast.success(`Account created successfully`);
-      router.replace("/");
+      Cookies.set("user_jwt", res.data.jwt, { expires: 7, path: "" });
+      Cookies.set("user_id", res.data.user.id, { expires: 7, path: "" });
+      router.push("/");
       setUserData({
         username: "",
         email: "",
