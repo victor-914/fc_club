@@ -56,7 +56,6 @@ function ProductListing({ productResult: data }) {
   //   }
   // );
 
-  console.log(data, "product");
 
   useEffect(() => {
     // setState("loading");
@@ -289,7 +288,6 @@ export async function getStaticProps() {
   );
 
   let productResult = response.data;
-  console.log("🚀 ~ getStaticProps ~ response:", response)
 
   // Return product data as props
   return {
