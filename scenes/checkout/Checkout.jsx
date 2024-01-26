@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { Formik } from "formik";
 import { useState, useEffect } from "react";
-import * as yup from "yup";
 import Shipping from "./Shipping";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
