@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as yup from "yup";
 import Shipping from "./Shipping";
 import styled from "styled-components";
 import { Color } from "../../utils/color";
 import { setUserDetails } from "../../state/profile";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { toast } from "react-toastify";
 const StyledButton = styled.button`
   width: 100%;
   height: 40px;
@@ -19,8 +22,24 @@ const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const [t, st] = useState(false);
+  const [token_id, setToken_id] = useState();
+  const [token, setToken] = useState();
   const router = useRouter();
-  const handleFormSubmit = (values, actions) => {
+
+  useEffect(() => {
+    const tokenID = Cookies.get("user_id");
+    const token = Cookies.get("user_jwt");
+    if (!tokenID && !token) {
+      router.push("_signup");
+    } else {
+      setToken_id(tokenID);
+      setToken(token);
+    }
+
+    return () => {};
+  });
+
+  const handleFormSubmit = async (values, actions) => {
     if (values) {
       dispatch(
         setUserDetails({
@@ -29,13 +48,37 @@ const Checkout = () => {
           email: values?.shippingAddress.email,
           customer_phoneNumber: values?.shippingAddress.phoneNumber,
           city: values?.shippingAddress.city,
+          state:values?.shippingAddress.state,
           address: values?.shippingAddress.street1,
         })
       );
-      st(true);
-    }
 
-    t && router.push("/_productCheckout");
+      try {
+        const res = await axios.put(
+          `https://rangersadmin.rangersintl.com/api/users/${token_id}`,
+          {
+            zip_code: values?.shippingAddress.zipCode,
+            country: values?.shippingAddress.country,
+            email: values?.shippingAddress.email,
+            customer_phoneNumber: values?.shippingAddress.phoneNumber,
+            city: values?.shippingAddress.city,
+            state:values?.shippingAddress.state,
+            address: values?.shippingAddress.street1,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+          st(true);
+          toast.success("shipping details stored successfully");
+      } catch (error) {
+        toast.error(error?.message);
+      } finally {
+        t && router.push("/_productCheckout");
+      }
+    }
   };
 
   return (
@@ -69,7 +112,6 @@ const Checkout = () => {
                 setFieldValue={setFieldValue}
               />
               <StyledButton type="submit">Proceed to Checkout</StyledButton>
-              {/* </Box> */}
             </form>
           )}
         </Formik>
@@ -82,7 +124,7 @@ const initialValues = {
   shippingAddress: {
     email: "",
     phoneNumber: "",
-    country: "",
+    country: "select country",
     street1: "",
     street2: "",
     city: "",
@@ -90,56 +132,5 @@ const initialValues = {
     zipCode: "",
   },
 };
-
-const checkoutSchema = [
-  yup.object().shape({
-    billingAddress: yup.object().shape({
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
-      street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
-    }),
-    shippingAddress: yup.object().shape({
-      isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      lastName: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      country: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street1: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      state: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-      zipCode: yup.string().when("isSameAddress", {
-        is: false,
-        then: yup.string().required("required"),
-      }),
-    }),
-  }),
-  yup.object().shape({
-    email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
-  }),
-];
 
 export default Checkout;

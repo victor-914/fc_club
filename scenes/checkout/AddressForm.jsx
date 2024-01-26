@@ -1,8 +1,8 @@
 import { getIn } from "formik";
-import { Box } from "@mui/material";
+import { Box, InputLabel, MenuItem, Select } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import { countries } from "../../utils/countries";
 const AddressForm = ({
   type,
   values,
@@ -59,18 +59,30 @@ const AddressForm = ({
         sx={{ gridColumn: "span 2" }}
       />
 
-      <TextField
+      <Select
         fullWidth
-        type="text"
         label="Country"
         onBlur={handleBlur}
         onChange={handleChange}
+        placeholder="country"
         value={values.country}
         name={formattedName("country")}
         error={formattedError("country")}
         helperText={formattedHelper("country")}
-        sx={{ gridColumn: "span 4" }}
-      />
+        sx={{
+          margin: "5px",
+          gridColumn: "span 2",
+        }}
+      >
+        <MenuItem value="" disabled>
+          Select Country
+        </MenuItem>
+        {countries.map((country) => (
+          <MenuItem key={country.name} value={country.name}>
+            {country.name}
+          </MenuItem>
+        ))}
+      </Select>
       <TextField
         fullWidth
         type="text"
@@ -81,7 +93,7 @@ const AddressForm = ({
         name={formattedName("street1")}
         error={formattedError("street1")}
         helperText={formattedHelper("street1")}
-        sx={{ gridColumn: "span 2" }}
+        sx={{ gridColumn: "span 4" }}
       />
       <TextField
         fullWidth

@@ -10,18 +10,15 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { removeFromCart } from "../../state";
+import { v4 as uuidv4 } from "uuid";
 function ProductPreview() {
   const [totalPrice, setTotalPrice] = useState();
   const router = useRouter();
   const cart = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.user.user);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [amount, setAmount] = useState(0);
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
-
   const [quantity, setQuantity] = useState(cart.length);
   useEffect(() => {
     setTotalPrice(
@@ -32,10 +29,12 @@ function ProductPreview() {
     );
     const jwt = Cookies.get("user_jwt");
     setToken(jwt);
-    return () => {};
-  }, [cart]);
+    setEmail(user?.userInfo?.email);
 
-  const postItem = async (item, ref, gw_res) => {
+    return () => {};
+  });
+
+  const postItem = async (item, gw_res, ref) => {
     const url = "https://rangersadmin.rangersintl.com/api/product-orders";
 
     try {
@@ -66,8 +65,8 @@ function ProductPreview() {
     }
   };
 
-  const handleCall = () => {
-    Promise.all(cart.map((item) => postItem(item)))
+  const handleCall = (tranx_id, gateway_res) => {
+    Promise.all(cart.map((item) => postItem(item, tranx_id, gateway_res)))
       .then((results) => {
         toast.success("purchase successful!") &&
           cart.map((item) => dispatch(removeFromCart({ id: item.id }))) &&
@@ -80,27 +79,19 @@ function ProductPreview() {
   };
 
   const config = {
-    reference: new Date().getTime().toString(),
+    reference: uuidv4(),
     email: email,
     amount: totalPrice * 100,
-    publicKey: "pk_live_be3ce25eef07a69d80632b9fb7463a32d99f03de",
+    publicKey: "pk_test_4fe51582c0cb351dba8e2f02e95550f99d2b4bef",
     channels: ["card"],
   };
 
-  const onSuccess = (reference) => {
-    console.log(reference);
-
-    Promise.all(cart.map((item) => postItem(item)))
-      .then((results) => {
-        console.log("All items have been successfully posted:", results);
-      })
-      .catch((error) => {
-        console.error("Error posting items:", error);
-      });
+  const onSuccess = (ref) => {
+    handleCall(ref.status, ref.trxref);
   };
 
   const onClose = () => {
-    console.log("closed");
+    toast.info("payment cancelled!");
   };
 
   const PaystackHook = () => {
@@ -118,14 +109,6 @@ function ProductPreview() {
       </div>
     );
   };
-
-  useEffect(() => {
-    setPhone(user?.userInfo?.customer_phoneNumber);
-    setEmail(user?.userInfo?.email);
-    setName(user?.userInfo?.email);
-    setAmount(totalPrice * 100);
-    return () => {};
-  });
 
   return (
     <StyledPreview>
@@ -166,7 +149,7 @@ function ProductPreview() {
                   </div>
                 </td>
                 <td>
-                  <input type="number" value={item?.count} />
+                  <input type="number" readOnly value={item?.count} />
                 </td>
                 <td>&#x20A6; {item?.attributes?.price * item.count}</td>
               </tr>
@@ -183,8 +166,6 @@ function ProductPreview() {
             </tbody>
           </table>
         </div>
-
-        {/* <button onClick={handleCall}>kkdjdjjdj</button> */}
 
         <aside className="pay_stackContainer">
           <PaystackHook />

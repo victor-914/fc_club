@@ -1,27 +1,103 @@
-import React, { useState } from "react";
-import {
-  Tab,
-  Tabs,
-  TextField,
-  Button,
-  Box,
-  AppBar,
-  useMediaQuery,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { TextField, Button, Box } from "@mui/material";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 function ProfileComponents() {
-  const [name, setName] = useState("John Doe");
-  const [phoneNumber, setPhoneNumber] = useState("123-456-7890");
-  const [email, setEmail] = useState("john.doe@example.com");
+  const router = useRouter();
+  const [token_id, setToken_id] = useState();
+  const [token, setToken] = useState();
+  const [formValues, setFormValues] = useState({
+    username: "",
+    email: "",
+    customer_phoneNumber: "",
+    country: "",
+    address: "",
+    city: "",
+    state: "",
+    zip_code: "",
+  });
 
-  const handleTabChange = (event, newValue) => {
-    setValue(newValue);
+  const handleTabChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
+  useEffect(() => {
+    const tokenID = Cookies.get("user_jwt");
+    const user_id = Cookies.get("user_id");
+    setToken(tokenID);
+    setToken_id(user_id);
+    if (!tokenID) {
+      router.push("_signup");
+    }
 
-  const handleSave = () => {
-    // Assume you have an API endpoint for updating the profile
-    // Make a request to update the profile with the new data
+    const fetchProfileData = async () => {
+      try {
+        const res = await axios.get(
+          "https://rangersadmin.rangersintl.com/api/users/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setFormValues({
+          username: res?.data?.username,
+          email: res?.data?.email,
+          customer_phoneNumber: res?.data?.customer_phoneNumber,
+          country: res?.data?.country,
+          state: res?.data?.state,
+          zip_code: res?.data?.zip_code,
+          city: res?.data?.city,
+          address: res?.data?.address,
+        });
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    token && fetchProfileData();
+
+    return () => {};
+  }, [token]);
+
+  const handleSave = async () => {
+    try {
+      const res = await axios.put(
+        `https://rangersadmin.rangersintl.com/api/users/${token_id}`,
+        {
+          zip_code: formValues?.zip_code,
+          country: formValues?.country,
+          email: formValues?.email,
+          customer_phoneNumber: formValues?.customer_phoneNumber,
+          city: formValues?.city,
+          state: formValues?.state,
+          address: formValues?.address,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("🚀 ~ handleSave ~ res:", res);
+      console.log("🚀 ~ handleSave ~ res:", res);
+
+      toast.success("user details updated!");
+    } catch (error) {
+      console.log("🚀 ~ handleSave ~ error:", error);
+      toast.error("Try again later! update failed!");
+    }
+
     console.log("Profile updated successfully");
+    console.log("🚀 ~ ProfileComponents ~ formValues:", formValues);
   };
+
   return (
     <Box
       sx={{
@@ -31,18 +107,22 @@ function ProfileComponents() {
       }}
     >
       <TextField
-        label="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        label="Username"
+        text="text"
+        value={formValues.username}
+        onChange={handleTabChange}
         fullWidth
+        name="username"
         sx={{
           marginTop: "20px",
         }}
       />
       <TextField
         label="Phone Number"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
+        type="tel"
+        value={formValues.customer_phoneNumber}
+        onChange={handleTabChange}
+        name="customer_phoneNumber"
         fullWidth
         sx={{
           marginTop: "20px",
@@ -50,8 +130,54 @@ function ProfileComponents() {
       />
       <TextField
         label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="email"
+        name="email"
+        value={formValues.email}
+        onChange={handleTabChange}
+        fullWidth
+        sx={{
+          marginTop: "20px",
+        }}
+      />
+      <TextField
+        label="Address"
+        type="text"
+        value={formValues.address}
+        onChange={handleTabChange}
+        fullWidth
+        name="address"
+        sx={{
+          marginTop: "20px",
+        }}
+      />
+      <TextField
+        type="text"
+        label="City"
+        value={formValues.city}
+        name="city"
+        onChange={handleTabChange}
+        fullWidth
+        sx={{
+          marginTop: "20px",
+        }}
+      />
+      <TextField
+        label="State"
+        type="text"
+        name="state"
+        value={formValues.state}
+        onChange={handleTabChange}
+        fullWidth
+        sx={{
+          marginTop: "20px",
+        }}
+      />
+      <TextField
+        label="Zip code"
+        type="text"
+        value={formValues.zip_code}
+        onChange={handleTabChange}
+        name="zip_code"
         fullWidth
         sx={{
           marginTop: "20px",
@@ -60,7 +186,7 @@ function ProfileComponents() {
       <Button
         sx={{
           marginTop: "20px",
-          color:"#000"
+          color: "#000",
         }}
         variant="contained"
         // color="primary"
