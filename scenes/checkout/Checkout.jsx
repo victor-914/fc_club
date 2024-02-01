@@ -24,6 +24,16 @@ const Checkout = () => {
   const [token_id, setToken_id] = useState();
   const [token, setToken] = useState();
   const router = useRouter();
+  const [formValues, setFormValues] = useState({
+    username: "",
+    email: "",
+    customer_phoneNumber: "",
+    country: "",
+    address: "",
+    city: "",
+    state: "",
+    zip_code: "",
+  });
 
   useEffect(() => {
     const tokenID = Cookies.get("user_id");
@@ -47,7 +57,7 @@ const Checkout = () => {
           email: values?.shippingAddress.email,
           customer_phoneNumber: values?.shippingAddress.phoneNumber,
           city: values?.shippingAddress.city,
-          state:values?.shippingAddress.state,
+          state: values?.shippingAddress.state,
           address: values?.shippingAddress.street1,
         })
       );
@@ -61,7 +71,7 @@ const Checkout = () => {
             email: values?.shippingAddress.email,
             customer_phoneNumber: values?.shippingAddress.phoneNumber,
             city: values?.shippingAddress.city,
-            state:values?.shippingAddress.state,
+            state: values?.shippingAddress.state,
             address: values?.shippingAddress.street1,
           },
           {
@@ -70,8 +80,8 @@ const Checkout = () => {
             },
           }
         );
-          st(true);
-          toast.success("shipping details stored successfully");
+        st(true);
+        toast.success("shipping details stored successfully");
       } catch (error) {
         toast.error(error?.message);
       } finally {

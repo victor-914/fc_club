@@ -220,7 +220,7 @@ async function getData() {
   return { fixture_dateData, fixturesData };
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   try {
     const { fixture_dateData, fixturesData } = await getData();
 

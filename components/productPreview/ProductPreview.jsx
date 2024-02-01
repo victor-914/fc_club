@@ -31,7 +31,9 @@ function ProductPreview() {
     setToken(jwt);
     setEmail(user?.userInfo?.email);
 
-    return () => {};
+    return () => {
+      
+    };
   });
 
   const postItem = async (item, gw_res, ref) => {
@@ -82,7 +84,7 @@ function ProductPreview() {
     reference: uuidv4(),
     email: email,
     amount: totalPrice * 100,
-    publicKey: "pk_test_4fe51582c0cb351dba8e2f02e95550f99d2b4bef",
+    publicKey: process.env.NEXT_PUBLIC_KEY,
     channels: ["card"],
   };
 

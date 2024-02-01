@@ -1,4 +1,4 @@
-import { usePDF, Resolution, Margin } from "react-to-pdf";
+import { usePDF } from "react-to-pdf";
 import styled from "styled-components";
 import React from "react";
 import { Button, useMediaQuery } from "@mui/material";
@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Color } from "../../utils/color";
 
 const InvoiceContainer = styled.div`
-  /* max-width: 600px; */
   width: ${(props) => (props.isMobile ? "100%" : "600px")};
   margin: auto;
   padding: 20px;
@@ -27,7 +26,6 @@ const Header = styled.div`
 const InvoiceDetails = styled.div`
   margin-bottom: 20px;
   .productDetails {
-    /* line-height: 1.5; */
     background-color: ${Color.primaryColor};
     color: #fff;
     font-weight: 700;
@@ -45,7 +43,6 @@ const UserDetails = styled.div`
   padding-bottom: 20px;
 
   .userHeader {
-    /* line-height: 1.5; */
     background-color: ${Color.primaryColor};
     color: #fff;
     font-weight: 700;
@@ -66,11 +63,7 @@ function DownloadInvoice({ details, invoice, view, setView }) {
     <StyledInvoice>
       <InvoiceContainer isMobile={mobile} ref={targetRef}>
         <Header>
-          {!mobile ? (
-            <header>RANGERS'S INTL INVOICE</header>
-          ) : (
-            <Image src={logo} layout="fixed" alt="Company Logo" />
-          )}
+          <header>RANGERS'S INTL FC INVOICE</header>
 
           <div>
             <h5>Invoice #{invoice?.id}</h5>
@@ -96,7 +89,7 @@ function DownloadInvoice({ details, invoice, view, setView }) {
           <p>Date: {new Date(invoice?.createdAt).toLocaleDateString()}</p>
           <p>Shipping Status: {invoice?.shipping_status}</p>
           <p>Gateway Response: {invoice?.gateway_response}</p>
-          <p>Quantity: {invoice?.quantity}</p>
+          {/* <p>Quantity: {invoice?.quantity}</p> */}
           <p>Gender: {invoice?.gender}</p>
           <p>Size: {invoice?.size}</p>
           <p>Price:&#x20A6; {invoice?.price}</p>
@@ -106,8 +99,8 @@ function DownloadInvoice({ details, invoice, view, setView }) {
           promptly and reaches you in perfect condition. You can expect a
           shipping confirmation email with tracking information shortly. Please
           feel free to track your order and reach out to us if you have any
-          questions or concerns along the way. 
-          Email us: customercare@rangersintl.com
+          questions or concerns along the way. Email us:
+          customercare@rangersintl.com
         </div>
       </InvoiceContainer>
       <div className="buttonContainer">
@@ -136,7 +129,6 @@ const StyledInvoice = styled.section`
   position: absolute;
   width: 100%;
   height: auto;
-  background-color: red;
   padding: 10px;
   .buttonContainer {
     width: 50%;

@@ -62,22 +62,24 @@ const ProductInvoice = () => {
     <Box
       sx={{
         display: "flex",
-        width: `${isMobile ? "100%" : "80%"}`,
+        width: "80%",
         alignItems: "flex-start",
         justifyContent: `${isMobile ? "center" : "flex-start"}`,
         flexWrap: "wrap",
         padding: "20px 0px 30px 0px",
         position: "relative",
-        gap: "20px",
+        gap: "10px",
         margin: "auto",
-        height: `${isMobile ? "120vh" : "120vh"}`
+        height: "120vh",
       }}
     >
       {userDetails?.product_order?.map((data) => (
         <Card
           key={data?.id}
           sx={{
-            width: isMobile ? "80%" : "300px",
+            width: "300px",
+            height: "300px",
+            border: "1px solid #910f1a7e",
           }}
         >
           <CardContent
@@ -87,6 +89,8 @@ const ProductInvoice = () => {
               alignItems: "center",
               justifyContent: "flex-start",
               textAlign: "start",
+              height: "100%",
+              width: "100%",
             }}
           >
             <Typography variant="h3" gutterBottom>

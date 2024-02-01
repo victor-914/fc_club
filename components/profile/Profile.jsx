@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ProfileComponents from "./ProfileComponents";
 import { Color } from "../../utils/color";
 import ProductInvoice from "./ProductInvoice";
+import LogoutComponent from "../logout/Logout";
 const StyledBox = styled.div`
   width: 100%;
   height: auto;
@@ -52,6 +53,7 @@ const ProfilePage = () => {
 
       {value === 0 && <ProfileComponents />}
       {value === 1 && <ProductInvoice />}
+      <LogoutComponent />
     </StyledBox>
   );
 };

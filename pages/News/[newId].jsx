@@ -70,7 +70,20 @@ function PerArticle({ data }) {
 
 export default PerArticle;
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  const articles = await api.get("/api/articles?fields[0]=title");
+
+  const paths = articles?.data?.data?.map((article) => ({
+    params: { newId: article.id.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
   try {
     const initialData = await api.get(
       `/api/articles/${context.params.newId}?populate=*`
@@ -80,6 +93,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data,
+        revalidate: 21600,
       },
     };
   } catch (error) {
@@ -89,7 +103,7 @@ export async function getServerSideProps(context) {
   }
 }
 
- export const Container = styled.div`
+export const Container = styled.div`
   width: 50%;
   margin: auto;
   padding: 5px;
@@ -108,7 +122,7 @@ export async function getServerSideProps(context) {
   }
 `;
 
- export const BannerImage = styled.div`
+export const BannerImage = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
@@ -148,7 +162,7 @@ export const Title = styled.h1`
   }
 `;
 
- export const Content = styled.div`
+export const Content = styled.div`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 20px;

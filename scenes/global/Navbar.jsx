@@ -13,7 +13,6 @@ import Image from "next/image";
 import styled from "styled-components";
 import { setIsmMenuOpen } from "../../state/mobilemenu";
 import { Color } from "../../utils/color";
-import { AiOutlineHeart } from "react-icons/ai";
 const StyledMenuLi = styled.li`
   font-size: 17px;
   font-weight: 600;
@@ -113,7 +112,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const router = useRouter();
-  const isSmallScreen = useMediaQuery("(max-width:600px)");
+  const isSmallScreen = useMediaQuery("(max-width:1200px)");
 
   return (
     <>

@@ -7,10 +7,6 @@ import { Container, Content, DateComponent, Title } from "../News/[newId]";
 import Markdown from "react-markdown";
 import NoContent from "../../components/noContent/NoContent";
 function PerFixture({ ticketProps }) {
-  // console.log(
-  //   "🚀 ~ file: [fixId].jsx:15 ~ PerFixture ~ ticketProps:",
-  //   ticketProps
-  // );
   return (
     <StyledPerFixture>
       <Breadcrumbs
@@ -115,7 +111,19 @@ const StyledPerFixture = styled.section`
   height: auto;
 `;
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  const ticket = await api.get("/api/ticket-fixtures?fields[0]=title");
+  const paths = ticket?.data?.data?.map((tic) => ({
+    params: { fixId: tic.id.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
   try {
     const initialData = await api.get(
       `api/ticket-fixtures/${context.params.fixId}?populate[articles][fields][0]=*&populate[articles][populate][images][fields][0]=url&populate[videos][fields][0]=*&populate[videos][populate][image][fields][0]=url&fields[0]=title&fields[1]=publishedAt`
@@ -123,6 +131,7 @@ export async function getServerSideProps(context) {
     const ticketProps = initialData.data;
     return {
       props: { ticketProps },
+      revalidate: 21600,
     };
   } catch (error) {
     return {

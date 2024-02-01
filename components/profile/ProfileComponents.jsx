@@ -85,8 +85,6 @@ function ProfileComponents() {
           },
         }
       );
-      console.log("🚀 ~ handleSave ~ res:", res);
-      console.log("🚀 ~ handleSave ~ res:", res);
 
       toast.success("user details updated!");
     } catch (error) {
@@ -94,8 +92,6 @@ function ProfileComponents() {
       toast.error("Try again later! update failed!");
     }
 
-    console.log("Profile updated successfully");
-    console.log("🚀 ~ ProfileComponents ~ formValues:", formValues);
   };
 
   return (

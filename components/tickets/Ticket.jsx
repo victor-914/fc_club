@@ -21,7 +21,7 @@ function Ticket({ item }) {
       <main className="container">
         <div className="againstWhom">
           <main className="enemyTeam">
-            <div className="enemyTeamName">{`${item?.attributes?.home_title} Vs ${item?.attributes?.away_title} `}</div>
+            <div className="enemyTeamName">{`${item?.attributes?.home_title}   Vs  ${item?.attributes?.away_title} `}</div>
           </main>
         </div>
 
@@ -51,9 +51,9 @@ function Ticket({ item }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display:"flex",
-                  justifyContent:"space-between",
-                  alignItems:"center"
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
                 Buy Ticket <RiArrowRightSLine />
@@ -77,7 +77,6 @@ export const StyledTicket = styled.div`
   box-shadow: 0px 0px 4px 2px rgba(236, 229, 229, 0.2),
     -1px -0px 3px 2px rgba(233, 227, 227, 0.2);
   padding: 0px 30px 0px 30px;
-
 
   .container {
     width: 100% !important;
@@ -304,7 +303,6 @@ export const StyledTicket = styled.div`
       line-height: 1.2;
     }
 
-   
     .ticketContainer {
       width: 100%;
       display: flex;

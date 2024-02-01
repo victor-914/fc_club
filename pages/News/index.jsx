@@ -9,7 +9,7 @@ import useSWR from "swr";
 
 function News({ news }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, error ,isLoading} = useSWR(
+  const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_URL}/api/articles?sort[0]=publishedAt:desc&populate[images][fields][0]=*&fields[0]=title&fields[1]=publishedAt&pagination[pageSize]=3&pagination[page]=${currentPage}`,
     fetcher,
     {
@@ -17,7 +17,6 @@ function News({ news }) {
     }
   );
 
-  //  if(isLoading) return <div>loading</div>
 
   return (
     <StyledNews>
@@ -144,7 +143,7 @@ const StyledNews = styled.section`
   }
 `;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const initialData = await api.get(
       "/api/articles?sort[0]=publishedAt:desc&populate[images][fields][0]=*&fields[0]=title&fields[1]=publishedAt&pagination[pageSize]=3&pagination[page]=1"
@@ -155,6 +154,7 @@ export async function getServerSideProps() {
       props: {
         news,
       },
+      revalidate: 21600,
     };
   } catch (error) {
     return {

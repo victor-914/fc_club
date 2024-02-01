@@ -141,7 +141,7 @@ const StyledHighLights = styled.section`
   }
 `;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const initialData = await api.get("/api/latest-videos");
     const videos = initialData.data;
