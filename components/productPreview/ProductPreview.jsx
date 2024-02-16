@@ -19,7 +19,16 @@ function ProductPreview() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
+  const [shipCost, setShipCost] = useState();
   const [quantity, setQuantity] = useState(cart.length);
+  const [selectedLocation, setSelectedLocation] = useState(0);
+  const [mainPrice, setMainPrice] = useState();
+  console.log("🚀 ~ ProductPreview ~ mainPrice:", mainPrice);
+
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+  };
+
   useEffect(() => {
     setTotalPrice(
       cart &&
@@ -30,10 +39,9 @@ function ProductPreview() {
     const jwt = Cookies.get("user_jwt");
     setToken(jwt);
     setEmail(user?.userInfo?.email);
+    setMainPrice(parseInt(totalPrice) + parseInt(selectedLocation));
 
-    return () => {
-      
-    };
+    return () => {};
   });
 
   const postItem = async (item, gw_res, ref) => {
@@ -44,7 +52,7 @@ function ProductPreview() {
         url,
         {
           title: item?.attributes?.title,
-          total_price: totalPrice,
+          total_price:  mainPrice,
           gateway_response: gw_res,
           gatewayRef_id: ref,
           gender: item?.selectedGender,
@@ -80,10 +88,12 @@ function ProductPreview() {
       });
   };
 
+
+
   const config = {
     reference: uuidv4(),
     email: email,
-    amount: totalPrice * 100,
+    amount: mainPrice * 100,
     publicKey: process.env.NEXT_PUBLIC_KEY,
     channels: ["card"],
   };
@@ -158,12 +168,48 @@ function ProductPreview() {
             ))}
           </tbody>
         </table>
+
+        <main className="delivery">
+          <div>
+            <h3>Select Delivery Location:</h3>
+
+            <label>
+              <input
+                type="radio"
+                value={2500}
+                checked={selectedLocation === "2500"}
+                onChange={handleLocationChange}
+              />
+              Within Enugu
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                value={3500}
+                checked={selectedLocation === "3500"}
+                onChange={handleLocationChange}
+              />
+              Outside Enugu
+            </label>
+            {/* <label>
+              <input
+                type="radio"
+                value=""
+                checked={selectedLocation === "location3"}
+                onChange={handleLocationChange}
+              />
+              International Order
+            </label> */}
+            <p>Delivery cost:&#x20A6; {selectedLocation}</p>
+          </div>
+        </main>
         <div className="total-price">
           <table>
             <tbody>
               <tr>
                 <td>Total</td>
-                <td> &#x20A6; {totalPrice}</td>
+                <td> &#x20A6; {mainPrice}</td>
               </tr>
             </tbody>
           </table>
@@ -205,6 +251,13 @@ const StyledPreview = styled.section`
 
   .paystack-button:hover {
     background-color: red;
+  }
+
+  .delivery {
+    display: flex;
+    justify-content: center;
+    line-height: 1.8;
+    border-top: 3px solid ${Color.primaryColor};
   }
 
   .cart-page {

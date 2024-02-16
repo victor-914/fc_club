@@ -48,6 +48,9 @@ const Checkout = () => {
     return () => {};
   });
 
+
+
+
   const handleFormSubmit = async (values, actions) => {
     if (values) {
       dispatch(
@@ -81,11 +84,12 @@ const Checkout = () => {
           }
         );
         st(true);
+        router.push("/_productCheckout");
         toast.success("shipping details stored successfully");
       } catch (error) {
         toast.error(error?.message);
       } finally {
-        t && router.push("/_productCheckout");
+       router.push("/_productCheckout");
       }
     }
   };
