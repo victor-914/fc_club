@@ -3,14 +3,15 @@ import styled from "styled-components";
 import { BaseFontSize, Color } from "../../utils/color";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { useRouter } from "next/router";
+
+function formatDateStringToLocal(dateString) {
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleString();
+  return formattedDate;
+}
+
 function Ticket({ item }) {
   const router = useRouter();
-
-  function formatDateStringToLocal(dateString) {
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleString();
-    return formattedDate;
-  }
 
   const handleClick = (id) => {
     router.replace(`/_fixtures/${id}`);

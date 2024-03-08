@@ -21,6 +21,10 @@ const ProfilePage = () => {
 
   const isMobile = useMediaQuery("(max-width:600px)");
 
+
+
+  
+
   return (
     <StyledBox>
       <Tabs

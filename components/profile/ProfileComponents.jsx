@@ -88,7 +88,7 @@ function ProfileComponents() {
 
       toast.success("user details updated!");
     } catch (error) {
-      console.log("🚀 ~ handleSave ~ error:", error);
+      // console.log("🚀 ~ handleSave ~ error:", error);
       toast.error("Try again later! update failed!");
     }
 

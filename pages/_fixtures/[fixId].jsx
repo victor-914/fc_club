@@ -131,7 +131,7 @@ export async function getStaticProps(context) {
     const ticketProps = initialData.data;
     return {
       props: { ticketProps },
-      revalidate: 21600,
+      revalidate: 60,
     };
   } catch (error) {
     return {

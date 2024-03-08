@@ -154,7 +154,7 @@ export async function getStaticProps() {
       props: {
         news,
       },
-      revalidate: 21600,
+      revalidate: 300,
     };
   } catch (error) {
     return {

@@ -12,7 +12,7 @@ export const groupFixturesByMonth = (fixtures, months) => {
   const fixturesByMonth = {};
 
   months.forEach((month) => {
-    fixturesByMonth[month.name] = { fixtures: [] };
+    fixturesByMonth[month.name] = { fixtures: [], _id: month.id };
   });
 
   fixtures?.forEach((fixture) => {
@@ -32,15 +32,22 @@ export const groupFixturesByMonth = (fixtures, months) => {
   const sortedMonths = Object.keys(fixturesByMonth).sort((a, b) => {
     const aDate = new Date(a);
     const bDate = new Date(b);
-    return aDate - bDate;
+    return aDate + bDate;
   });
 
   const sortedFixtures = sortedMonths.map((month) => ({
     month,
     fixtures: fixturesByMonth[month].fixtures,
+    id: fixturesByMonth[month]._id,
   }));
 
-  return sortedFixtures;
+  const sorted = sortedFixtures.sort((a, b) => {
+    if (a.id < b.id) return 1;
+    if (a.month > b.month) return -1;
+    return 0;
+  });
+
+  return sorted;
 };
 
 export const months = [
@@ -72,7 +79,6 @@ function MatchesFixture({ fixturesData, fixture_dateData }) {
   if (!data) return <div>Loading...</div>;
 
   const fixturesByMonth = groupFixturesByMonth(data?.data, months);
-  console.log(fixturesByMonth);
 
   return (
     <StyledMatches>
@@ -85,15 +91,13 @@ function MatchesFixture({ fixturesData, fixture_dateData }) {
         <main className="newsContainer">
           <div className="newsSubCont">
             {fixturesByMonth?.map((item) => (
-              <>
-                <Accordion title={item.month}>
-                  {item?.fixtures?.map((data, indx) => (
-                    <div>
-                      <Ticket key={indx} item={data} />
-                    </div>
-                  ))}
-                </Accordion>
-              </>
+              <Accordion key={item.month} title={item.month}>
+                {item?.fixtures?.map((data, indx) => (
+                  <div>
+                    <Ticket key={indx} item={data} />
+                  </div>
+                ))}
+              </Accordion>
             ))}
           </div>
         </main>
@@ -229,10 +233,9 @@ export async function getStaticProps(context) {
         fixture_dateData,
         fixturesData,
       },
+      revalidate: 60,
     };
   } catch (error) {
-    console.error("Error fetching data:", error);
-
     return {
       props: {
         error: "An error occurred while fetching data.",

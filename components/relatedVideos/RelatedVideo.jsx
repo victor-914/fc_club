@@ -9,7 +9,7 @@ import { BaseFontSize, Color } from "../../utils/color";
 function RelatedVideo() {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/videos?sort[0]=title:desc&populate[image][fields][0]=url&fields[0]=*&pagination[pageSize]=4&pagination[page]=${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/videos?sort[0]=title:asc&populate[image][fields][0]=url&fields[0]=*&pagination[pageSize]=4&pagination[page]=${currentPage}`,
     fetcher
   );
 

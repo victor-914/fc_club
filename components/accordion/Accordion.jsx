@@ -112,11 +112,9 @@ const StyledNewBox = styled.div`
     font-weight: 700;
     text-transform: capitalize !important;
     font-size: calc(${BaseFontSize.bfs} - 0.01vw);
-    text-align: justify;
+    text-align: start;
     padding: 5px;
-    letter-spacing: -0.6px !important;
-    word-spacing: -0.3px !important;
-  }
+}
 
   .headerCont header:hover {
     text-decoration: underline;

@@ -149,6 +149,7 @@ export async function getStaticProps() {
     return {
       props: {
         videos,
+        revalidate:60
       },
     };
   } catch (error) {
