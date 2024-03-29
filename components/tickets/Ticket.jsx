@@ -23,6 +23,15 @@ function Ticket({ item }) {
         <div className="againstWhom">
           <main className="enemyTeam">
             <div className="enemyTeamName">{`${item?.attributes?.home_title}   Vs  ${item?.attributes?.away_title} `}</div>
+
+            <div className="scoreTable">
+              <div>
+                {item?.attributes?.home_score && item?.attributes?.home_score}{" "}
+              </div>
+              <div>
+                {item?.attributes?.away_score && item?.attributes?.away_score}
+              </div>
+            </div>
           </main>
         </div>
 
@@ -97,6 +106,17 @@ export const StyledTicket = styled.div`
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .scoreTable {
+    font-weight: 700;
+    font-size: 18px;
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .enemyTeamName {

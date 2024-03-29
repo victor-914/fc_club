@@ -68,7 +68,7 @@ export const months = [
 function MatchesFixture({ fixturesData, fixture_dateData }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/api/ticket-fixtures?sort[0]=date:desc&fields[0]=symbol&fields[1]=venue&fields[2]=date&fields[3]=home_title&fields[4]=away_title&fields[5]=isTicketAvailable&pagination[pageSize]=3&pagination[page]=${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/ticket-fixtures?sort[0]=date:desc&populate[author][fields][0]=firstName&populate[author][fields][1]=lastName&fields[0]=symbol&fields[1]=venue&fields[2]=date&fields[3]=home_title&fields[4]=away_title&fields[5]=isTicketAvailable&fields[6]=away_score&fields[7]=home_score&pagination[pageSize]=4&pagination[page]=${currentPage}`,
     fetcher,
     {
       fallbackData: fixture_dateData,
