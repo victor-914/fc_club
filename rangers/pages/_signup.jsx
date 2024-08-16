@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import axios from "axios";
 function Login() {
   const router = useRouter();
   const [userData, setUserData] = useState({

@@ -172,8 +172,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={cart[0]?.attributes?.withinEnugu}
-                checked={selectedLocation == cart[0]?.attributes?.withinEnugu}
+                value={5000}
+                checked={selectedLocation ===  5000}
                 onChange={handleLocationChange}
               />
               Within Enugu
@@ -182,8 +182,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={cart[0]?.attributes?.outsideEnugu}
-                checked={selectedLocation == cart[0]?.attributes?.outsideEnugu}
+                value={8000}
+                checked={selectedLocation === 8000}
                 onChange={handleLocationChange}
               />
               Outside Enugu
@@ -192,8 +192,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={cart[0]?.attributes?.internationlOrder}
-                checked={selectedLocation == cart[0]?.attributes?.internationlOrder}
+                value={40000}
+                checked={selectedLocation === 4000}
                 onChange={handleLocationChange}
               />
               International Order
