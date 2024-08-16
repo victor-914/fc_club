@@ -20,7 +20,7 @@ function ProductPreview() {
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(cart.length);
-  const [selectedLocation, setSelectedLocation] = useState(0);
+  const [selectedLocation, setSelectedLocation] = useState(5000);
   const [mainPrice, setMainPrice] = useState();
 
   const handleLocationChange = (event) => {
@@ -173,7 +173,7 @@ function ProductPreview() {
               <input
                 type="radio"
                 value={5000}
-                checked={selectedLocation ===  5000}
+                checked={parseInt(selectedLocation) ===  5000}
                 onChange={handleLocationChange}
               />
               Within Enugu
@@ -183,7 +183,7 @@ function ProductPreview() {
               <input
                 type="radio"
                 value={8000}
-                checked={selectedLocation === 8000}
+                checked={parseInt(selectedLocation) === 8000}
                 onChange={handleLocationChange}
               />
               Outside Enugu
@@ -193,7 +193,7 @@ function ProductPreview() {
               <input
                 type="radio"
                 value={40000}
-                checked={selectedLocation === 4000}
+                checked={parseInt(selectedLocation) === 40000}
                 onChange={handleLocationChange}
               />
               International Order
