@@ -57,7 +57,7 @@ function Ticket({ item }) {
           {item?.attributes?.isTicketAvailable && (
             <button className="learnMore">
               <a
-                href="https://www.shopurban.co/seniorbarman"
+                href="https://www.seniorbarman.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

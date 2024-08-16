@@ -76,7 +76,7 @@ function LatestFixture({ item }) {
 
         <aside className="ticket">
           <a
-            href="https://www.shopurban.co/seniorbarman"
+            href="https://www.seniorbarman.com"
             target="_blank"
             rel="noopener noreferrer"
             style={{

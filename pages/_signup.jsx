@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import axios from "axios";
 function Login() {
   const router = useRouter();
   const [userData, setUserData] = useState({
@@ -19,7 +18,9 @@ function Login() {
       toast.success(`Account created successfully`);
       Cookies.set("user_jwt", res.data.jwt, { expires: 7, path: "" });
       Cookies.set("user_id", res.data.user.id, { expires: 7, path: "" });
-      router.push("/");
+      router.push({
+        pathname: router.query.from,
+      });
       setUserData({
         username: "",
         email: "",

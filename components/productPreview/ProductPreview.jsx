@@ -19,14 +19,13 @@ function ProductPreview() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
-  const [shipCost, setShipCost] = useState();
   const [quantity, setQuantity] = useState(cart.length);
-  const [selectedLocation, setSelectedLocation] = useState(0);
+  const [selectedLocation, setSelectedLocation] = useState(5000);
   const [mainPrice, setMainPrice] = useState();
-  console.log("🚀 ~ ProductPreview ~ mainPrice:", mainPrice);
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
+    
   };
 
   useEffect(() => {
@@ -40,7 +39,6 @@ function ProductPreview() {
     setToken(jwt);
     setEmail(user?.userInfo?.email);
     setMainPrice(parseInt(totalPrice) + parseInt(selectedLocation));
-
     return () => {};
   });
 
@@ -52,7 +50,7 @@ function ProductPreview() {
         url,
         {
           title: item?.attributes?.title,
-          total_price:  mainPrice,
+          total_price: mainPrice,
           gateway_response: gw_res,
           gatewayRef_id: ref,
           gender: item?.selectedGender,
@@ -87,8 +85,6 @@ function ProductPreview() {
           router.push("/profile");
       });
   };
-
-
 
   const config = {
     reference: uuidv4(),
@@ -176,8 +172,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={2500}
-                checked={selectedLocation === "2500"}
+                value={5000}
+                checked={parseInt(selectedLocation) ===  5000}
                 onChange={handleLocationChange}
               />
               Within Enugu
@@ -186,21 +182,22 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={3500}
-                checked={selectedLocation === "3500"}
+                value={8000}
+                checked={parseInt(selectedLocation) === 8000}
                 onChange={handleLocationChange}
               />
               Outside Enugu
             </label>
-            {/* <label>
+            <br />
+            <label>
               <input
                 type="radio"
-                value=""
-                checked={selectedLocation === "location3"}
+                value={40000}
+                checked={parseInt(selectedLocation) === 40000}
                 onChange={handleLocationChange}
               />
               International Order
-            </label> */}
+            </label>
             <p>Delivery cost:&#x20A6; {selectedLocation}</p>
           </div>
         </main>
@@ -319,6 +316,13 @@ const StyledPreview = styled.section`
   }
   th:last-child {
     text-align: right;
+  }
+  input[type="radio"]{
+     margin: 2px;
+     cursor: pointer;
+  }
+  input[type="radio"]:hover{
+    transform: scale(2);
   }
   /* Media query for menu */
   @media only screen and (max-width: 800px) {

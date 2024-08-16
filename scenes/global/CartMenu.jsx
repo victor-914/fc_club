@@ -60,7 +60,10 @@ const CartMenu = () => {
     } else if (!isLoggedIn) {
       dispatch(setIsCartOpen({}));
       toast.error("Authentication required");
-      router.replace("/_signup");
+      router.push({
+        pathname:"/_signup",
+        query:{from:"_checkout"}
+      });
     }
   };
 
