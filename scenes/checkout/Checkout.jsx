@@ -52,6 +52,7 @@ const Checkout = () => {
 
 
   const handleFormSubmit = async (values, actions) => {
+    
     if (values) {
       dispatch(
         setUserDetails({
@@ -68,15 +69,17 @@ const Checkout = () => {
       try {
         const res = await axios.put(
           `https://rangersadmin.rangersintl.com/api/users/${token_id}`,
-          {
-            zip_code: values?.shippingAddress.zipCode,
-            country: values?.shippingAddress.country,
-            email: values?.shippingAddress.email,
-            customer_phoneNumber: values?.shippingAddress.phoneNumber,
-            city: values?.shippingAddress.city,
-            state: values?.shippingAddress.state,
-            address: values?.shippingAddress.street1,
-          },
+           {
+            data:{
+                zip_code: values?.shippingAddress.zipCode,
+                country: values?.shippingAddress.country,
+                email: values?.shippingAddress.email,
+                customer_phoneNumber: values?.shippingAddress.phoneNumber,
+                city: values?.shippingAddress.city,
+                state: values?.shippingAddress.state,
+                address: values?.shippingAddress.street1,
+            }
+           },
           {
             headers: {
               Authorization: `Bearer ${token}`,

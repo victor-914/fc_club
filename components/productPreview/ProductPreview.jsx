@@ -20,12 +20,20 @@ function ProductPreview() {
   const [token, setToken] = useState("");
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(cart.length);
-  const [selectedLocation, setSelectedLocation] = useState(5000);
+  const [selectedLocation, setSelectedLocation] = useState(0);
   const [mainPrice, setMainPrice] = useState();
+  const [outsideEnuguShpCost, setOutsideEnuguShpCost] = useState();
+  const [withinEnuguShpCost, setWithinEnuguShpCost] = useState();
+  const [intEnuguShpCost, setIntEnuguShpCost] = useState();
+
+  useEffect(() => {
+    setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
+    setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
+    setIntEnuguShpCost(parseInt(cart[0]?.attributes?.internationlOrder));
+  }, [cart]);
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
-    
   };
 
   useEffect(() => {
@@ -107,6 +115,7 @@ function ProductPreview() {
     return (
       <div>
         <button
+          disabled={selectedLocation === null}
           className="paystack-button"
           onClick={() => {
             initializePayment(onSuccess, onClose);
@@ -172,8 +181,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={5000}
-                checked={parseInt(selectedLocation) ===  5000}
+                value={withinEnuguShpCost}
+                checked={parseInt(selectedLocation) === withinEnuguShpCost}
                 onChange={handleLocationChange}
               />
               Within Enugu
@@ -182,8 +191,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={8000}
-                checked={parseInt(selectedLocation) === 8000}
+                value={outsideEnuguShpCost}
+                checked={parseInt(selectedLocation) === outsideEnuguShpCost}
                 onChange={handleLocationChange}
               />
               Outside Enugu
@@ -192,8 +201,8 @@ function ProductPreview() {
             <label>
               <input
                 type="radio"
-                value={40000}
-                checked={parseInt(selectedLocation) === 40000}
+                value={intEnuguShpCost}
+                checked={parseInt(selectedLocation) === intEnuguShpCost}
                 onChange={handleLocationChange}
               />
               International Order
@@ -212,9 +221,11 @@ function ProductPreview() {
           </table>
         </div>
 
-        <aside className="pay_stackContainer">
-          <PaystackHook />
-        </aside>
+        {selectedLocation != 0 && (
+          <aside className="pay_stackContainer">
+            <PaystackHook />
+          </aside>
+        )}
       </div>
     </StyledPreview>
   );
@@ -317,11 +328,11 @@ const StyledPreview = styled.section`
   th:last-child {
     text-align: right;
   }
-  input[type="radio"]{
-     margin: 2px;
-     cursor: pointer;
+  input[type="radio"] {
+    margin: 2px;
+    cursor: pointer;
   }
-  input[type="radio"]:hover{
+  input[type="radio"]:hover {
     transform: scale(2);
   }
   /* Media query for menu */

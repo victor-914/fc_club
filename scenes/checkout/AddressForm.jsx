@@ -1,5 +1,5 @@
 import { getIn } from "formik";
-import { Box,MenuItem, Select } from "@mui/material";
+import { Box, MenuItem, Select } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { countries } from "../../utils/countries";
@@ -13,7 +13,6 @@ const AddressForm = ({
 }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  // these functions allow for better code readability
   const formattedName = (field) => `${type}.${field}`;
 
   const formattedError = (field) =>
@@ -59,12 +58,15 @@ const AddressForm = ({
         sx={{ gridColumn: "span 2" }}
       />
 
+     
       <Select
         fullWidth
         label="Country"
+        type="select"
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder="country"
+        defaultValue="select country"
         value={values.country}
         name={formattedName("country")}
         error={formattedError("country")}
@@ -72,11 +74,10 @@ const AddressForm = ({
         sx={{
           margin: "5px",
           gridColumn: "span 2",
+          position: "relative",
         }}
       >
-        <MenuItem value="" disabled>
-          Select Country
-        </MenuItem>
+        <MenuItem value="">Select country</MenuItem>
         {countries.map((country) => (
           <MenuItem key={country.name} value={country.name}>
             {country.name}
