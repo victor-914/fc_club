@@ -42,9 +42,14 @@ const StyledSecNavBar = styled.section`
   width: 100%;
   margin: auto;
   height: 100px;
-  background-color: ${Color.primaryColor};
+  background-color: transparent;
   position: fixed;
+  padding-top: 10px;
   z-index: 10;
+   background: #db0a0a93;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+  backdrop-filter: blur(10px);  
+  border: 1px solid rgba(255, 255, 255, 0.2); 
 
   .secBar {
     display: flex;
@@ -102,12 +107,13 @@ const secNavbar = [
   //   content: "Contact",
   //   link: "accessories",
   // },
-   {
+  {
     _id: "hjdddhdjkdjddd",
     content: "Profile",
     link: "profile",
   },
 ];
+
 function Navbar() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
@@ -116,31 +122,7 @@ function Navbar() {
 
   return (
     <>
-      <StyledSecNavBar className="">
-        <main className="secBar">
-          {secNavbar.map((item) => (
-            <StyledMenuLi
-              path={router.pathname}
-              link={item.link}
-              // style={{
-              //   color:
-              //     router.pathname.includes(`${item.page}`) ? "#000" : "#fff",
-              //     backgroundColor:  router.pathname === `${item.page}` ? "#000" : "transparent",
-              //     border:router.pathname.includes(`${item.page}`) ? `10px solid green` : `10px solid ${Color.primaryColor}`
-              // }}
-              key={item._id}
-              onClick={() => {
-                router.replace({
-                  pathname: item.link,
-                });
-              }}
-            >
-              {item.content}
-            </StyledMenuLi>
-          ))}
-        </main>
-      </StyledSecNavBar>
-      <Box
+    <Box
         display="flex"
         alignItems="center"
         width="100%"
@@ -148,7 +130,7 @@ function Navbar() {
         backgroundColor="rgba(255, 255, 255, 1)"
         color="black"
         position="fixed"
-        top="0"
+        top="0px"
         left="0"
         zIndex="40"
       >
@@ -176,8 +158,6 @@ function Navbar() {
             columnGap="20px"
             zIndex="2"
           >
-            
-
             <IconButton
               sx={{ color: "black" }}
               onClick={() => router.push("/profile")}
@@ -219,8 +199,36 @@ function Navbar() {
           </Box>
         </Box>
       </Box>
+  
+
+      <StyledSecNavBar className="">
+        <main className="secBar">
+          {secNavbar.map((item) => (
+            <StyledMenuLi
+              path={router.pathname}
+              link={item.link}
+              // style={{
+              //   color:
+              //     router.pathname.includes(`${item.page}`) ? "#000" : "#fff",
+              //     backgroundColor:  router.pathname === `${item.page}` ? "#000" : "transparent",
+              //     border:router.pathname.includes(`${item.page}`) ? `10px solid green` : `10px solid ${Color.primaryColor}`
+              // }}
+              key={item._id}
+              onClick={() => {
+                router.replace({
+                  pathname: item.link,
+                });
+              }}
+            >
+              {item.content}
+            </StyledMenuLi>
+          ))}
+        </main>
+      </StyledSecNavBar>
+      
     </>
   );
 }
+
 
 export default Navbar;

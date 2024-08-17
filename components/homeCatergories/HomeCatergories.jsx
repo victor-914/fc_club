@@ -1,14 +1,14 @@
 import Card from "./Card";
-import imgFour from "../../assets/news.webp";
+import imgFour from "../../assets/news.jpeg";
 import imgSix from "../../assets/fixture.jpeg";
-import imgFive from "../../assets/news_wallpaper1.png";
+import imgFive from "../../assets/highlight.jpeg";
 import styled from "styled-components";
 
 const HomeCatergories = () => {
   const cardData = [
     { title: "Fixtures", img: imgSix, page: "_fixtures" },
     { title: "News", img: imgFour, page: "News" },
-    { title: "Highlights", img: imgFive, page: "_highlights" },
+    { title: "Shop", img: imgFive, page: "products" },
   ];
 
   return (

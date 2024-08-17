@@ -1,36 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { InstagramEmbed } from "react-social-media-embed";
 import { LinkedInEmbed } from "react-social-media-embed";
 import { TwitterEmbed } from "react-social-media-embed";
+import { FacebookEmbed } from "react-social-media-embed";
 import { BaseFontSize } from "../../utils/color";
+import api from "../../utils/api";
 function SocialMedia() {
+  const [insta, setInsta] = useState();
+  const [twit, setTwit] = useState();
+  const [link, setLinked] = useState();
 
-  const images = [
-    {
-      _id: "29ddd83",
-      img: "https://www.instagram.com/reel/C-riAkvMhz8/?utm_source=ig_web_button_share_sheet",
-    },
-  ];
+  useEffect(() => {
+    const fetchSocial = async () => {
+      try {
+        let resp = await api.get("api/socials");
+        resp = resp?.data?.data;
+        setInsta(resp[0]?.attributes.url);
+        setTwit(resp[1]?.attributes.url);
+        setLinked(resp[2]?.attributes.url);
+      } catch (error) {}
+    };
+
+    fetchSocial();
+
+    return () => {};
+  }, []);
+
   return (
     <StyledSocialMedia>
-      <header className="sub_socialsHeader">
+      {/* <header className="sub_socialsHeader">
         TAG & FOLLOW #RANGERSINTL ON INSTAGRAM
-      </header>
+      </header> */}
 
       <section>
-        <main className="socialContainer">
-          {images.map((item) => (
-            <div  key={item._id} className="socials">
+        {/* <main className="socialContainer">
+            <div
+             style={{
+              height:"50vh !important"
+             }}
+              className="socials"
+            >
               <InstagramEmbed
+                height={"100%"}
                 placeholderDisabled
-                url={item.img}
-                width={"100%"}
-                height={"auto"}
+                url={insta ? insta : "https://www.instagram.com/reel/C-SzJMNCDBX" }
               />
             </div>
-          ))}
-        </main>
+        </main> */}
         <main className="subSocialContainer">
           <div className="sub_socials" id="linkedIn">
             <header className="sub_socialsHeader">
@@ -38,7 +55,7 @@ function SocialMedia() {
             </header>
             <LinkedInEmbed
               placeholderDisabled
-              url="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7116457451750617089?compact=1"
+              url={ link ? link : "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7116457451750617089?compact=1"}
               width={"100%"}
             />
           </div>
@@ -48,7 +65,11 @@ function SocialMedia() {
             </header>
             <TwitterEmbed
               placeholderDisabled
-              url="https://x.com/Rangers_Intl/status/1802388177191067770"
+              url={
+                twit
+                  ? twit
+                  : "https://x.com/Rangers_Intl/status/1802388177191067770"
+              }
               width={"100%"}
               height={"auto"}
             />
@@ -65,7 +86,7 @@ const StyledSocialMedia = styled.section`
   padding: 20px 0px 20px 0px;
   margin: auto;
   height: auto;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   margin-bottom: 100px;
 
   header {
@@ -83,15 +104,12 @@ const StyledSocialMedia = styled.section`
     height: auto;
     margin: auto;
     display: flex;
-    /* background-color: green; */
     justify-content: space-between;
     background-color: #fff;
   }
 
   .socials {
     width: 100%;
-    /* border: 1px solid #901D78; */
-    /* height: 30vh; */
     position: relative;
     cursor: pointer;
     height: auto;
