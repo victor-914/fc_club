@@ -1,18 +1,14 @@
 import Card from "./Card";
 import imgFour from "../../assets/news.webp";
-// import imgFive from "../../assets/RangersKit1.png";
-import imgSix from "../../assets/video_wallpaper.jpg";
+import imgSix from "../../assets/fixture.jpeg";
 import imgFive from "../../assets/news_wallpaper1.png";
 import styled from "styled-components";
 
 const HomeCatergories = () => {
   const cardData = [
     { title: "Fixtures", img: imgSix, page: "_fixtures" },
-    // { title: "The Club", img: imgTwo, page: "#" },
     { title: "News", img: imgFour, page: "News" },
     { title: "Highlights", img: imgFive, page: "_highlights" },
-    // { title: "Shop", img: imgFive, page: "products" },
-    // { title: "Tickets", img: imgSix, page: "Accessories" },
   ];
 
   return (

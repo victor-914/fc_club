@@ -5,10 +5,11 @@ import { LinkedInEmbed } from "react-social-media-embed";
 import { TwitterEmbed } from "react-social-media-embed";
 import { BaseFontSize } from "../../utils/color";
 function SocialMedia() {
+
   const images = [
     {
       _id: "29ddd83",
-      img: "https://www.instagram.com/reel/CyKQST-outv/?igshid=MzRlODBiNWFlZA==",
+      img: "https://www.instagram.com/reel/C-riAkvMhz8/?utm_source=ig_web_button_share_sheet",
     },
   ];
   return (
@@ -47,7 +48,7 @@ function SocialMedia() {
             </header>
             <TwitterEmbed
               placeholderDisabled
-              url="https://x.com/Rangers_Intl/status/1724802394054435270?s=20"
+              url="https://x.com/Rangers_Intl/status/1802388177191067770"
               width={"100%"}
               height={"auto"}
             />
