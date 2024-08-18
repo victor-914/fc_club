@@ -27,10 +27,10 @@ function ProductPreview() {
   const [intEnuguShpCost, setIntEnuguShpCost] = useState();
 
   useEffect(() => {
-    setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
-    setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
+    setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
+    setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
     setIntEnuguShpCost(parseInt(cart[0]?.attributes?.internationlOrder));
-  }, [cart]);
+  });
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
