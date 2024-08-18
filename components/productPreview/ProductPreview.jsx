@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { removeFromCart } from "../../state";
 import { v4 as uuidv4 } from "uuid";
+import api from "../../utils/api";
 function ProductPreview() {
   const [totalPrice, setTotalPrice] = useState();
   const router = useRouter();
@@ -30,11 +31,27 @@ function ProductPreview() {
   const [intEnuguShpCost, setIntEnuguShpCost] = useState();
   console.log("🚀 ~ ProductPreview ~ intEnuguShpCost:", intEnuguShpCost)
 
+
   useEffect(() => {
-    setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
-    setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
-    setIntEnuguShpCost(parseInt(cart[0]?.attributes?.internationlOrder));
-  });
+    const getShippingCost = async () => {
+      const res = await api.get("api/products/1");
+      setOutsideEnuguShpCost(res?.data.data.attributes.outsideEnugu);
+      setWithinEnuguShpCost(res?.data.data.attributes.withinEnugu);
+      setIntEnuguShpCost(res?.data.data.attributes.internationlOrder);
+    }
+
+    getShippingCost()
+  
+    return () => {
+    }
+  }, [])
+  
+
+  // useEffect(() => {
+  //   setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
+  //   setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
+  //   setIntEnuguShpCost(parseInt(cart[0]?.attributes?.internationlOrder));
+  // });
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
