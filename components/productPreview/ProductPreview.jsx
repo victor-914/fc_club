@@ -22,14 +22,10 @@ function ProductPreview() {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(cart.length);
   const [selectedLocation, setSelectedLocation] = useState(0);
-  console.log("🚀 ~ ProductPreview ~ selectedLocation:", selectedLocation)
   const [mainPrice, setMainPrice] = useState();
   const [outsideEnuguShpCost, setOutsideEnuguShpCost] = useState();
-  console.log("🚀 ~ ProductPreview ~ outsideEnuguShpCost:", outsideEnuguShpCost)
   const [withinEnuguShpCost, setWithinEnuguShpCost] = useState();
-  console.log("🚀 ~ ProductPreview ~ withinEnuguShpCost:", withinEnuguShpCost)
   const [intEnuguShpCost, setIntEnuguShpCost] = useState();
-  console.log("🚀 ~ ProductPreview ~ intEnuguShpCost:", intEnuguShpCost)
 
 
   useEffect(() => {
@@ -47,11 +43,7 @@ function ProductPreview() {
   }, [])
   
 
-  // useEffect(() => {
-  //   setOutsideEnuguShpCost(parseInt(cart[0]?.attributes?.outsideEnugu));
-  //   setWithinEnuguShpCost(parseInt(cart[0]?.attributes?.withinEnugu));
-  //   setIntEnuguShpCost(parseInt(cart[0]?.attributes?.internationlOrder));
-  // });
+  
 
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
